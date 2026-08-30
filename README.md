@@ -10,8 +10,12 @@
 | 本 repo 檔案 | 說明 |
 |---|---|
 | `README.md` | 本總覽(工作現況、雲端檔案索引、待辦與時程) |
-| `縣府案件/01_115年度營運計畫書審查意見回復對照表.md` | 回復宜蘭縣政府 115/3/20 府旅商字第 1150038859 號函之對照表(草稿-待內部審) |
+| `縣府案件/01_115年度營運計畫書審查意見回復對照表.md` / `.docx` | 回復宜蘭縣政府 115/3/20 府旅商字第 1150038859 號函之對照表 |
+| `縣府案件/09_履約會議提案書_仲裁議題.md` / `09_履約會議提案書_0902會議用.docx` | **9/2 履約管理會議王董說明用**,3 案由(仲裁條款適用、決議文送達日、評估次數分母) |
+| `縣府案件/09A_王董_9月2日履約會議_發言重點.md` / `.docx` | 王董一頁式發言重點(含 6 句不能說的話、縣府排定議題應對) |
 | `縣府案件/收發文登記簿.csv` | 與縣政府往來公文登記簿(29 筆,含待發函 A~E 狀態) |
+
+> 9/2 會議另可參考雲端硬碟:[10_爭點對照表_會議討論用](https://drive.google.com/file/d/1afwbqvjSa5ZXuxOm_38_hMaz0FOHvDyv/view)(12 個爭點攻防分析)、[00_總說明_必讀](https://drive.google.com/file/d/1Vhq_8yfwsLlQBWerBZF9aVJBlwnNH8M4/view)、[13_交件指引](https://drive.google.com/file/d/1da0kIyfGNijAZRWxqH10bRFF6ZKIiGIE/view)(送件順序與期限)。函稿 01~13、12A/12B 之 Word/PDF 版在雲端硬碟「[Word檔](https://drive.google.com/drive/folders/1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3)」資料夾,共用附件庫 A~O 在「[附件](https://drive.google.com/drive/folders/1W5HxcYGNYFOIQ4ka7bcrXdo-T4rug8iA)」資料夾——**函稿並未遺失在桌機,全部都在雲端**。
 
 ## 二、Google 雲端硬碟檔案索引(工作成果所在)
 
