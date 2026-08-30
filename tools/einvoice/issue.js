@@ -29,7 +29,7 @@
 'use strict';
 const crypto = require('crypto');
 const fs = require('fs');
-const https = require('https');
+const { execFileSync } = require('child_process');
 
 function parseArgs(argv) {
   const args = {};
@@ -56,20 +56,17 @@ function ecpayDecrypt(b64, key, iv) {
   return JSON.parse(decodeURIComponent(urlEncoded));
 }
 
+// 走 curl 發送:雲端環境的對外連線須經代理(HTTPS_PROXY),Node https 不會自動走代理
 function post(url, body) {
-  return new Promise((resolve, reject) => {
-    const payload = JSON.stringify(body);
-    const req = https.request(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) },
-    }, (res) => {
-      let data = '';
-      res.on('data', (c) => (data += c));
-      res.on('end', () => resolve({ status: res.statusCode, body: data }));
-    });
-    req.on('error', reject);
-    req.end(payload);
-  });
+  const out = execFileSync('curl', [
+    '-sS', '--max-time', '60',
+    '-X', 'POST', url,
+    '-H', 'Content-Type: application/json',
+    '-d', JSON.stringify(body),
+    '-w', '\n%{http_code}',
+  ], { encoding: 'utf8' });
+  const idx = out.lastIndexOf('\n');
+  return Promise.resolve({ status: Number(out.slice(idx + 1)), body: out.slice(0, idx) });
 }
 
 function fail(msg, extra) {
