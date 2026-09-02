@@ -24,6 +24,8 @@
 | `縣府案件/12B_票券改善方案_停售預售票券版_函稿.md` | 方案 B 函稿(停售預售票) |
 | `縣府案件/14_回饋活動紀錄表_1150830.md` / `.docx` | 睦鄰回饋活動紀錄(照片 5 張已登載,待補日期) |
 | `縣府案件/13_交件指引_送件順序與注意事項.md` | 12 份文件送件順序、期限、發文前逐份檢查 |
+| `縣府案件/18_113及114年度財務報表報請備查_函稿.md` / `.docx` | 檢送 113/114 年度簽證財報,依契約第 6.1 條報請備查(114 年度已逾 6/30 期限,儘速發) |
+| `縣府案件/19_現金增資700萬元完成變更登記報請備查_函稿.md` / `.docx` | 增資 700 萬經經濟部核准變更登記報請備查(附經濟部函+變更登記表+財報;經濟部函字號待填) |
 | `縣府案件/收發文登記簿.csv` | 公文登記簿(29 筆,含待發函 A~E 狀態) |
 
 > 9/2 會議另可參考雲端硬碟:[10_爭點對照表_會議討論用](https://drive.google.com/file/d/1afwbqvjSa5ZXuxOm_38_hMaz0FOHvDyv/view)(12 個爭點攻防分析)、[00_總說明_必讀](https://drive.google.com/file/d/1Vhq_8yfwsLlQBWerBZF9aVJBlwnNH8M4/view)、[13_交件指引](https://drive.google.com/file/d/1da0kIyfGNijAZRWxqH10bRFF6ZKIiGIE/view)(送件順序與期限)。函稿 01~13、12A/12B 之 Word/PDF 版在雲端硬碟「[Word檔](https://drive.google.com/drive/folders/1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3)」資料夾,共用附件庫 A~O 在「[附件](https://drive.google.com/drive/folders/1W5HxcYGNYFOIQ4ka7bcrXdo-T4rug8iA)」資料夾——**函稿並未遺失在桌機,全部都在雲端**。
