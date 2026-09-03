@@ -24,6 +24,9 @@
 | `縣府案件/12B_票券改善方案_停售預售票券版_函稿.md` | 方案 B 函稿(停售預售票) |
 | `縣府案件/14_回饋活動紀錄表_1150830.md` / `.docx` | 睦鄰回饋活動紀錄(照片 5 張已登載,待補日期) |
 | `縣府案件/13_交件指引_送件順序與注意事項.md` | 12 份文件送件順序、期限、發文前逐份檢查 |
+| `縣府案件/20_財報暨增資合併備查_函稿.md` / `.docx` | 113/114 年度簽證財報+增資 700 萬經濟部核准文件,合併一函依契約第 6.1 條報請備查;**定稿已簽(115/9/3 發文,115北輕字第1150902001號)歸檔於 `縣府案件/發文版/`,經濟部核准函在 `縣府案件/附件/`;親送取戳後回填登記簿序號 30** |
+| `縣府案件/18_…` / `19_…` 函稿 | 已併入文 20,不單獨發文(留卷備考) |
+| `縣府案件/21_114年度財務報告補充說明_函稿.md` / `.docx` | 114 年度財報補充說明專函(股東權益/應付費用/改善計畫;續 1150902001 號函)——**股東權益總額、應付費用總額、溫泉取用費繳納狀態待填,建議 9 月評估會前送達** |
 | `縣府案件/收發文登記簿.csv` | 公文登記簿(29 筆,含待發函 A~E 狀態) |
 
 > 9/2 會議另可參考雲端硬碟:[10_爭點對照表_會議討論用](https://drive.google.com/file/d/1afwbqvjSa5ZXuxOm_38_hMaz0FOHvDyv/view)(12 個爭點攻防分析)、[00_總說明_必讀](https://drive.google.com/file/d/1Vhq_8yfwsLlQBWerBZF9aVJBlwnNH8M4/view)、[13_交件指引](https://drive.google.com/file/d/1da0kIyfGNijAZRWxqH10bRFF6ZKIiGIE/view)(送件順序與期限)。函稿 01~13、12A/12B 之 Word/PDF 版在雲端硬碟「[Word檔](https://drive.google.com/drive/folders/1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3)」資料夾,共用附件庫 A~O 在「[附件](https://drive.google.com/drive/folders/1W5HxcYGNYFOIQ4ka7bcrXdo-T4rug8iA)」資料夾——**函稿並未遺失在桌機,全部都在雲端**。
