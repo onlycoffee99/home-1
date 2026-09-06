@@ -52,6 +52,7 @@
 - `README.md`:進度總覽、待辦、雲端硬碟連結索引
 - `縣府案件/`:00 總說明、01 對照表、09 提案書、09A 王董發言重點、10 爭點對照表、11 函稿、12A/12B 函稿、12 決策單、13 交件指引、收發文登記簿.csv
 - `tools/md2docx.js`:md 轉 Word 工具(用法見 tools/README.md)
+- `tools/line_broadcast.js`:LINE 官方帳號群發工具(金鑰放環境變數,見 tools/README.md)
 - `.claude/skills/ot-case/`:縣府案件工作模式 skill
 - `行銷/`:兩店社群行銷規則書、排程表、每週產稿;`.claude/skills/marketing/`:行銷工作模式 skill
 

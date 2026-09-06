@@ -27,6 +27,16 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 5. commit + push(訊息:`行銷:YYYY-Wnn 下週排程草稿`)。
 6. 對話 3~5 行摘要。
 
+## 蘋果派到貨快訊(即時,老闆說「蘋果派到貨 N 個」或 Gmail 主旨含「蘋果派到貨」)
+1. 依品牌資料六之一句型,產礁溪 LINE 群發稿(80 字內,含數量、預訂方式=回覆訊息)與 IG 限動文字稿。
+2. 環境變數 `LINE_TOKEN_WUDOU` 存在 → 先 `--dry-run` 給老闆看,老闆說 OK 才 `node tools/line_broadcast.js --store wudou --text ...` 群發;不存在 → 把文案給老闆手動貼。
+3. 在 `行銷/排程表.csv` 加一列(平台 LINE、主題「蘋果派到貨」、狀態「已發」或「待老闆手動發」),commit+push。
+4. 蘋果派文案永遠不寫日期承諾;預訂回覆由老闆在 LINE 聊天室處理。
+
+## LINE 群發工具
+- `tools/line_broadcast.js`(用法見 `tools/README.md`);金鑰只放環境變數,**任何情況不得把 token 寫進檔案或 commit**;老闆若在對話貼 token,提醒改設環境變數並不要再貼。
+- 群發前一律 `--dry-run` 並取得老闆 OK;免費方案每月 200 則(每位好友算一則),群發前用 `--quota` 確認額度。
+
 ## 核准處理(老闆回信或對話說 OK/修改)
 - 全部 OK → 排程表狀態改「核准」,回覆「已核准,請到 Meta Business Suite / LINE OA 各排一次」並附每篇文案。
 - 修改 → 改對應 md 與 csv,重寄該篇,狀態維持「待核」。
