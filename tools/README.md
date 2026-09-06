@@ -21,4 +21,5 @@ node tools/line_broadcast.js --store wudou --text "【舞荳咖啡】..." --dry-
 node tools/line_broadcast.js --store wudou --text "【舞荳咖啡】..." --image https://.../a.jpg
 node tools/line_broadcast.js --store tc2 --text "..." --to <userId>          # 只推給一個人測試
 node tools/line_broadcast.js --store wudou --quota                            # 查本月額度/已用量
+node tools/line_broadcast.js --env-file /path/line_tokens.env --store wudou --quota   # 金鑰從 repo 外的檔讀
 ```

@@ -5,6 +5,7 @@
 //   node tools/line_broadcast.js --store wudou --text "【舞荳咖啡】今天蘋果派到貨..." [--image https://...jpg] [--dry-run]
 //   node tools/line_broadcast.js --store tc2   --text "..." --to <userId>      # 只推給一個人(測試用)
 //   node tools/line_broadcast.js --store wudou --quota                          # 查本月免費額度與已用量
+//   加 --env-file <路徑> 可從 KEY=value 檔讀金鑰(檔案放 repo 外,例如 scratchpad)
 //
 // 金鑰放環境變數,絕不寫進 repo:
 //   LINE_TOKEN_WUDOU  = 礁溪一館 @910icecd 的 Channel access token (long-lived)
@@ -40,8 +41,19 @@ async function call(token, path, method = 'GET', body) {
   return text ? JSON.parse(text) : {};
 }
 
+function loadEnvFile(path) {
+  // 讀 KEY=value 檔(不覆蓋已存在的環境變數);找不到就略過
+  try {
+    for (const line of require('fs').readFileSync(path, 'utf8').split('\n')) {
+      const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    }
+  } catch {}
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args['env-file']) loadEnvFile(args['env-file']);
   const store = STORES[args.store];
   if (!store) { console.error('請指定 --store wudou 或 --store tc2'); process.exit(2); }
   const token = process.env[store.env];
