@@ -40,7 +40,7 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 - 群發前一律 `--dry-run` 並取得老闆 OK;免費方案每月 200 則(每位好友算一則),群發前用 `--quota` 確認額度。
 
 ## IG / Google 商家自動發布(Postproxy,`tools/social_post.js`)
-- 金鑰 `POSTPROXY_API_KEY`:順序同 LINE(環境變數 → scratchpad `line_tokens.env` → Gmail 搜 `from:me subject:Postproxy金鑰`),不得寫進 repo。
+- 金鑰 `POSTPROXY_API_KEY`:順序同 LINE(環境變數 → scratchpad `line_tokens.env` → Gmail thread 1a0760a32af86f42 的第三封「Re:」,金鑰是第一行那串 48 碼十六進位,第二行「Postproxy金鑰e322…」不是金鑰),不得寫進 repo。
 - 第一次使用:`profiles` 記下 IG 與 Google 的 profile id,`placements <googleProfileId>` 記下兩家店 location_id,寫進 `行銷/00_品牌資料.md` 第二節(id 不是秘密,可寫)。
 - 排程發布:老闆核准後,每篇用 `post --at <UTC時間>` 交給 Postproxy 排程(圖片先從雲端硬碟圖庫下載到 scratchpad 再 `--file` 上傳);回傳的 post id 記進 `行銷/排程表.csv` 備註,狀態改「已排程」。發布後用 `get` 確認 published,改「已發」;failed 要回報老闆並附錯誤。
 - Google 商家每篇都要帶 `--gbp-location`(一館/二館各自的 location_id),CTA 用 LEARN_MORE 帶 UTM 連結。
