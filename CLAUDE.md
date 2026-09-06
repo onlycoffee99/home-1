@@ -18,6 +18,10 @@
 - LINE 發票收件器 → Gmail(主旨「LINE發票 - 」)→ invoice-pipeline 自動辨識入帳,歸屬統編 72941298
 - 每日 Gmail 有「[鑫和] 申報與繳款提醒」;iCHEF 每日關帳紀錄、綠界通知均進 Gmail
 
+### 行銷線:時間到咖啡館兩店社群經營
+- 一館「舞荳咖啡」(公園裡的咖啡館)、二館(第二停車場,專營認證咖啡豆);IG 共用 @5wudou,LINE 官方帳號與 Google 商家檔案各店一個
+- 規則書 `行銷/00_品牌資料.md`,排程總表 `行銷/排程表.csv`,工作模式 `.claude/skills/marketing/`;每週日 20:00 Routine 產下週草稿寄 Gmail 核閱
+
 ## 二、近期硬期限(民國 115 年)
 
 | 期限 | 事項 | 後果 |
@@ -49,6 +53,7 @@
 - `縣府案件/`:00 總說明、01 對照表、09 提案書、09A 王董發言重點、10 爭點對照表、11 函稿、12A/12B 函稿、12 決策單、13 交件指引、收發文登記簿.csv
 - `tools/md2docx.js`:md 轉 Word 工具(用法見 tools/README.md)
 - `.claude/skills/ot-case/`:縣府案件工作模式 skill
+- `行銷/`:兩店社群行銷規則書、排程表、每週產稿;`.claude/skills/marketing/`:行銷工作模式 skill
 
 ### Google 雲端硬碟(正式檔案庫,Word/PDF/影音)
 - 函稿 Word/PDF(01~13、12A/12B):資料夾「Word檔」(ID `1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3`)
