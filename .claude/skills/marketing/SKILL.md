@@ -11,7 +11,7 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 3. 最近一份 `行銷/排程/YYYY-Wnn.md`(避免主題重複)
 
 ## 鐵律
-- 標「待確認」或空白 [　] 的資訊**不得寫進文案**(例如二館詳細地址、LINE 顯示名稱)。
+- 標「待確認」或空白 [　] 的資訊**不得寫進文案**(例如二館詳細地址)。
 - 二館在**台中**,不是礁溪;一館在礁溪溫泉公園。兩店地點、營業時間不得互相套用。
 - 每篇文案開頭必有店名標籤【舞荳咖啡】或【台中二館】。
 - 價格、日期、活動規則只能來自老闆提供或排程表已有資料,不得自行編造;不知道就留 [　] 並在備註標「待老闆補」。
@@ -34,7 +34,9 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 4. 蘋果派文案永遠不寫日期承諾;預訂回覆由老闆在 LINE 聊天室處理。
 
 ## LINE 群發工具
-- `tools/line_broadcast.js`(用法見 `tools/README.md`);金鑰只放環境變數,**任何情況不得把 token 寫進檔案或 commit**;老闆若在對話貼 token,提醒改設環境變數並不要再貼。
+- `tools/line_broadcast.js`(用法見 `tools/README.md`);**任何情況不得把 token 寫進 repo 或 commit**。
+- 金鑰讀取順序:(1)環境變數 `LINE_TOKEN_WUDOU`/`LINE_TOKEN_TC2`;(2)scratchpad 的 `line_tokens.env`(`--env-file`);(3)都沒有時 Gmail 搜 `from:me subject:Fwd LINE_TOKEN_WUDOU`(老闆 115/9/6 寄給自己的信,thread 1a0760a32af86f42),讀出後寫到 scratchpad `line_tokens.env`(chmod 600)再用 `--env-file`,不得寫到 repo 內任何路徑。
+- 兩帳號都要能用 `--quota` 查到額度才算接通;礁溪 @910icecd 中用量 3,000 則/月,台中 @897xndml 輕用量 200 則/月。
 - 群發前一律 `--dry-run` 並取得老闆 OK;免費方案每月 200 則(每位好友算一則),群發前用 `--quota` 確認額度。
 
 ## 核准處理(老闆回信或對話說 OK/修改)
