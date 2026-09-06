@@ -39,6 +39,13 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 - 兩帳號都要能用 `--quota` 查到額度才算接通;礁溪 @910icecd 中用量 3,000 則/月,台中 @897xndml 輕用量 200 則/月。
 - 群發前一律 `--dry-run` 並取得老闆 OK;免費方案每月 200 則(每位好友算一則),群發前用 `--quota` 確認額度。
 
+## IG / Google 商家自動發布(Postproxy,`tools/social_post.js`)
+- 金鑰 `POSTPROXY_API_KEY`:順序同 LINE(環境變數 → scratchpad `line_tokens.env` → Gmail 搜 `from:me subject:Postproxy金鑰`),不得寫進 repo。
+- 第一次使用:`profiles` 記下 IG 與 Google 的 profile id,`placements <googleProfileId>` 記下兩家店 location_id,寫進 `行銷/00_品牌資料.md` 第二節(id 不是秘密,可寫)。
+- 排程發布:老闆核准後,每篇用 `post --at <UTC時間>` 交給 Postproxy 排程(圖片先從雲端硬碟圖庫下載到 scratchpad 再 `--file` 上傳);回傳的 post id 記進 `行銷/排程表.csv` 備註,狀態改「已排程」。發布後用 `get` 確認 published,改「已發」;failed 要回報老闆並附錯誤。
+- Google 商家每篇都要帶 `--gbp-location`(一館/二館各自的 location_id),CTA 用 LEARN_MORE 帶 UTM 連結。
+- 免費版每月 10 篇(跨平台同一篇算一篇);超過前提醒老闆升級。
+
 ## 核准處理(老闆回信或對話說 OK/修改)
 - 全部 OK → 排程表狀態改「核准」,回覆「已核准,請到 Meta Business Suite / LINE OA 各排一次」並附每篇文案。
 - 修改 → 改對應 md 與 csv,重寄該篇,狀態維持「待核」。
