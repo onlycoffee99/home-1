@@ -131,7 +131,7 @@ def page(fname, title, body, desc=""):
 </nav></header>
 {body}
 <footer><div class="wrap">
-<div><strong>鑫和洋行 生技</strong><br>統一編號:72941298<br>聯絡電話:0975-328-779<br>LINE:<a href="https://lin.ee/vNoyrGo" target="_blank" rel="noopener">加入 LINE 好友</a>(ID:onlycoffee99)</div>
+<div><strong>鑫和洋行 生技</strong><br>統一編號:72941298<br>聯絡電話:0975-328-779<br>LINE 官方帳號:<a href="https://lin.ee/vNoyrGo" target="_blank" rel="noopener">加入好友</a></div>
 <div><strong>線上購物</strong><br>台灣訂購:<a href="{SHOP}" target="_blank" rel="noopener">綠界 時間到咖啡館</a><br>海外訂購:<a href="https://5wudou.com" target="_blank" rel="noopener">舞荳購物網(5wudou.com)</a><br><br>© 時間到咖啡館-公園裡的咖啡館</div>
 </div></footer>
 {SKY_JS}

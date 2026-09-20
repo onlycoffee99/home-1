@@ -27,7 +27,7 @@ body = """
 <h2>訂購方式</h2>
 <div class="grid">
 <div class="card"><h3>少量訂購</h3><p><strong>每盒 NT$250</strong>(五入)。直接透過綠界線上付款,台灣本島宅配。</p><p><a class="cta" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 26px;border-radius:22px;font-weight:700" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">前往綠界訂購</a></p></div>
-<div class="card"><h3>企業/團體訂購</h3><p>中秋送禮大宗採購、企業客製(加印 LOGO、賀卡),請以 LINE 或電話聯繫,確認價格與交期後再付款。</p><p>電話:0975-328-779<br>LINE:<a href="https://lin.ee/vNoyrGo" target="_blank" rel="noopener">加入 LINE 好友</a></p></div>
+<div class="card"><h3>企業/團體訂購</h3><p>中秋送禮大宗採購、企業客製(加印 LOGO、賀卡),請以 LINE 或電話聯繫,確認價格與交期後再付款。</p><p>電話:0975-328-779<br>LINE 官方帳號:<a href="https://lin.ee/vNoyrGo" target="_blank" rel="noopener">加入好友</a></p></div>
 </div>
 <div class="note">海外訂購請至 <a href="https://5wudou.com" target="_blank" rel="noopener">舞荳購物網(5wudou.com)</a>;更多禮盒介紹也可參考 <a href="https://time-coffee-midautumn-gift.onlycoffee99.chatgpt.site" target="_blank" rel="noopener">禮盒介紹頁</a>。</div>
 </section>
