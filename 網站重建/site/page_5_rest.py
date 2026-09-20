@@ -37,6 +37,14 @@ body_sustain = """
 <p>我們與佛光大學傳媒系產學合作,從產品開發、包裝設計到影像行銷,學生實際參與每個環節——玩咖系列掛耳咖啡就是共創成果,用咖啡說宜蘭的故事。過程紀錄:</p>
 <div class="card" style="padding:0;overflow:hidden"><video controls playsinline preload="metadata" style="width:100%;display:block;border-radius:16px 16px 0 0"><source src="assets/process.mp4" type="video/mp4">你的瀏覽器不支援影片播放。</video>
 <p class="muted" style="padding:14px 20px;margin:0">共創過程紀錄影片——從發想、製作到成品,永續是一步一步做出來的。</p></div>
+<div class="grid">
+<div class="card photo-card"><img src="assets/wanka-board.jpg" alt="玩咖品牌黑板與粉筆畫" loading="lazy"><p class="muted">「透過一杯咖啡,讓我們彼此的距離更靠近」——玩咖的品牌黑板,出自學生之手。IG:<a href="https://www.instagram.com/wanka__coffee" target="_blank" rel="noopener">@wanka__coffee</a></p></div>
+<div class="card photo-card"><img src="assets/wanka-team.jpg" alt="玩咖學生團隊於攤位合影" loading="lazy"><p class="muted">玩咖團隊在展場——從沖煮、解說到販售,每一關學生都自己來。</p></div>
+<div class="card photo-card"><img src="assets/wanka-explain.jpg" alt="學生向來賓解說產品" loading="lazy"><p class="muted">面對面向來賓介紹風味與包裝——課堂學的,在攤位上真刀真槍練。</p></div>
+<div class="card photo-card"><img src="assets/wanka-booth.jpg" alt="時間到咖啡館與玩咖合作聯名展售桌" loading="lazy"><p class="muted">時間到咖啡館 × 玩咖 合作聯名展售——ICO 認證衣索比亞品豆與學生設計包裝同台亮相。</p></div>
+<div class="card photo-card"><img src="assets/wanka-guests.jpg" alt="國際朋友在展場品嚐咖啡" loading="lazy"><p class="muted">來自世界各地的朋友在展場品嚐——一杯咖啡,就是最好的交流語言。</p></div>
+<div class="card photo-card"><img src="assets/wanka-farm.jpg" alt="果園產地裡的 Time Coffee 布標" loading="lazy"><p class="muted">走進產地——永續從了解土地開始,Time Coffee 的腳步一直在田裡。</p></div>
+</div>
 </section>
 <section>
 <h2>國際交流|向世界學習</h2>
