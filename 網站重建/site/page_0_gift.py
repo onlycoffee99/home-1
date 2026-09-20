@@ -3,7 +3,7 @@ def flavor(name, en, notes, quote):
     return f"<div class='card'><h3>{name}</h3><p class='muted'>{en}</p><p>{notes}</p><p class='muted'>{quote}</p></div>"
 
 body = """
-<div class="hero"><h1>中秋精品咖啡禮盒</h1><p>我是容器,盛裝一塊拼圖,讓生命呈現不同的風味。<br>I am a vessel. Every piece of the puzzle brings a different flavor to life.</p>
+<div class="hero"><h1>中秋精品咖啡禮盒</h1><p>五款精品掛耳、五段天色——把一整天的天空,裝進一盒祝福裡。</p>
 <p style="position:relative;z-index:2;font-size:1.3rem;font-weight:700;margin-top:6px">一盒五入 NT$250</p>
 <a class="cta" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">綠界線上訂購</a>
 </div>
