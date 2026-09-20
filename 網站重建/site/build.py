@@ -1,5 +1,5 @@
 # 產生器:執行 python3 build.py 會依 pages 內容輸出各 html(共用頁首頁尾)
-NAV = [("index.html","首頁"),("menu.html","店內菜單"),("beans.html","咖啡豆單"),
+NAV = [("index.html","首頁"),("gift.html","中秋禮盒"),("menu.html","店內菜單"),("beans.html","咖啡豆單"),
        ("brand.html","舞荳品牌"),("sustain.html","關於永續"),("about.html","關於我們"),
        ("contact.html","聯絡我們")]
 SHOP = "https://sirshopping.cashier.ecpay.com.tw"

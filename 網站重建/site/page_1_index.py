@@ -11,6 +11,11 @@ body = """
 <div class="quote">「舞荳」不只是一個名字,它是一種節奏、一種覺醒、一種勇氣。豆子舞動,就像靈魂從黑暗中甦醒。我們將這份光,放進咖啡豆與堅果中,不是為了裝飾生活,而是為了祝福生命。每一份產品,都代表一句話:<strong>你值得被理解,也值得擁有祝福。</strong></div>
 </section>
 <section>
+<h2>新品上市|中秋精品咖啡禮盒</h2>
+<div class="card photo-card"><img src="assets/gift.jpg" alt="中秋五入精品咖啡禮盒" loading="lazy">
+<p class="muted">一盒五入、五段天色:耶加雪菲、西達瑪、谷吉布穀、藝伎、黃金曼特寧。「我是容器,盛裝一塊拼圖,讓生命呈現不同的風味。」　<a href="gift.html"><strong>看禮盒介紹與訂購 →</strong></a></p></div>
+</section>
+<section>
 <h2>礁溪的天空|時間到咖啡館的一天</h2>
 <div class="card photo-card"><img src="assets/sky.jpg" alt="黃昏時分,太陽落向海平線,霞光染橘了天空" loading="lazy">
 <p class="muted">黃昏的實景——我們就在這樣的天空下,烘豆、沖咖啡、等你來。上方的天空會隨著你造訪的時刻變化,也可以點右上角的「晨/午/暮」看看一天的顏色。</p></div>
