@@ -51,42 +51,105 @@
 </div></footer>
 <script>
 (function(){
- var themes={morning:"早晨的天空",noon:"正午的晴空",dusk:"黃昏的霞光"};
- var order=["morning","noon","dusk"];
- function pick(){var h=new Date().getHours();return h>=5&&h<10?"morning":h>=10&&h<16?"noon":"dusk";}
- var hero=document.querySelector(".hero");
+ // ---- 調色關鍵影格(小時) ----
+ function hx(h){h=h.replace('#','');return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
+ var K=[ // h, sky4色, 站台色, 雲, 夜度
+  {h:0.0, sky:["#0b1830","#16294a","#243b5e","#2c4668"], site:{bg:"#eef1f6",card:"#f8fafc",line:"#dce3ee",brand:"#48699a",bd:"#25395c",ac:"#6d8cba",sub:"#61728a",ink:"#2b3a52",note:"#eaeef5",tagb:"#e2e8f2",tagi:"#3c557e"}, cloud:[170,190,215,0.18], night:1},
+  {h:4.6, sky:["#12213c","#2a3c60","#4d5578","#7a6a76"], site:{bg:"#eff1f7",card:"#f9fafc",line:"#dee3ee",brand:"#4f6da0",bd:"#2a3e61",ac:"#7590bd",sub:"#65758d",ink:"#2d3c54",note:"#edeff6",tagb:"#e4e9f3",tagi:"#40587f"}, cloud:[200,190,205,0.25], night:.85},
+  {h:6.2, sky:["#7fa3d0","#a8bede","#ecc7b4","#ffd9ae"], site:{bg:"#f6f5fa",card:"#fffdfc",line:"#e6e3ee",brand:"#6b81b3",bd:"#4d6497",ac:"#a58fbd",sub:"#71788f",ink:"#333d55",note:"#fdefe8",tagb:"#f0ecf6",tagi:"#5c6a9a"}, cloud:[255,225,210,0.5], night:.15},
+  {h:8.5, sky:["#9cc4e8","#c9dcee","#f6dfc8","#ffe9d0"], site:{bg:"#f5f6fb",card:"#fffdfd",line:"#e2e4f0",brand:"#5b83b8",bd:"#4a6b9c",ac:"#a3bede",sub:"#6b7a92",ink:"#31405a",note:"#fdf1ec",tagb:"#eceef8",tagi:"#5b6f9c"}, cloud:[255,240,225,0.55], night:0},
+  {h:12.5,sky:["#3d84c8","#68a4d8","#a5cbe9","#cfe5f4"], site:{bg:"#f0f7fd",card:"#ffffff",line:"#d7e7f5",brand:"#2f74b5",bd:"#1d4e7e",ac:"#5ba3d9",sub:"#54708a",ink:"#213348",note:"#fdf3e5",tagb:"#ddeefb",tagi:"#1d4e7e"}, cloud:[255,255,255,0.55], night:0},
+  {h:16.0,sky:["#4b88c4","#7dabd6","#c3d3e2","#ecd9c0"], site:{bg:"#f4f7fb",card:"#fffefb",line:"#e0e5ec",brand:"#48719f",bd:"#2f5480",ac:"#7fa3c8",sub:"#5f7186",ink:"#26374b",note:"#fcf2e2",tagb:"#e4edf6",tagi:"#2f5480"}, cloud:[255,248,235,0.5], night:0},
+  {h:18.4,sky:["#27436e","#5a6a95","#e8975a","#f7b45f"], site:{bg:"#faf3ea",card:"#fffcf8",line:"#eddfcc",brand:"#b5652f",bd:"#33425f",ac:"#e0954e",sub:"#87715c",ink:"#41352a",note:"#fbecd9",tagb:"#f6e7d6",tagi:"#8a5426"}, cloud:[255,190,140,0.4], night:.1},
+  {h:19.6,sky:["#1a2c4e","#2f4066","#6a5578","#c4764f"], site:{bg:"#f2f0f2",card:"#fbf9fa",line:"#e2ddе4".replace("е","e"),brand:"#7a648e",bd:"#3a3f63",ac:"#a07a9a",sub:"#6f6a80",ink:"#332f48",note:"#f3ecf0",tagb:"#eae4ee",tagi:"#5d4f7d"}, cloud:[210,170,180,0.3], night:.6},
+  {h:21.2,sky:["#0b1830","#16294a","#243b5e","#2c4668"], site:{bg:"#eef1f6",card:"#f8fafc",line:"#dce3ee",brand:"#48699a",bd:"#25395c",ac:"#6d8cba",sub:"#61728a",ink:"#2b3a52",note:"#eaeef5",tagb:"#e2e8f2",tagi:"#3c557e"}, cloud:[170,190,215,0.18], night:1},
+  {h:24.0,sky:["#0b1830","#16294a","#243b5e","#2c4668"], site:{bg:"#eef1f6",card:"#f8fafc",line:"#dce3ee",brand:"#48699a",bd:"#25395c",ac:"#6d8cba",sub:"#61728a",ink:"#2b3a52",note:"#eaeef5",tagb:"#e2e8f2",tagi:"#3c557e"}, cloud:[170,190,215,0.18], night:1}
+ ];
+ function lerp(a,b,t){return a+(b-a)*t;}
+ function mixhex(a,b,t){a=hx(a);b=hx(b);return "rgb("+Math.round(lerp(a[0],b[0],t))+","+Math.round(lerp(a[1],b[1],t))+","+Math.round(lerp(a[2],b[2],t))+")";}
+ function state(h){
+  h=((h%24)+24)%24;
+  var i=0;while(i<K.length-1&&!(h>=K[i].h&&h<=K[i+1].h))i++;
+  var A=K[i],B=K[i+1],t=(h-A.h)/((B.h-A.h)||1);
+  var o={sky:[],site:{},night:lerp(A.night,B.night,t)};
+  for(var k=0;k<4;k++)o.sky[k]=mixhex(A.sky[k],B.sky[k],t);
+  for(var k2 in A.site)o.site[k2]=mixhex(A.site[k2],B.site[k2],t);
+  o.cloud="rgba("+Math.round(lerp(A.cloud[0],B.cloud[0],t))+","+Math.round(lerp(A.cloud[1],B.cloud[1],t))+","+Math.round(lerp(A.cloud[2],B.cloud[2],t))+","+lerp(A.cloud[3],B.cloud[3],t).toFixed(2)+")";
+  // 太陽軌跡:5.4~18.9 可見
+  var up=5.4,dn=18.9;
+  if(h>up-0.6&&h<dn+0.6){
+   var p=Math.min(1,Math.max(0,(h-up)/(dn-up)));
+   o.sunX=8+p*76; o.sunY=64-Math.sin(p*Math.PI)*54;
+   var low=1-Math.sin(p*Math.PI);
+   o.sunS=84+low*44;
+   o.sunC=mixhex("#fffbe8","#ffb440",Math.pow(low,1.3));
+   o.sunA=(h<up? (h-(up-0.6))/0.6 : h>dn? 1-(h-dn)/0.6 : 1);
+  } else {o.sunA=0;o.sunX=50;o.sunY=120;o.sunS=84;o.sunC="#ffb440";}
+  return o;
+ }
+ function greet(h){h=((h%24)+24)%24;return h<4.5?"深夜的星空":h<7?"破曉的天光":h<10.5?"早晨的天空":h<15.5?"正午的晴空":h<17.5?"午後的暖陽":h<19.5?"黃昏的霞光":"夜幕的星光";}
+ var hero=document.querySelector(".hero"),sun,sky,stars;
+ var R=document.documentElement;
+ function render(h){
+  var o=state(h);
+  if(sky)sky.style.background="linear-gradient(180deg,"+o.sky[0]+" 0%,"+o.sky[1]+" 42%,"+o.sky[2]+" 78%,"+o.sky[3]+" 100%)";
+  if(stars)stars.style.opacity=o.night*.9;
+  if(sun){sun.style.left="calc("+o.sunX+"% - "+(o.sunS/2)+"px)";sun.style.top=o.sunY+"%";
+   sun.style.width=o.sunS+"px";sun.style.height=o.sunS+"px";sun.style.opacity=o.sunA;
+   sun.style.background=o.sunC;
+   sun.style.boxShadow="0 0 "+(o.sunS*0.75)+"px "+(o.sunS*0.34)+"px "+o.sunC.replace("rgb","rgba").replace(")",",0.85)")+",0 0 "+(o.sunS*2.2)+"px "+(o.sunS*1.05)+"px "+o.sunC.replace("rgb","rgba").replace(")",",0.35)");}
+  var st=o.site;
+  R.style.setProperty("--bg",st.bg);R.style.setProperty("--card",st.card);
+  R.style.setProperty("--line",st.line);R.style.setProperty("--brand",st.brand);
+  R.style.setProperty("--brand-dark",st.bd);R.style.setProperty("--accent",st.ac);
+  R.style.setProperty("--sub",st.sub);R.style.setProperty("--ink",st.ink);
+  R.style.setProperty("--note-bg",st.note);R.style.setProperty("--tag-bg",st.tagb);
+  R.style.setProperty("--tag-ink",st.tagi);R.style.setProperty("--sky-top",o.sky[0]);
+  R.style.setProperty("--quote-bg","linear-gradient(135deg,"+st.card+","+st.note+")");
+  R.style.setProperty("--cloud-col",o.cloud);
+  var g=document.querySelector(".hero .greet");if(g)g.textContent=greet(h);
+ }
+ function nowH(){var d=new Date();return d.getHours()+d.getMinutes()/60+d.getSeconds()/3600;}
  if(hero){
-  order.forEach(function(m){var d=document.createElement("div");d.className="skybg "+m;hero.insertBefore(d,hero.firstChild);});
+  sky=document.createElement("div");sky.className="skybg";hero.insertBefore(sky,hero.firstChild);
+  stars=document.createElement("div");stars.className="stars";hero.appendChild(stars);
   ["c1","c2","c3"].forEach(function(c){var d=document.createElement("div");d.className="cloud "+c;hero.appendChild(d);});
-  var sun=document.createElement("div");sun.className="sun";hero.appendChild(sun);
+  sun=document.createElement("div");sun.className="sun";hero.appendChild(sun);
   var hz=document.createElement("div");hz.className="horizon";hero.appendChild(hz);
-  var g=document.createElement("div");g.className="greet";
-  var h1=hero.querySelector("h1");hero.insertBefore(g,h1);
+  var g=document.createElement("div");g.className="greet";hero.insertBefore(g,hero.querySelector("h1"));
   var sw=document.createElement("div");sw.className="skyswitch";
-  [["morning","晨"],["noon","午"],["dusk","暮"]].forEach(function(p){
-   var bt=document.createElement("button");bt.dataset.m=p[0];bt.textContent=p[1];
-   bt.onclick=function(){apply(p[0],true)};sw.appendChild(bt);});
+  var live=true,anim=null;
+  function tween(from,to,ms,done){
+   if(anim)cancelAnimationFrame(anim);
+   var t0=performance.now();
+   if(to<from)to+=24;
+   function step(t){var p=Math.min(1,(t-t0)/ms);p=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+    render(from+(to-from)*p);
+    if(p<1)anim=requestAnimationFrame(step);else{anim=null;if(done)done();}}
+   anim=requestAnimationFrame(step);
+  }
+  [["晨",8],["午",13],["暮",18.3],["現在",null]].forEach(function(pp){
+   var bt=document.createElement("button");bt.textContent=pp[0];
+   bt.onclick=function(){
+    document.querySelectorAll(".skyswitch button").forEach(function(x){x.classList.remove("on")});
+    bt.classList.add("on");
+    if(pp[1]===null){live=true;tween(curH,nowH(),1600);curH=nowH();}
+    else{live=false;tween(curH,pp[1],1600);curH=pp[1];}
+   };
+   sw.appendChild(bt);
+  });
   hero.appendChild(sw);
+  var curH=nowH();
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){render(curH);}
+  else{ // 開場:從破曉一路演到「現在」
+   var start=5.0;
+   render(start);
+   setTimeout(function(){tween(start,curH<5?curH+24:curH,5200);},400);
+  }
+  sw.lastChild.classList.add("on");
+  setInterval(function(){if(live&&!anim){curH=nowH();render(curH);}},20000);
  }
- function apply(m,save){
-  document.documentElement.setAttribute("data-sky",m);
-  if(save){try{localStorage.setItem("sky",m)}catch(e){}}
-  document.querySelectorAll(".skybg").forEach(function(d){d.classList.toggle("show",d.classList.contains(m))});
-  var g=document.querySelector(".hero .greet");if(g)g.textContent=themes[m];
-  document.querySelectorAll(".skyswitch button").forEach(function(b){b.classList.toggle("on",b.dataset.m===m)});
- }
- var target;try{target=localStorage.getItem("sky")}catch(e){}
- if(!themes[target])target=pick();
- var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
- if(reduce||!hero){apply(target,false);return;}
- var seq=order.slice(0,order.indexOf(target)+1);
- if(seq.length===1)seq=["dusk"].concat(seq);
- apply(seq[0],false);
- var k=1;
- var t=setInterval(function(){
-  if(k>=seq.length){clearInterval(t);return;}
-  apply(seq[k],false);k++;
- },2600);
 })();
 </script>
 
