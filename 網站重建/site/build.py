@@ -4,6 +4,29 @@ NAV = [("index.html","首頁"),("menu.html","店內菜單"),("beans.html","咖�
        ("contact.html","聯絡我們")]
 SHOP = "https://sirshopping.cashier.ecpay.com.tw"
 
+SKY_JS = r"""<script>
+(function(){
+ var themes={morning:"早晨的天空",noon:"正午的晴空",dusk:"黃昏的霞光"};
+ function pick(){var h=new Date().getHours();return h>=5&&h<10?"morning":h>=10&&h<16?"noon":"dusk";}
+ var cur;try{cur=localStorage.getItem("sky")}catch(e){}
+ if(!themes[cur])cur=pick();
+ function apply(m){cur=m;document.documentElement.setAttribute("data-sky",m);
+  try{localStorage.setItem("sky",m)}catch(e){}
+  var g=document.querySelector(".hero .greet");if(g)g.textContent=themes[m];
+  document.querySelectorAll(".skyswitch button").forEach(function(b){b.classList.toggle("on",b.dataset.m===m)});}
+ var hero=document.querySelector(".hero");
+ if(hero){var g=document.createElement("div");g.className="greet";hero.insertBefore(g,hero.firstChild);
+  var sw=document.createElement("div");sw.className="skyswitch";
+  [["morning","晨"],["noon","午"],["dusk","暮"]].forEach(function(p){
+   var b=document.createElement("button");b.dataset.m=p[0];b.textContent=p[1];
+   b.onclick=function(){apply(p[0])};sw.appendChild(b);});
+  hero.appendChild(sw);}
+ apply(cur);
+})();
+</script>
+"""
+
+
 def page(fname, title, body, desc=""):
     nav = "".join(f'<a class="item{" on" if f==fname else ""}" href="{f}">{t}</a>' for f,t in NAV)
     html = f"""<!DOCTYPE html>
@@ -25,6 +48,7 @@ def page(fname, title, body, desc=""):
 <div><strong>鑫和洋行 生技</strong><br>統一編號:72941298<br>客服電話:03-936-3306<br>客服手機:0975-328-779<br>LINE ID:onlycoffee99</div>
 <div><strong>線上購物</strong><br>台灣訂購:<a href="{SHOP}" target="_blank" rel="noopener">綠界 時間到咖啡館</a><br>海外訂購:<a href="https://5wudou.com" target="_blank" rel="noopener">舞荳購物網(5wudou.com)</a><br><br>© 時間到咖啡館-公園裡的咖啡館</div>
 </div></footer>
+{SKY_JS}
 </body></html>"""
     open(fname,"w",encoding="utf-8").write(html)
     print("wrote",fname)

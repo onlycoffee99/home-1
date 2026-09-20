@@ -14,8 +14,8 @@ header{background:linear-gradient(90deg,var(--brand-dark),var(--sky-top));positi
 .nav a.item{color:#e7f2fb;font-size:.9rem;padding:6px 2px}
 .nav a.item:hover,.nav a.item.on{color:#fff;border-bottom:2px solid #fff}
 .nav a.shop{background:#fff;color:var(--brand-dark);padding:7px 16px;border-radius:20px;font-size:.9rem;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.hero{background:linear-gradient(175deg,var(--sky-top) 0%,var(--sky-bot) 62%,#fdf3e4 100%);color:#fff;text-align:center;padding:72px 16px 64px;position:relative;overflow:hidden}
-.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.35);filter:blur(30px)}
+.hero{background:var(--hero-tint),url("assets/sky.jpg") center 60%/cover no-repeat;color:#fff;text-align:center;padding:84px 16px 76px;position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.18);filter:blur(34px)}
 .hero::before{width:340px;height:120px;top:36px;left:-60px}
 .hero::after{width:420px;height:150px;bottom:20px;right:-90px;background:rgba(255,255,255,.45)}
 .hero h1{font-size:2rem;letter-spacing:.08em;text-shadow:0 2px 14px rgba(29,78,126,.35);position:relative;z-index:1}
@@ -60,3 +60,14 @@ footer a{color:#9fd0f2}
  --bg:#0e1a29;--card:#16273b;--ink:#e3edf7;--sub:#93aac0;--brand:#7db8e8;--brand-dark:#0a1522;
  --accent:#5ba3d9;--line:#24405c;--gold:#e0a558;--sky-top:#16324f;--sky-bot:#0e1a29;
 }
+
+/* 一天的天空:早晨/中午/黃昏 主題 */
+:root{--hero-tint:linear-gradient(180deg,rgba(60,120,180,.42),rgba(120,170,220,.18) 60%,rgba(250,240,225,.15))}
+:root[data-sky="morning"]{--hero-tint:linear-gradient(180deg,rgba(168,205,238,.55),rgba(235,225,235,.30) 60%,rgba(255,235,215,.28));--sky-top:#7fb2dc;--brand:#3f7fb5;--brand-dark:#2a5a88;--accent:#6fa8d4;--gold:#e8b06a;--bg:#f5f9fd}
+:root[data-sky="noon"]{--hero-tint:linear-gradient(180deg,rgba(45,110,180,.45),rgba(110,165,220,.20) 60%,rgba(215,235,250,.12))}
+:root[data-sky="dusk"]{--hero-tint:linear-gradient(180deg,rgba(20,40,78,.30),rgba(60,60,90,.08) 55%,rgba(255,140,50,.12));--sky-top:#3a4f76;--brand:#b66a35;--brand-dark:#2c3a5c;--accent:#e0954e;--gold:#e8964a;--bg:#faf6f1;--line:#ecdfd0}
+:root[data-sky="dusk"] .tag{background:#f6e7d6;color:#8a5426}
+.skyswitch{position:absolute;top:14px;right:14px;z-index:3;display:flex;gap:6px}
+.skyswitch button{border:none;cursor:pointer;background:rgba(255,255,255,.75);color:#2a4a6e;font-size:.78rem;padding:5px 12px;border-radius:16px;font-family:inherit;backdrop-filter:blur(4px)}
+.skyswitch button.on{background:#fff;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hero .greet{position:relative;z-index:1;font-size:.9rem;color:#fff;opacity:.92;letter-spacing:.2em;margin-bottom:8px;text-shadow:0 1px 8px rgba(29,78,126,.4)}
