@@ -88,6 +88,13 @@ body = """
 ["青森燉蘋果派 Aomori Stewed Apple Pie","180"],
 ["宜蘭金棗香檸派 Kumquat Lemon Pie","180"],
 ]) + """
+<h3>可頌鬆餅<span class="tag" style="margin-left:8px">台中館限定</span></h3>
+<div class="grid">
+<div class="card photo-card"><img src="assets/waffle-honey.webp" alt="蜂蜜可頌鬆餅" loading="lazy">
+<p><strong>蜂蜜可頌鬆餅</strong>|一份 $180<br><span class="muted">酥香可頌壓成鬆餅格紋,外層金黃酥脆、內裡柔軟帶奶油香,淋上蜂蜜後甜而不膩,適合搭配咖啡一起享用。</span></p></div>
+<div class="card photo-card"><img src="assets/waffle-choco.webp" alt="巧克力可頌鬆餅" loading="lazy">
+<p><strong>巧克力可頌鬆餅</strong>|一份 $180<br><span class="muted">淋上濃郁巧克力醬,再撒上可可粉,苦甜香氣更有層次,酥脆口感一次滿足。</span></p></div>
+</div>
 </section>
 </main>
 """
