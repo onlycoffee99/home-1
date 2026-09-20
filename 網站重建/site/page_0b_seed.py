@@ -1,8 +1,8 @@
 # 舞荳種子計畫
 body = """
 <div class="hero"><h1>舞荳種子計畫</h1><p>「荳」,就是種子。每一筆消費,替這片土地種下一顆荳——荳長大了,就變成回饋。</p>
-<p style="position:relative;z-index:2;font-size:1.5rem;font-weight:700;margin-top:10px">🌱 目前已種下 <span style="font-size:2rem">0</span> 顆荳</p>
-<p style="position:relative;z-index:2;font-size:.9rem;opacity:.95">計畫起跑——第一顆荳,等你來種。</p>
+<p style="position:relative;z-index:2;font-size:1.5rem;font-weight:700;margin-top:10px">🌱 目前已種下 <span style="font-size:2rem">1</span> 顆荳</p>
+<p style="position:relative;z-index:2;font-size:.9rem;opacity:.95">第一顆荳已種下(115/9/20)——下一顆,等你。</p>
 <a class="cta" href="https://cart.cashier.ecpay.com.tw/qp/3fr0" target="_blank" rel="noopener">🌱 立刻種一顆荳</a>
 </div>
 <main class="wrap">
