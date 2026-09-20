@@ -94,10 +94,14 @@
   var o=state(h);
   if(sky)sky.style.background="linear-gradient(180deg,"+o.sky[0]+" 0%,"+o.sky[1]+" 42%,"+o.sky[2]+" 78%,"+o.sky[3]+" 100%)";
   if(stars)stars.style.opacity=o.night*.9;
-  if(sun){sun.style.left="calc("+o.sunX+"% - "+(o.sunS/2)+"px)";sun.style.top=o.sunY+"%";
-   sun.style.width=o.sunS+"px";sun.style.height=o.sunS+"px";sun.style.opacity=o.sunA;
-   sun.style.background=o.sunC;
-   sun.style.boxShadow="0 0 "+(o.sunS*0.75)+"px "+(o.sunS*0.34)+"px "+o.sunC.replace("rgb","rgba").replace(")",",0.85)")+",0 0 "+(o.sunS*2.2)+"px "+(o.sunS*1.05)+"px "+o.sunC.replace("rgb","rgba").replace(")",",0.35)");}
+  if(sun){var D=o.sunS*3;
+   sun.style.left="calc("+o.sunX+"% - "+(D/2)+"px)";
+   sun.style.top="calc("+o.sunY+"% - "+(D/2-o.sunS/2)+"px)";
+   sun.style.width=D+"px";sun.style.height=D+"px";sun.style.opacity=o.sunA;
+   var ha=o.sunC.replace("rgb","rgba").replace(")",",0.55)");
+   var hb=o.sunC.replace("rgb","rgba").replace(")",",0)");
+   sun.style.background="radial-gradient(circle, #ffffff 0%, "+o.sunC+" 12%, "+o.sunC+" 16%, "+ha+" 30%, "+hb+" 68%)";
+   sun.style.boxShadow="none";}
   var st=o.site;
   R.style.setProperty("--bg",st.bg);R.style.setProperty("--card",st.card);
   R.style.setProperty("--line",st.line);R.style.setProperty("--brand",st.brand);
