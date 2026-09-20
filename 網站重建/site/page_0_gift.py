@@ -4,6 +4,7 @@ def flavor(name, en, notes, quote):
 
 body = """
 <div class="hero"><h1>中秋精品咖啡禮盒</h1><p>我是容器,盛裝一塊拼圖,讓生命呈現不同的風味。<br>I am a vessel. Every piece of the puzzle brings a different flavor to life.</p>
+<p style="position:relative;z-index:2;font-size:1.3rem;font-weight:700;margin-top:6px">一盒五入 NT$250</p>
 <a class="cta" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">綠界線上訂購</a>
 </div>
 <main class="wrap">
@@ -25,7 +26,7 @@ body = """
 <section>
 <h2>訂購方式</h2>
 <div class="grid">
-<div class="card"><h3>少量訂購</h3><p>直接透過綠界線上付款,台灣本島宅配。</p><p><a class="cta" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 26px;border-radius:22px;font-weight:700" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">前往綠界訂購</a></p></div>
+<div class="card"><h3>少量訂購</h3><p><strong>每盒 NT$250</strong>(五入)。直接透過綠界線上付款,台灣本島宅配。</p><p><a class="cta" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 26px;border-radius:22px;font-weight:700" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">前往綠界訂購</a></p></div>
 <div class="card"><h3>企業/團體訂購</h3><p>中秋送禮大宗採購、企業客製(加印 LOGO、賀卡),請以 LINE 或電話聯繫,確認價格與交期後再付款。</p><p>LINE ID:onlycoffee99<br>電話:03-936-3306/0975-328-779</p></div>
 </div>
 <div class="note">海外訂購請至 <a href="https://5wudou.com" target="_blank" rel="noopener">舞荳購物網(5wudou.com)</a>;更多禮盒介紹也可參考 <a href="https://time-coffee-midautumn-gift.onlycoffee99.chatgpt.site" target="_blank" rel="noopener">禮盒介紹頁</a>。</div>
