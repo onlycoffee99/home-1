@@ -52,21 +52,41 @@
 <script>
 (function(){
  var themes={morning:"早晨的天空",noon:"正午的晴空",dusk:"黃昏的霞光"};
+ var order=["morning","noon","dusk"];
  function pick(){var h=new Date().getHours();return h>=5&&h<10?"morning":h>=10&&h<16?"noon":"dusk";}
- var cur;try{cur=localStorage.getItem("sky")}catch(e){}
- if(!themes[cur])cur=pick();
- function apply(m){cur=m;document.documentElement.setAttribute("data-sky",m);
-  try{localStorage.setItem("sky",m)}catch(e){}
-  var g=document.querySelector(".hero .greet");if(g)g.textContent=themes[m];
-  document.querySelectorAll(".skyswitch button").forEach(function(b){b.classList.toggle("on",b.dataset.m===m)});}
  var hero=document.querySelector(".hero");
- if(hero){var g=document.createElement("div");g.className="greet";hero.insertBefore(g,hero.firstChild);
+ if(hero){
+  order.forEach(function(m){var d=document.createElement("div");d.className="skybg "+m;hero.insertBefore(d,hero.firstChild);});
+  ["c1","c2","c3"].forEach(function(c){var d=document.createElement("div");d.className="cloud "+c;hero.appendChild(d);});
+  var sun=document.createElement("div");sun.className="sun";hero.appendChild(sun);
+  var hz=document.createElement("div");hz.className="horizon";hero.appendChild(hz);
+  var g=document.createElement("div");g.className="greet";
+  var h1=hero.querySelector("h1");hero.insertBefore(g,h1);
   var sw=document.createElement("div");sw.className="skyswitch";
   [["morning","晨"],["noon","午"],["dusk","暮"]].forEach(function(p){
-   var b=document.createElement("button");b.dataset.m=p[0];b.textContent=p[1];
-   b.onclick=function(){apply(p[0])};sw.appendChild(b);});
-  hero.appendChild(sw);}
- apply(cur);
+   var bt=document.createElement("button");bt.dataset.m=p[0];bt.textContent=p[1];
+   bt.onclick=function(){apply(p[0],true)};sw.appendChild(bt);});
+  hero.appendChild(sw);
+ }
+ function apply(m,save){
+  document.documentElement.setAttribute("data-sky",m);
+  if(save){try{localStorage.setItem("sky",m)}catch(e){}}
+  document.querySelectorAll(".skybg").forEach(function(d){d.classList.toggle("show",d.classList.contains(m))});
+  var g=document.querySelector(".hero .greet");if(g)g.textContent=themes[m];
+  document.querySelectorAll(".skyswitch button").forEach(function(b){b.classList.toggle("on",b.dataset.m===m)});
+ }
+ var target;try{target=localStorage.getItem("sky")}catch(e){}
+ if(!themes[target])target=pick();
+ var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(reduce||!hero){apply(target,false);return;}
+ var seq=order.slice(0,order.indexOf(target)+1);
+ if(seq.length===1)seq=["dusk"].concat(seq);
+ apply(seq[0],false);
+ var k=1;
+ var t=setInterval(function(){
+  if(k>=seq.length){clearInterval(t);return;}
+  apply(seq[k],false);k++;
+ },2600);
 })();
 </script>
 
