@@ -20,16 +20,17 @@ body_sustain = """
 <div class="card"><h3>三、行動咖啡與出走活動</h3><p>行動咖啡人走進旅遊景點、市集、校園與公部門活動;出走計畫(Barista on the Move)讓咖啡師走入社區、學校、企業,以「現場手沖 × 故事分享 × 品味教育」推廣咖啡文化;社區巡迴「一日咖啡日」;使用再生設備與可回收包材,推動「永續行動咖啡人」理念。</p></div>
 </section>
 <section>
-<h2>永續的輪轉|從發想到落地,再回到土地</h2>
-<p>我們的永續不是單向的計畫,而是一個不斷轉動的圓——每一件產品都走過這六步,落地之後,又推動下一圈:</p>
+<h2>永續的輪轉|一步一步,畫出這個圓</h2>
+<p>這個圓,不是規劃出來的,是走出來的——我們公司的過程,是先和學生合作開始,再一步一步把每個環節補上:</p>
 <div class="grid">
-<div class="card"><span class="tag">① 走出去</span><h3>國際化的養分</h3><p class="muted">赴日本青森、各地產地與職人交流——國際化是所有產品設計的養分,也是產學合作最重要的一環。</p></div>
-<div class="card"><span class="tag">② 帶回來</span><h3>在宜蘭研發</h3><p class="muted">把學到的講究帶回土地:在地金棗、在地好米、ICO 認證咖啡豆,與佛光大學學生一起共創打樣。</p></div>
-<div class="card"><span class="tag">③ 做出來</span><h3>成為真實的產品</h3><p class="muted">黑糖金磚、香脆米菓條、金棗派、玩咖掛耳、中秋禮盒——每一件都是這個循環的果實。</p></div>
+<div class="card"><span class="tag">① 從學生開始</span><h3>產學共創是起點</h3><p class="muted">一切從和佛光大學學生合作開始——玩咖系列就是第一步。年輕人帶來想法,我們帶著經驗,一起把第一個產品做出來。</p></div>
+<div class="card"><span class="tag">② 走出去</span><h3>國際化的養分</h3><p class="muted">赴日本青森、各地產地與職人交流——國際化是所有產品設計的養分,也是產學合作最重要的一環。</p></div>
+<div class="card"><span class="tag">③ 帶回來做出來</span><h3>在宜蘭研發成產品</h3><p class="muted">把學到的講究帶回土地:在地金棗、在地好米、ICO 認證咖啡豆——黑糖金磚、米菓條、金棗派、掛耳禮盒,一件一件做出來。</p></div>
 <div class="card"><span class="tag">④ 說出去</span><h3>AI 行銷 × 媒體行銷</h3><p class="muted">好產品也要被看見:用 AI 工具與媒體行銷(官網、IG、社群、影像)把故事說出去——行銷補上,企業的循環才完整。</p></div>
 <div class="card"><span class="tag">⑤ 落地販售</span><h3>咖啡館與官網</h3><p class="muted">產品最終落地於<strong>時間到咖啡館門市</strong>與<strong>官網線上購物(綠界/舞荳購物網)</strong>——你喝到、吃到、買到的每一份,都是永續的實踐。</p></div>
 <div class="card"><span class="tag">⑥ 轉回去</span><h3>回饋土地與人</h3><p class="muted">販售的收益,回到在地小農採購、學生工作機會與下一輪的研發交流——圓,就這樣繼續轉。</p></div>
 </div>
+<div class="quote">老實說,這個圓我們還沒有完全走完——但每一年、每一件產品,都讓它更圓一點。我們一直在努力。</div>
 <div class="note">想支持這個輪轉,最簡單的方式:來<strong>公園裡的咖啡館</strong>坐坐,或到<a href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">線上購物</a>把宜蘭的味道帶回家。</div>
 </section>
 <section>
