@@ -3,7 +3,7 @@ body = """
 <div class="hero">
 <h1>時間到咖啡館・公園裡的咖啡館</h1>
 <p>我們就是 ICO 認証咖啡——英國國際咖啡組織認證 G1 等級咖啡豆,十年堅持,只為讓你喝到最高等級價值的咖啡。</p>
-<a class="cta" href="https://5wudou.com" target="_blank" rel="noopener">前往舞荳購物網</a>
+<a class="cta" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">前往線上購物</a>
 </div>
 <main class="wrap">
 <section>

@@ -51,7 +51,7 @@ body_contact = """
 <h2>聯絡資訊</h2>
 <div class="grid">
 <div class="card"><h3>鑫和洋行 生技</h3><p>統一編號:72941298<br>客服電話:03-936-3306<br>客服手機:0975-328-779<br>LINE ID:onlycoffee99</p></div>
-<div class="card"><h3>線上購物</h3><p>舞荳 堅果咖啡購物網<br><a href="https://5wudou.com" target="_blank" rel="noopener"><strong>5wudou.com</strong></a><br>咖啡豆、掛耳、堅果、可可與保健商品線上訂購。</p></div>
+<div class="card"><h3>線上購物</h3><p>台灣訂購:<a href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener"><strong>綠界 時間到咖啡館</strong></a><br>海外訂購:<a href="https://5wudou.com" target="_blank" rel="noopener"><strong>舞荳購物網 5wudou.com</strong></a><br>咖啡豆、掛耳、堅果、可可與保健商品線上訂購。</p></div>
 </div>
 <div class="note">掛耳客製化、代工服務(企業聯名、伴手禮開發)歡迎透過電話或 LINE 洽詢。</div>
 </section>

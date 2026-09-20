@@ -52,7 +52,7 @@ body = """
 <section>
 <h2>舞荳 低溫烘焙堅果</h2>
 <p>低溫烘焙嚴選堅果——「健康養生,美味可口」。低溫烘烤八小時,保留最大的營養價值;八種堅果 1:1 精心分裝,一天一日營養在這一包。是送禮及敬神明的最佳禮物。</p>
-<p><a class="cta" style="display:inline-block;background:#c8956c;color:#fff;padding:10px 26px;border-radius:22px;font-weight:700" href="https://5wudou.com" target="_blank" rel="noopener">前往舞荳購物網選購</a></p>
+<p><a class="cta" style="display:inline-block;background:#c8956c;color:#fff;padding:10px 26px;border-radius:22px;font-weight:700" href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">前往線上購物選購</a></p>
 </section>
 </main>
 """

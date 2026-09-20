@@ -2,7 +2,7 @@
 NAV = [("index.html","首頁"),("menu.html","店內菜單"),("beans.html","咖啡豆單"),
        ("brand.html","舞荳品牌"),("sustain.html","關於永續"),("about.html","關於我們"),
        ("contact.html","聯絡我們")]
-SHOP = "https://5wudou.com"
+SHOP = "https://sirshopping.cashier.ecpay.com.tw"
 
 def page(fname, title, body, desc=""):
     nav = "".join(f'<a class="item{" on" if f==fname else ""}" href="{f}">{t}</a>' for f,t in NAV)
@@ -23,7 +23,7 @@ def page(fname, title, body, desc=""):
 {body}
 <footer><div class="wrap">
 <div><strong>鑫和洋行 生技</strong><br>統一編號:72941298<br>客服電話:03-936-3306<br>客服手機:0975-328-779<br>LINE ID:onlycoffee99</div>
-<div><strong>線上購物</strong><br><a href="{SHOP}" target="_blank" rel="noopener">舞荳 堅果咖啡購物網(5wudou.com)</a><br><br>© 時間到咖啡館-公園裡的咖啡館</div>
+<div><strong>線上購物</strong><br>台灣訂購:<a href="{SHOP}" target="_blank" rel="noopener">綠界 時間到咖啡館</a><br>海外訂購:<a href="https://5wudou.com" target="_blank" rel="noopener">舞荳購物網(5wudou.com)</a><br><br>© 時間到咖啡館-公園裡的咖啡館</div>
 </div></footer>
 </body></html>"""
     open(fname,"w",encoding="utf-8").write(html)

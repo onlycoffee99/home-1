@@ -28,7 +28,7 @@ body = """
 <section>
 <h2>新品上市</h2>
 """ + bean("馬拉威藝伎|水洗","Malawi Geisha Washed・高海拔火山土壤、日夜溫差大・Geisha 品種,非洲風土×藝伎","900",["口感:花香、柑橘、檸檬表現;亮點:柑橘檸檬尾韻蜂蜜","酸質集中,適合喜歡熱帶果韻的你"]) + """
-<div class="note">選購與客製化掛耳需求,歡迎至 <a href="https://5wudou.com" target="_blank" rel="noopener">舞荳購物網</a> 或以 LINE(ID:onlycoffee99)聯繫我們。</div>
+<div class="note">選購與客製化掛耳需求,歡迎至 <a href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">線上購物(綠界)</a> 或以 LINE(ID:onlycoffee99)聯繫我們。</div>
 </section>
 </main>
 """
