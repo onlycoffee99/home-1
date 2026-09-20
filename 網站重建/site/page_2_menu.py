@@ -25,10 +25,14 @@ body = """
 <p class="muted">滴漏式沖煮,呈現明亮華麗的香氣與深厚豐富性。產地衣索比亞,一杯 $200,以下產地可選淺焙或中焙。</p>
 <div class="grid">
 <div class="card"><h3>谷吉布穀 罕布拉 G1 日曬</h3><p class="muted">Guji Buku Hambella G1 Natural——圓潤、層次豐富,水果酸香甜飽滿,冷口感呈現果汁清澈</p></div>
-<div class="card"><h3>西達瑪 阿萊塔 G2 日曬</h3><p class="muted">Bombe Bensa Sidama Natural——花香、乾淨、柑橘、檸檬</p></div>
-<div class="card"><h3>西達摩 聖塔瓦納 G1 日曬</h3><p class="muted">Sidamo Shantawene G1 Natural——豐富鮮明果香,藍莓果醬、香檳白酒韻味,香氣濃郁飽滿</p></div>
 <div class="card"><h3>耶加雪菲 雪列圖 G1 日曬</h3><p class="muted">Yirgacheffe Chelelektu G1 Natural——花香、葡萄乾、深色莓果、熱帶水果、焦糖</p></div>
 <div class="card"><h3>耶加雪菲 雪列圖 G1 水洗</h3><p class="muted">Yirgacheffe Chelelektu G1 Washed——花檸檬柑橘,伯爵茶尾韻,蜂蜜蜜桃,口感乾淨清澈</p></div>
+</div>
+<h3>限量季節產品精品豆</h3>
+<div class="grid">
+<div class="card"><h3>黃金曼特寧 AAA</h3><p class="muted">中深焙——烘焙堅果與焦糖調,醇厚沉穩、回甘悠長</p></div>
+<div class="card"><h3>馬拉威藝伎</h3><p class="muted">Malawi Geisha——花香、柑橘、檸檬,尾韻蜂蜜,酸質集中</p></div>
+<div class="card"><h3>衣索比亞・耶加雪菲藝伎</h3><p class="muted">Ethiopia Yirgacheffe Geisha——細緻花果香,乾淨柔和、尾韻優雅</p></div>
 </div>
 </section>
 <section>
@@ -76,9 +80,12 @@ body = """
 ["貓山王榴槤奶茶 Musang King Durian Milk Tea","","180"],["火龍果蘋果汁 Dragon Fruit Apple Juice","","180"],
 ["蘋果鳯梨汁 Apple Pineapple Juice","","180"],["香蕉木瓜牛奶 Banana Papaya Milk","","180"],
 ["蜂蜜蘇打 Honey Soda","","180"],["檸檬蘇打 Lemon Soda","","180"],["百香果蘇打 Passion Fruit Soda","","180"],
-]) + T("時令點心(以現場為主)",["品項","M","L"],[
-["經典紐約肉桂蘋果派 Classic New York Cinnamon Apple Pie","","180"],
-["波本椰奶派 Bourbon Coconut Pie","","180"],
+]) + T("餐點(以現場為主)",["品項","價格"],[
+["四種起士披薩 Four Cheese Pizza","280"],
+["瑪格麗特披薩 Margherita Pizza","280"],
+["鄉村菇鹹派 Country Mushroom Quiche","180"],
+["青森燉蘋果派 Aomori Stewed Apple Pie","180"],
+["宜蘭金棗香檸派 Kumquat Lemon Pie","180"],
 ]) + """
 </section>
 </main>
