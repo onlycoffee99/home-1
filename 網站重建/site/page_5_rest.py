@@ -110,4 +110,4 @@ body_contact = """
 </section>
 </main>
 """
-page("contact.html","聯絡我們",body_contact,"時間到咖啡館聯絡方式:鑫和洋行生技,電話03-936-3306,LINE ID onlycoffee99,線上購物5wudou.com。")
+page("contact.html","聯絡我們",body_contact,"時間到咖啡館聯絡方式:鑫和洋行生技,電話0975-328-779,LINE ID onlycoffee99,線上購物5wudou.com。")
