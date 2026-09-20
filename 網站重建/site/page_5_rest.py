@@ -31,7 +31,7 @@ body_sustain = """
 <div class="card"><span class="tag">⑥ 轉回去</span><h3>回饋土地與人</h3><p class="muted">販售的收益,回到在地小農採購、學生工作機會與下一輪的研發交流——圓,就這樣繼續轉。</p></div>
 </div>
 <div class="quote">老實說,這個圓我們還沒有完全走完——但每一年、每一件產品,都讓它更圓一點。我們一直在努力。</div>
-<div class="note">想支持這個輪轉,最簡單的方式:來<strong>公園裡的咖啡館</strong>坐坐,或到<a href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">線上購物</a>把宜蘭的味道帶回家。</div>
+<div class="note">想支持這個輪轉,最簡單的方式:來<strong>公園裡的咖啡館</strong>坐坐,或到<a href="https://sirshopping.cashier.ecpay.com.tw" target="_blank" rel="noopener">線上購物</a>把宜蘭的味道帶回家——或者,<a href="seed.html"><strong>種一顆荳 🌱</strong></a>。</div>
 </section>
 <section>
 <h2>在地創生|從宜蘭土地長出來的產品</h2>
