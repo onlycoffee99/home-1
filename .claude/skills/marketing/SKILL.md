@@ -46,6 +46,11 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 - Google 商家每篇都要帶 `--gbp-location`(一館/二館各自的 location_id),CTA 用 LEARN_MORE 帶 UTM 連結。
 - 免費版每月 10 篇(跨平台同一篇算一篇);超過前提醒老闆升級。
 
+## 圖卡製作(老闆嫌照片沒風格時)
+- 模板 `行銷/圖卡模板/`(HTML → headless Chromium 截 1080×1350 PNG),做法見該資料夾 README。
+- 照片來源:雲端硬碟「行銷」資料夾已設「知道連結的任何人可檢視」,直接抓 `https://drive.usercontent.google.com/download?id=<fileId>&export=download&confirm=t`(`uc?export=download` 那個網址會要登入,不要用)。
+- 發布:Postproxy MCP `post_publish`,media 用 `upload_create` 上傳後的 url;輪播可放「圖卡 + 原照」。
+
 ## 核准處理(老闆回信或對話說 OK/修改)
 - 全部 OK → 排程表狀態改「核准」,回覆「已核准,請到 Meta Business Suite / LINE OA 各排一次」並附每篇文案。
 - 修改 → 改對應 md 與 csv,重寄該篇,狀態維持「待核」。
