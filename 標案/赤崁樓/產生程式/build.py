@@ -81,12 +81,13 @@ def mk_table(ratios, header, rows):
             p.style = CELL
             pPr = p._p.get_or_add_pPr()
             pPr.append(parse_xml(f'<w:spacing xmlns:w="{W}" w:line="380" w:lineRule="exact"/>'))
-            short = len(txt) <= 6 or re.fullmatch(r'[\d,.%～\-－—／/()（）元人場日次時分以上內下]+', txt or '-')
+            short = len(re.sub(r'[【】]', '', txt)) <= 6 or re.fullmatch(r'[\d,.%～\-－—／/()（）元人場日次時分以上內下]+', txt or '-')
             num = re.fullmatch(r'-?\d{1,3}(,\d{3})+|[\d.]+%', txt)
             align = 'center' if ri == 0 or (short and not num) else ('right' if num else 'left')
             pPr.append(parse_xml(f'<w:jc xmlns:w="{W}" w:val="{align}"/>'))
-            r = p.add_run(txt)
-            if bold_row or ri == 0: r.bold = True
+            add_runs(p, txt)
+            if bold_row or ri == 0:
+                for r in p.runs: r.bold = True
     return t._tbl
 
 def mk_figure(imgs, caption, per_row):
@@ -224,7 +225,15 @@ ph = find_par(lambda s: s.startswith('履約實績(待鄭姐提供)'))
 insert_after(ph, build(S['履約實績']), drop_blank=False)
 body.remove(ph)
 
-insert_after(find_par(lambda s: s.startswith('在品牌行銷方面')), build(S['協力廠商補充']), drop_blank=False)
+h_co = find_par(lambda s: s.strip() == '協力廠商')
+set_text(h_co, '協力人員')
+nx = h_co.getnext()
+while ptext(nx).strip() != '經營目標及預期效益':
+    n2 = nx.getnext(); body.remove(nx); nx = n2
+insert_after(h_co, build(S['協力人員']), drop_blank=False)
+for el in body.iter(qn('w:p')):
+    for t in el.iter(qn('w:t')):
+        if t.text and '協力廠商' in t.text: t.text = t.text.replace('協力廠商', '協力人員')
 
 for key, head in [('經營構想', '經營構想'), ('商品與服務內容', '商品與服務內容'), ('營運作業流程', '營運作業流程'),
                   ('室內空間說明', '室內空間說明'), ('行銷推廣計畫', '行銷推廣計畫'),
