@@ -56,6 +56,8 @@
 - `tools/social_post.js`:IG/Google 商家代發工具(Postproxy,金鑰放環境變數,見 tools/README.md)
 - `.claude/skills/ot-case/`:縣府案件工作模式 skill
 - `行銷/`:兩店社群行銷規則書、排程表、每週產稿;`.claude/skills/marketing/`:行銷工作模式 skill
+- `資歷庫/`:鑫和洋行、鄭玉屏、張哲源、徐鈺清之實績與學經歷總庫(實績總表.csv+各主檔);`.claude/skills/credentials/`:標案資歷庫工作模式 skill(老闆拍照+一句話→我補足歸檔)
+- `標案/`:各標案服務建議書產生程式與說明(赤崁樓案)
 
 ### Google 雲端硬碟(正式檔案庫,Word/PDF/影音)
 - 函稿 Word/PDF(01~13、12A/12B):資料夾「Word檔」(ID `1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3`)
@@ -63,6 +65,7 @@
 - 評估會資料(簡報 02/03、影片 04~06、對照表、說明書):資料夾 ID `1FFKkNATwBlR8U7ysAnDl7YuUBI9Syqdi`
 - 票券 A/B 說明影片 07A/07B:資料夾 ID `1boTb8krJQl8y7fkiS5macJPJZM7Ntpju`
 - 收發文登記簿:資料夾 ID `1KzmzfrsSoiDmsG4avK_q-CcNLHA0LDbj`
+- 資歷庫佐證(實績照片、證書、同意書掃描):資料夾 ID `1K0in_MmY2b16QGoYdkQGXGWaoliIsrpa`
 
 ### 僅存桌機(待桌機修復後上雲)
 - E 槽歷代存檔、契約掃描全本(50MB 無文字層)、前案仲裁判斷書掃描
