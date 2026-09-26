@@ -220,6 +220,7 @@ for el in body.iter(qn('w:p')):
 # ---------- 2. 各章節插入 ----------
 H = lambda key: (lambda s: s.strip() == key)
 insert_after(find_par(H('前言')), build(S['前言']))
+insert_after(find_par(lambda s: s.startswith('鑫和洋行營運長鄭玉屏小姐')), build(S['舞荳品牌']), drop_blank=False)
 
 ph = find_par(lambda s: s.startswith('履約實績(待鄭姐提供)'))
 insert_after(ph, build(S['履約實績']), drop_blank=False)
