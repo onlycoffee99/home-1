@@ -27,7 +27,8 @@ numbering = d.part.numbering_part.element
 def new_num(start=1):
     ids = [int(n.get(qn('w:numId'))) for n in numbering.findall(qn('w:num'))]
     nid = max(ids) + 1
-    numbering.append(parse_xml(
+    last_num = numbering.findall(qn('w:num'))[-1]
+    last_num.addnext(parse_xml(
         f'<w:num xmlns:w="{W}" w:numId="{nid}"><w:abstractNumId w:val="3"/>'
         f'<w:lvlOverride w:ilvl="0"><w:startOverride w:val="{start}"/></w:lvlOverride></w:num>'))
     return nid
@@ -95,6 +96,7 @@ def mk_figure(imgs, caption, per_row):
     t = d.add_table(rows=0, cols=per_row)
     body.remove(t._tbl)
     tp = t._tbl.tblPr
+    for old in tp.findall(qn('w:tblW')) + tp.findall(qn('w:tblStyle')): tp.remove(old)
     tp.append(parse_xml(f'<w:tblStyle xmlns:w="{W}" w:val="a9"/>'))
     tp.append(parse_xml(f'<w:tblW xmlns:w="{W}" w:w="{total}" w:type="dxa"/>'))
     tp.append(parse_xml(f'<w:jc xmlns:w="{W}" w:val="center"/>'))
@@ -306,8 +308,10 @@ if sp.find('.//' + qn('w:sectPr')) is not None:
     for r in list(sp.findall(qn('w:r'))):
         if r.find(qn('w:br')) is not None: sp.remove(r)
     ppr = sp.find(qn('w:pPr'))
-    for x in ('<w:snapToGrid xmlns:w="%s" w:val="0"/>' % W, '<w:spacing xmlns:w="%s" w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>' % W):
-        ppr.insert(1, parse_xml(x))
+    wc = ppr.find(qn('w:widowControl'))
+    pos = list(ppr).index(wc) + 1 if wc is not None else 0
+    ppr.insert(pos, parse_xml('<w:spacing xmlns:w="%s" w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>' % W))
+    ppr.insert(pos, parse_xml('<w:snapToGrid xmlns:w="%s" w:val="0"/>' % W))
     ppr.insert(len(ppr) - 1, parse_xml('<w:rPr xmlns:w="%s"><w:sz w:val="2"/><w:szCs w:val="2"/></w:rPr>' % W))
 
 # 目錄第一層段前距縮小,容納新增的「陸、附件」列
@@ -316,7 +320,7 @@ sp1.set(qn('w:beforeLines'), '25'); sp1.set(qn('w:before'), '90')
 
 # 開啟時提示更新欄位(目錄頁碼)
 settings = d.settings.element
-if settings.find(qn('w:updateFields')) is None:
+if False:
     settings.append(parse_xml(f'<w:updateFields xmlns:w="{W}" w:val="true"/>'))
 
 d.save(OUT)
