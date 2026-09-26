@@ -323,5 +323,8 @@ settings = d.settings.element
 if False:
     settings.append(parse_xml(f'<w:updateFields xmlns:w="{W}" w:val="true"/>'))
 
+# 圖片 docPr id 重新編號,避免重複造成 Word 無法開啟
+for i, dp in enumerate(body.iter('{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}docPr'), 1):
+    dp.set('id', str(i))
 d.save(OUT)
 print('saved', OUT)
