@@ -219,6 +219,16 @@ for el in body.iter(qn('w:p')):
             keep = ''.join(ch for i, ch in enumerate(tx) if not (a <= s0 + i < b))
             t.text = keep; pos = s1
 
+# ---------- 1b. 使用者於 v6 自行修改之原文段落 ----------
+USER_EDITS = [
+    ('張哲源先生負責鑫和洋行之業務經營與對外聯繫，統籌本案', '張哲源先生負責鑫和洋行之店內經營，鄭玉屏為主理人統籌本案'),
+    ('宜蘭金棗友農小農果醬。', '宜蘭金棗友農小農果醬和金棗派之發想作品。'),
+]
+for old, new in USER_EDITS:
+    hit = [el for el in body.iter(qn('w:p')) if old in ptext(el)]
+    assert len(hit) == 1, old
+    set_text(hit[0], ptext(hit[0]).replace(old, new))
+
 # ---------- 2. 各章節插入 ----------
 H = lambda key: (lambda s: s.strip() == key)
 insert_after(find_par(H('前言')), build(S['前言']))
