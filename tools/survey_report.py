@@ -27,13 +27,20 @@ RECOMMEND = ["一定會", "應該會", "還不確定", "應該不會"]
 SMALL_N = 30  # 有效份數低於此值標註「樣本少」
 
 SECTIONS = [
-    ("♨️ 泡風呂(核心題:每位填答者必答)", ["q08", "q09"]),
+    ("⛩️ 核心題(每位填答者必答)", ["q00", "q08", "q09"]),
     ("🌳 公園環境與服務", ["q01", "q02", "q03", "q04", "q05", "q06", "q07"]),
     ("♨️ 風呂服務", ["q10", "q11", "q12"]),
     ("☕ 店家與停車", ["q13", "q14", "q15"]),
     ("🏞️ 宜蘭好在地", ["q17", "q18", "q19", "q20", "q21", "q22", "q23", "q24"]),
 ]
 FUN = ["f1", "f2", "f3"]
+TRAVEL = [
+    ("v1", ["宜蘭在地", "基隆、台北、新北", "桃園、新竹、苗栗", "台中、彰化、南投", "雲林、嘉義、台南", "高雄、屏東", "花蓮、台東", "離島", "國外"]),
+    ("v2", ["當天來回", "住 1 晚", "住 2 晚", "住 3 晚以上", "我住宜蘭"]),
+    ("v3", ["自己來", "伴侶", "家人(帶小孩)", "家人(帶長輩)", "朋友", "旅行團"]),
+    ("v4", ["親友推薦", "Google 地圖", "IG、FB", "YouTube", "旅遊網站、部落格", "路過看到", "老客人了"]),
+    ("v5", ["只在礁溪", "頭城、外澳", "宜蘭市", "羅東", "冬山、五結、三星", "蘇澳、南方澳", "大同、太平山", "還沒決定"]),
+]
 AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"]
 FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"]
 
@@ -124,7 +131,7 @@ def build(rows, names, start, end):
         lines.append("本期間無填答資料。")
         return "\n".join(lines)
 
-    core = {q: sat_stats(rows, q) for q in ["q08", "q09"]}
+    core = {q: sat_stats(rows, q) for q in ["q00", "q08", "q09"]}
     lines += ["## 一、重點摘要", ""]
     for q, s in core.items():
         if s["n"]:
@@ -142,10 +149,18 @@ def build(rows, names, start, end):
         lines.append("- 各題不滿意比例均未達 10%(僅計有效份數 10 份以上之題目)")
     first = sum(1 for r in rows if r.get("freq", "").startswith("今天第一次來"))
     lines.append(f"- 首次到訪遊客占 {pct(first, len(rows))}")
+    org = [r["v1"] for r in rows if r.get("v1")]
+    if org:
+        out = sum(1 for v in org if v != "宜蘭在地")
+        lines.append(f"- 宜蘭縣外遊客占 {pct(out, len(org))}({len(org)} 份)")
+    stay = [r["v2"] for r in rows if r.get("v2") and r["v2"] != "我住宜蘭"]
+    if stay:
+        night = sum(1 for v in stay if v.startswith("住"))
+        lines.append(f"- 外地遊客在宜蘭過夜占 {pct(night, len(stay))}({len(stay)} 份,樣本少時僅供參考)" if len(stay) < SMALL_N else f"- 外地遊客在宜蘭過夜占 {pct(night, len(stay))}({len(stay)} 份)")
     lines.append("")
 
     lines += ["## 二、各題滿意度", "",
-              "> 說明:每位填答者答 8 題(2 題核心題固定,其餘自題庫隨機抽出),故各題有效份數不同。滿意率=(非常滿意+滿意)÷有效份數;平均分數以非常滿意 5 分至非常不滿意 1 分計;「不清楚/沒注意」「今天沒開車」「今天沒需要幫忙」列為不適用,不計入分母。"
+              "> 說明:每位填答者答 10 題(整體滿意度、溫泉水質、湯區清潔、客源地、年齡與來訪頻率為固定題,其餘分類自題庫隨機抽出),故各題有效份數不同。滿意率=(非常滿意+滿意)÷有效份數;平均分數以非常滿意 5 分至非常不滿意 1 分計;「不清楚/沒注意」「今天沒開車」「今天沒需要幫忙」列為不適用,不計入分母。"
               f"有效份數未達 {SMALL_N} 份者標註「樣本少」,僅供參考。", ""]
     for title, qs in SECTIONS:
         lines += [f"### {title}", "",
@@ -163,6 +178,12 @@ def build(rows, names, start, end):
     lines += ["### 推薦意願", "", t, ""]
     if n:
         lines.append(f"推薦意願(一定會+應該會):{pct(c['一定會'] + c['應該會'], n)}\n")
+
+    lines += ["### 宜蘭觀光效益", "", "> 「客源地」為固定題;住宿晚數、同行對象、資訊來源、宜蘭其他行程每人隨機抽 1 題。", ""]
+    for q, order in TRAVEL:
+        t, c, n = dist_table(rows, q, order, names.get(q, q))
+        if n:
+            lines += [t + ("\n\n(樣本少,僅供參考)" if n < SMALL_N else ""), ""]
 
     lines += ["## 三、填答者背景", ""]
     t, _, _ = dist_table(rows, "age", AGES, "年齡")
@@ -212,6 +233,7 @@ def main():
     ap.add_argument("--from", dest="start")
     ap.add_argument("--to", dest="end")
     ap.add_argument("--exclude", default="Claude 測試", help="留言含此字串的列視為測試資料排除")
+    ap.add_argument("--credit", default="", help="報告末尾署名(內部版可加;送縣府版不加)")
     ap.add_argument("--out")
     args = ap.parse_args()
 
@@ -228,6 +250,8 @@ def main():
     rows = [r for r in rows if r["_t"] and start <= r["_t"].date() <= end]
 
     md = build(rows, names, start, end)
+    if args.credit:
+        md += "\n---\n\n" + args.credit + "\n"
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:
             f.write(md)

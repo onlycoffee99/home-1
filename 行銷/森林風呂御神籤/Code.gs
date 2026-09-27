@@ -45,7 +45,14 @@ var COLUMNS = [
   ['f2', '趣味:最想來一杯'],
   ['f3', '趣味:森林風呂是什麼動物'],
   ['message', '想說的話'],
-  ['asked', '本次抽到的題目']
+  ['asked', '本次抽到的題目'],
+  // 115/9/27 改 10 題版新增(接在最後,舊資料欄位不動)
+  ['q00', '0 整體滿意度'],
+  ['v1', '客源地'],
+  ['v2', '宜蘭住宿晚數'],
+  ['v3', '同行對象'],
+  ['v4', '資訊來源'],
+  ['v5', '宜蘭其他行程']
 ];
 
 function doGet(e) {
@@ -69,9 +76,13 @@ function getSheet_() {
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
   }
+  var header = COLUMNS.map(function (c) { return c[1]; });
   if (sh.getLastRow() === 0) {
-    sh.appendRow(COLUMNS.map(function (c) { return c[1]; }));
+    sh.appendRow(header);
     sh.setFrozenRows(1);
+  } else if (sh.getLastColumn() < header.length) {
+    // 新增欄位時補齊標題列(新欄位一律接在最後,既有資料不受影響)
+    sh.getRange(1, 1, 1, header.length).setValues([header]);
   }
   return sh;
 }

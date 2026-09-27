@@ -68,7 +68,7 @@
   .note { color: var(--ink-2); font-size: 15px; text-align: center; margin-top: 14px; }
 
   /* 進度:8 支籤 */
-  .sticks { display: flex; justify-content: center; gap: 8px; margin: 4px 0 16px; }
+  .sticks { display: flex; justify-content: center; gap: 7px; margin: 4px 0 16px; }
   .sticks i { width: 10px; height: 34px; border-radius: 3px 3px 5px 5px; background: var(--line); transition: background .3s, transform .3s; }
   .sticks i.done { background: var(--wood); }
   .sticks i.now { background: var(--torii); transform: translateY(-6px); }
@@ -112,6 +112,8 @@
   .rules { font-size: 14px; color: var(--ink-2); margin-top: 14px; line-height: 1.7; }
   .again { text-align: center; color: var(--forest); font-weight: 700; margin-bottom: 10px; }
   .foot { text-align: center; font-size: 13px; color: var(--ink-2); margin-top: auto; padding-top: 20px; }
+  .credit { font-size: 11px; opacity: .75; margin-top: 4px; }
+  .credit a { color: inherit; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -141,9 +143,9 @@
         <text x="90" y="174" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">籤</text>
       </svg>
     </div>
-    <div class="gift">答完 <b>8</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕</div>
+    <div class="gift">答完 <b>10</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕</div>
     <button class="btn" id="btn-draw">搖一搖・抽籤</button>
-    <p class="note">大約 1 分鐘・不用填名字電話</p>
+    <p class="note">大約 2 分鐘・不用填名字電話</p>
   </section>
 
   <!-- 題目 -->
@@ -190,7 +192,9 @@
     </div>
   </section>
 
-  <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館</div>
+  <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館
+    <div class="credit">問卷設計 Eileen ・ <a href="tel:0975328779">0975-328-779</a></div>
+  </div>
 </div>
 
 <script>
@@ -202,9 +206,13 @@
     { em: "😍", v: "非常滿意" }, { em: "😊", v: "滿意" }, { em: "😐", v: "普通" },
     { em: "😕", v: "不滿意" }, { em: "😫", v: "非常不滿意" }
   ];
+  var OVERALL = { id: "q00", tag: "⛩️ 開籤", t: "整體來說,今天在森林風呂開心嗎?" };
   var CORE = [
     { id: "q08", tag: "♨️ 泡風呂", t: "今天的溫泉水,泡起來怎麼樣?" },
-    { id: "q09", tag: "♨️ 泡風呂", t: "湯區環境乾淨嗎?" }
+    { id: "q09", tag: "♨️ 泡風呂", t: "湯區環境乾淨嗎?" },
+    { id: "v1", tag: "🗺️ 旅人小檔案", t: "你從哪裡來?",
+      opts: [{ em: "🏡", v: "宜蘭在地" }, { em: "🏙️", v: "基隆、台北、新北" }, { em: "🚄", v: "桃園、新竹、苗栗" }, { em: "⛰️", v: "台中、彰化、南投" },
+             { em: "🌾", v: "雲林、嘉義、台南" }, { em: "🌴", v: "高雄、屏東" }, { em: "🌊", v: "花蓮、台東" }, { em: "🏝️", v: "離島" }, { em: "✈️", v: "國外" }] }
   ];
   var POOL_SAT = [
     { id: "q01", tag: "🌳 逛公園", t: "公園的風景,看起來舒服嗎?" },
@@ -233,6 +241,16 @@
     { id: "q23", t: "在地民眾免費泡湯回饋活動,你覺得如何?" },
     { id: "q24", t: "與佛光大學合作的在地創生商品,你覺得如何?" }
   ].map(function (q) { q.tag = "🏞️ 宜蘭好在地"; q.extra = "不清楚/沒注意"; return q; });
+  var POOL_TRAVEL = [
+    { id: "v2", tag: "🗺️ 旅人小檔案", t: "這趟在宜蘭住幾晚?",
+      opts: [{ em: "🚗", v: "當天來回" }, { em: "🌙", v: "住 1 晚" }, { em: "🌙🌙", v: "住 2 晚" }, { em: "🏨", v: "住 3 晚以上" }, { em: "🏡", v: "我住宜蘭" }] },
+    { id: "v3", tag: "🗺️ 旅人小檔案", t: "今天跟誰一起來?",
+      opts: [{ em: "🧘", v: "自己來" }, { em: "💑", v: "伴侶" }, { em: "👨‍👩‍👧", v: "家人(帶小孩)" }, { em: "👵", v: "家人(帶長輩)" }, { em: "👯", v: "朋友" }, { em: "🚌", v: "旅行團" }] },
+    { id: "v4", tag: "🗺️ 旅人小檔案", t: "怎麼知道森林風呂的?",
+      opts: [{ em: "🗣️", v: "親友推薦" }, { em: "📍", v: "Google 地圖" }, { em: "📱", v: "IG、FB" }, { em: "▶️", v: "YouTube" }, { em: "📰", v: "旅遊網站、部落格" }, { em: "🚶", v: "路過看到" }, { em: "😎", v: "老客人了" }] },
+    { id: "v5", tag: "🗺️ 旅人小檔案", t: "這趟還會去宜蘭哪裡?(選最主要的)",
+      opts: [{ em: "♨️", v: "只在礁溪" }, { em: "🏄", v: "頭城、外澳" }, { em: "🏛️", v: "宜蘭市" }, { em: "🌃", v: "羅東" }, { em: "🎎", v: "冬山、五結、三星" }, { em: "🐟", v: "蘇澳、南方澳" }, { em: "🌲", v: "大同、太平山" }, { em: "🤔", v: "還沒決定" }] }
+  ];
   var POOL_FUN = [
     { id: "f1", tag: "🎈 隨便聊聊", t: "泡湯的時候,腦袋在想什麼?",
       opts: [{ em: "☁️", v: "什麼都沒想,放空中" }, { em: "🍜", v: "等一下吃什麼" }, { em: "😭", v: "工作…(不要想了)" }, { em: "🤔", v: "人生的大道理" }, { em: "♨️", v: "好想再泡一下" }] },
@@ -252,7 +270,8 @@
     { l: "森林吉", p: "聽聽竹林的風聲<br>煩惱都放在湯裡了" },
     { l: "福吉", p: "泡得開心、吃得開心<br>福氣自然跟著來" }
   ];
-  var NUM = ["一", "二", "三", "四", "五", "六", "七", "八"];
+  var NUM = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+  var TOTAL = 10;
 
   // ===== 工具 =====
   function $(id) { return document.getElementById(id); }
@@ -265,19 +284,19 @@
   function show(id) { var s = document.querySelectorAll(".screen"); for (var i = 0; i < s.length; i++) s[i].classList.remove("on"); $(id).classList.add("on"); window.scrollTo(0, 0); }
 
   // ===== 狀態 =====
-  var questions = [];   // 本次 8 題(第 8 題為基本資料卡)
+  var questions = [];   // 本次 10 題(第 1 題整體滿意、第 10 題基本資料卡)
   var answers = {};     // id -> 答案
   var idx = 0;
 
   function buildSet() {
-    // 2 固定 + 3 滿意度隨機 + 1 宜蘭好在地 + 1 趣味,打散後最後接基本資料卡
-    var mid = shuffle(CORE.concat(pick(POOL_SAT, 3), pick(POOL_LOCAL, 1), pick(POOL_FUN, 1)));
-    return mid.concat([{ id: "basic", tag: "🎒 認識你一下", basic: true }]);
+    // 第 1 題整體滿意;中間 8 題打散:固定 3(水質、清潔、客源地)+ 環境服務 2 + 宜蘭好在地 1 + 旅遊行為 1 + 趣味 1;最後基本資料卡
+    var mid = shuffle(CORE.concat(pick(POOL_SAT, 2), pick(POOL_LOCAL, 1), pick(POOL_TRAVEL, 1), pick(POOL_FUN, 1)));
+    return [OVERALL].concat(mid, [{ id: "basic", tag: "🎒 認識你一下", basic: true }]);
   }
 
   function renderSticks(el, cur) {
     var h = "";
-    for (var i = 0; i < 8; i++) h += '<i class="' + (i < cur ? "done" : i === cur ? "now" : "") + '"></i>';
+    for (var i = 0; i < TOTAL; i++) h += '<i class="' + (i < cur ? "done" : i === cur ? "now" : "") + '"></i>';
     el.innerHTML = h;
   }
 
@@ -327,7 +346,7 @@
 
   function next() {
     if (idx < questions.length - 1) { idx++; renderQ(); window.scrollTo(0, 0); }
-    else { renderSticks($("sticks2"), 8); show("s-msg"); }
+    else { renderSticks($("sticks2"), TOTAL); show("s-msg"); }
   }
 
   // ===== 結果 =====
