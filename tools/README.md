@@ -36,3 +36,16 @@ node tools/social_post.js post --profiles <gbpProfileId> --text "..." --file 圖
 node tools/social_post.js get <postId>                              # 查每平台 published/failed
 ```
 時間用 UTC(台灣時間減 8 小時)。IG 圖 JPG/PNG ≤8MB;Google 商家圖 ≤5MB、不支援影片、文字 ≤1,500 字。
+
+## survey_report.py(森林風呂御神籤問卷統計報告)
+
+只用 Python 標準函式庫。匯出金鑰在雲端硬碟「森林風呂御神籤」資料夾,**不得寫進 repo**。
+
+```bash
+python3 tools/survey_report.py --url <網頁網址> --key <金鑰> --month 2026-10 --out 報告.md
+python3 tools/survey_report.py --url <網頁網址> --key <金鑰> --from 2026-10-01 --to 2026-12-31 --out 報告.md --save-json raw.json
+python3 tools/survey_report.py --json raw.json --month 2026-11 --out 報告.md   # 用已下載的資料
+```
+- 各題:有效份數、五級分布、滿意率、平均分數(5 分制)、不適用份數;未達 30 份標「樣本少」
+- 另含重點摘要、推薦意願、年齡/來訪頻率、月別趨勢(跨月時)、趣味題、留言原文
+- 留言含「Claude 測試」的列自動排除(`--exclude` 可改)

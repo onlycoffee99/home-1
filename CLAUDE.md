@@ -54,6 +54,8 @@
 - `tools/md2docx.js`:md 轉 Word 工具(用法見 tools/README.md)
 - `tools/line_broadcast.js`:LINE 官方帳號群發工具(金鑰放環境變數,見 tools/README.md)
 - `tools/social_post.js`:IG/Google 商家代發工具(Postproxy,金鑰放環境變數,見 tools/README.md)
+- `tools/survey_report.py`:森林風呂御神籤問卷統計報告(見 tools/README.md、marketing skill)
+- `行銷/森林風呂御神籤/`:森林風呂遊客問卷網頁(隨機 8 題、贈咖啡券),部署說明含網址
 - `.claude/skills/ot-case/`:縣府案件工作模式 skill
 - `行銷/`:兩店社群行銷規則書、排程表、每週產稿;`.claude/skills/marketing/`:行銷工作模式 skill
 

@@ -2,6 +2,8 @@
  * 森林風呂御神籤:Google Apps Script 後端
  * 可放在試算表的 擴充功能 → Apps Script,或 script.google.com 新專案(兩種都可以)。
  * 網頁(Index.html)答完後呼叫 submit(),寫一列到「回覆」工作表並回傳券號。
+ * 匯出(給 Claude 做評估報告):網址後加 ?export=<金鑰>,回傳全部回覆 JSON。
+ *   金鑰放在「專案設定 → 指令碼屬性」EXPORT_KEY,不寫進程式碼;未設定則不開放匯出。
  */
 
 var SHEET_NAME = '回覆';
@@ -46,7 +48,16 @@ var COLUMNS = [
   ['asked', '本次抽到的題目']
 ];
 
-function doGet() {
+function doGet(e) {
+  var key = PropertiesService.getScriptProperties().getProperty('EXPORT_KEY');
+  if (e && e.parameter && e.parameter.export) {
+    if (!key || e.parameter.export !== key) {
+      return ContentService.createTextOutput('{"error":"forbidden"}').setMimeType(ContentService.MimeType.JSON);
+    }
+    var values = getSheet_().getDataRange().getDisplayValues();
+    return ContentService.createTextOutput(JSON.stringify({ columns: COLUMNS, rows: values.slice(1) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return HtmlService.createHtmlOutputFromFile('Index')
     .setTitle('森林風呂御神籤')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
@@ -81,7 +92,7 @@ function submit(payload) {
 
     var row = COLUMNS.map(function (c) {
       var k = c[0];
-      if (k === 'time') return new Date();
+      if (k === 'time') return Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
       if (k === 'coupon') return 'No.' + coupon;
       if (k === 'luck') return clip(payload.luck, 10);
       if (k === 'message') return clip(payload.message, 300);
