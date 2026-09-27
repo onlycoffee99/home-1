@@ -49,3 +49,13 @@ python3 tools/survey_report.py --json raw.json --month 2026-11 --out 報告.md  
 - 各題:有效份數、五級分布、滿意率、平均分數(5 分制)、不適用份數;未達 30 份標「樣本少」
 - 另含重點摘要、推薦意願、年齡/來訪頻率、月別趨勢(跨月時)、趣味題、留言原文
 - 留言含「Claude 測試」的列自動排除(`--exclude` 可改)
+
+## make_qr.py / html2pdf.js(印刷品:QR 立牌、贈品券)
+
+```bash
+pip install qrcode                                   # 一次
+python3 tools/make_qr.py <網址> qr.svg               # 產 QR SVG,貼進立牌 HTML
+node tools/html2pdf.js 立牌.html 立牌.pdf 預覽.png   # 依 CSS @page 紙張大小輸出 PDF + 預覽圖
+```
+- 範本:`行銷/森林風呂御神籤/立牌_A5.html`、`咖啡券_A4十張.html`
+- 印之前用預覽圖解碼確認網址:`pip install opencv-python-headless` 後 `python3 -c "import cv2;print(cv2.QRCodeDetector().detectAndDecode(cv2.imread('預覽.png'))[0])"`
