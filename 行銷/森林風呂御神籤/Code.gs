@@ -1,10 +1,12 @@
 /**
  * 森林風呂御神籤:Google Apps Script 後端
- * 放在「森林風呂御神籤_回覆」試算表的 擴充功能 → Apps Script 裡。
+ * 可放在試算表的 擴充功能 → Apps Script,或 script.google.com 新專案(兩種都可以)。
  * 網頁(Index.html)答完後呼叫 submit(),寫一列到「回覆」工作表並回傳券號。
  */
 
 var SHEET_NAME = '回覆';
+// 「森林風呂御神籤_回覆」試算表 ID(雲端硬碟「森林風呂御神籤」資料夾內)
+var SPREADSHEET_ID = '1K22clZvbwZXTtxSCUmUTx1svKZBpdLILlm6Q7w6yC88';
 
 // 欄位順序固定;id 須與 Index.html 題庫一致
 var COLUMNS = [
@@ -51,7 +53,7 @@ function doGet() {
 }
 
 function getSheet_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
