@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>森林風呂御神籤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f0e4;
+    --paper-2: #efe6d3;
+    --ink: #2b2a26;
+    --ink-2: #6b6558;
+    --forest: #2f5d46;
+    --forest-2: #e3ecdf;
+    --torii: #b8402f;
+    --torii-2: #f3ddd6;
+    --wood: #b98a57;
+    --wood-2: #8a6239;
+    --line: #d9cdb4;
+    --card: #fffdf7;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(47,93,70,.07) 0, transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(184,64,47,.06) 0, transparent 40%);
+    color: var(--ink);
+    font-family: "Noto Sans TC", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 40px; min-height: 100vh; display: flex; flex-direction: column; }
+  .serif { font-family: "Noto Serif TC", serif; }
+  h1 { font-family: "Noto Serif TC", serif; font-weight: 900; font-size: 34px; letter-spacing: .12em; margin: 8px 0 4px; text-align: center; color: var(--forest); }
+  .sub { text-align: center; color: var(--ink-2); margin: 0 0 8px; }
+  .screen { display: none; flex: 1; flex-direction: column; }
+  .screen.on { display: flex; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* 籤筒 */
+  .tube-box { display: flex; justify-content: center; margin: 12px 0 8px; }
+  .tube { width: 180px; height: 230px; transform-origin: 50% 90%; }
+  .tube.shake { animation: shake .9s ease-in-out; }
+  @keyframes shake {
+    0%,100% { transform: rotate(0); }
+    15% { transform: rotate(-14deg); } 30% { transform: rotate(12deg); }
+    45% { transform: rotate(-10deg); } 60% { transform: rotate(8deg); }
+    75% { transform: rotate(-4deg); }
+  }
+  .tube .pop { transition: transform .5s cubic-bezier(.2,1.6,.4,1); }
+  .tube.popped .pop { transform: translateY(-46px); }
+
+  .gift { background: var(--card); border: 1.5px dashed var(--torii); border-radius: 14px; padding: 12px 14px; text-align: center; margin: 8px 0 20px; }
+  .gift b { color: var(--torii); font-size: 22px; }
+  .btn {
+    display: block; width: 100%; border: 0; border-radius: 14px; padding: 16px;
+    font: 700 21px "Noto Sans TC", sans-serif; letter-spacing: .08em; cursor: pointer;
+    background: var(--torii); color: #fff; box-shadow: 0 4px 0 #8c2e21;
+  }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #8c2e21; }
+  .btn:disabled { opacity: .5; }
+  .btn.ghost { background: transparent; color: var(--ink-2); box-shadow: none; font-weight: 500; font-size: 17px; }
+  .note { color: var(--ink-2); font-size: 15px; text-align: center; margin-top: 14px; }
+
+  /* 進度:8 支籤 */
+  .sticks { display: flex; justify-content: center; gap: 8px; margin: 4px 0 16px; }
+  .sticks i { width: 10px; height: 34px; border-radius: 3px 3px 5px 5px; background: var(--line); transition: background .3s, transform .3s; }
+  .sticks i.done { background: var(--wood); }
+  .sticks i.now { background: var(--torii); transform: translateY(-6px); }
+
+  .qcard { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px 18px 18px; box-shadow: 0 6px 20px rgba(80,60,30,.08); position: relative; }
+  .qno { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--forest); color: #fff; font-family: "Noto Serif TC", serif; font-weight: 700; padding: 3px 18px; border-radius: 999px; font-size: 16px; letter-spacing: .15em; white-space: nowrap; }
+  .qtag { text-align: center; color: var(--forest); font-size: 14px; margin-top: 6px; }
+  .qtext { font-family: "Noto Serif TC", serif; font-weight: 700; font-size: 23px; line-height: 1.5; text-align: center; margin: 6px 0 18px; }
+  .opts { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+    background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px;
+    font: 500 19px "Noto Sans TC", sans-serif; color: var(--ink); cursor: pointer;
+  }
+  .opt .em { font-size: 28px; width: 34px; text-align: center; line-height: 1; }
+  .opt.sel { border-color: var(--forest); background: var(--forest-2); }
+  .opt.soft { color: var(--ink-2); font-size: 17px; border-style: dashed; }
+  .grp-label { font-weight: 700; margin: 4px 0 8px; color: var(--forest); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 14px; font: 500 17px "Noto Sans TC", sans-serif; color: var(--ink); cursor: pointer; }
+  .chip.sel { border-color: var(--forest); background: var(--forest-2); }
+  .back { margin-top: 14px; }
+
+  textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font: 18px "Noto Sans TC", sans-serif; background: #fff; color: var(--ink); resize: vertical; }
+
+  /* 籤詩 */
+  .omikuji {
+    background: #fffdf5; border: 2px solid var(--torii); border-radius: 6px; padding: 22px 18px 18px;
+    position: relative; text-align: center; box-shadow: 0 8px 24px rgba(120,40,20,.12);
+  }
+  .omikuji::before { content: ""; position: absolute; inset: 6px; border: 1px solid var(--torii-2); border-radius: 3px; pointer-events: none; }
+  .luck { font-family: "Noto Serif TC", serif; font-weight: 900; font-size: 56px; color: var(--torii); letter-spacing: .2em; line-height: 1.1; margin: 4px 0 10px; }
+  .poem { font-family: "Noto Serif TC", serif; font-size: 20px; line-height: 1.8; margin-bottom: 14px; }
+  .coupon { background: var(--torii-2); border-radius: 10px; padding: 12px; margin: 10px 0 4px; }
+  .coupon .t { font-weight: 700; font-size: 19px; }
+  .coupon .no { font-family: "Noto Serif TC", serif; font-weight: 900; font-size: 30px; color: var(--torii); letter-spacing: .08em; }
+  .live { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: var(--ink-2); margin-top: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #3aa35b; animation: blink 1s infinite; }
+  @keyframes blink { 50% { opacity: .2; } }
+  .show { margin-top: 16px; background: var(--forest); color: #fff; border-radius: 12px; padding: 12px; text-align: center; font-weight: 700; }
+  .rules { font-size: 14px; color: var(--ink-2); margin-top: 14px; line-height: 1.7; }
+  .again { text-align: center; color: var(--forest); font-weight: 700; margin-bottom: 10px; }
+  .foot { text-align: center; font-size: 13px; color: var(--ink-2); margin-top: auto; padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 開始 -->
+  <section class="screen on" id="s-start">
+    <h1>森林風呂御神籤</h1>
+    <p class="sub">泡完湯,來抽一支好運籤吧 ♨️</p>
+    <div class="tube-box">
+      <svg class="tube" id="tube" viewBox="0 0 180 230" aria-hidden="true">
+        <g fill="#c9a06d" stroke="#8a6239" stroke-width="2">
+          <rect x="62" y="18" width="9" height="80" rx="2" transform="rotate(-8 66 98)"/>
+          <rect x="108" y="22" width="9" height="76" rx="2" transform="rotate(9 112 98)"/>
+          <rect x="95" y="14" width="9" height="84" rx="2" transform="rotate(3 99 98)"/>
+          <rect x="74" y="26" width="9" height="72" rx="2" transform="rotate(-3 78 98)"/>
+        </g>
+        <g class="pop">
+          <rect x="84" y="4" width="11" height="96" rx="2" fill="#e8c893" stroke="#8a6239" stroke-width="2"/>
+          <rect x="84" y="4" width="11" height="14" rx="2" fill="#b8402f"/>
+        </g>
+        <rect x="40" y="80" width="100" height="140" rx="10" fill="#b98a57" stroke="#8a6239" stroke-width="3"/>
+        <rect x="40" y="100" width="100" height="8" fill="#8a6239"/>
+        <rect x="40" y="192" width="100" height="8" fill="#8a6239"/>
+        <rect x="64" y="118" width="52" height="64" rx="4" fill="#fffdf5" stroke="#b8402f" stroke-width="2"/>
+        <text x="90" y="148" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">御</text>
+        <text x="90" y="174" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">籤</text>
+      </svg>
+    </div>
+    <div class="gift">答完 <b>8</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕</div>
+    <button class="btn" id="btn-draw">搖一搖・抽籤</button>
+    <p class="note">大約 1 分鐘・不用填名字電話</p>
+  </section>
+
+  <!-- 題目 -->
+  <section class="screen" id="s-q">
+    <div class="sticks" id="sticks"></div>
+    <div class="qcard">
+      <div class="qno" id="qno"></div>
+      <div class="qtag" id="qtag"></div>
+      <div id="qbody"></div>
+    </div>
+    <button class="btn ghost back" id="btn-back">← 上一籤</button>
+  </section>
+
+  <!-- 留言 -->
+  <section class="screen" id="s-msg">
+    <div class="sticks" id="sticks2"></div>
+    <div class="qcard">
+      <div class="qno">最後一句話</div>
+      <div class="qtext" style="margin-top:14px">有什麼想跟我們說的嗎?💬</div>
+      <textarea id="msg" maxlength="300" placeholder="可以不寫,直接按下面抽籤詩"></textarea>
+    </div>
+    <div style="height:16px"></div>
+    <button class="btn" id="btn-submit">看我的籤詩 🎋</button>
+    <button class="btn ghost" id="btn-back2">← 上一籤</button>
+  </section>
+
+  <!-- 結果 -->
+  <section class="screen" id="s-result">
+    <div class="again" id="again" hidden>今天已經抽過囉,這是你的籤 😊</div>
+    <div class="omikuji">
+      <div class="serif" style="color:var(--ink-2)">森林風呂御神籤</div>
+      <div class="luck" id="luck"></div>
+      <div class="poem" id="poem"></div>
+      <div class="coupon">
+        <div class="t">🎁 時間到咖啡館 折 30 元</div>
+        <div class="no" id="cno"></div>
+      </div>
+      <div class="live"><span class="dot"></span><span id="clock"></span></div>
+    </div>
+    <div class="show">請把這個畫面給風呂櫃台看<br>領取紙本咖啡券 ☕</div>
+    <div class="rules">
+      ・咖啡券限時間到咖啡館(公園一館)使用,每次消費限用 1 張<br>
+      ・每人每天限領 1 次・不得兌換現金、不找零
+    </div>
+  </section>
+
+  <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ===== 題庫(id 與試算表欄位對應,請勿任意更改 id)=====
+  var SCALE = [
+    { em: "😍", v: "非常滿意" }, { em: "😊", v: "滿意" }, { em: "😐", v: "普通" },
+    { em: "😕", v: "不滿意" }, { em: "😫", v: "非常不滿意" }
+  ];
+  var CORE = [
+    { id: "q08", tag: "♨️ 泡風呂", t: "今天的溫泉水,泡起來怎麼樣?" },
+    { id: "q09", tag: "♨️ 泡風呂", t: "湯區環境乾淨嗎?" }
+  ];
+  var POOL_SAT = [
+    { id: "q01", tag: "🌳 逛公園", t: "公園的風景,看起來舒服嗎?" },
+    { id: "q02", tag: "🌳 逛公園", t: "公園走道、草地乾不乾淨?" },
+    { id: "q03", tag: "🌳 逛公園", t: "公園的廁所(含泡腳池旁)乾淨嗎?" },
+    { id: "q04", tag: "🌳 逛公園", t: "泡腳池乾淨嗎?" },
+    { id: "q05", tag: "🌳 逛公園", t: "需要幫忙時,工作人員有主動協助、馬上處理嗎?", extra: "今天沒需要幫忙" },
+    { id: "q06", tag: "🌳 逛公園", t: "垃圾分類、資源回收做得好嗎?" },
+    { id: "q07", tag: "🌳 逛公園", t: "園區防蚊蟲做得如何?🦟" },
+    { id: "q10", tag: "♨️ 泡風呂", t: "風呂的廁所乾淨嗎?" },
+    { id: "q11", tag: "♨️ 泡風呂", t: "櫃台人員親切嗎?" },
+    { id: "q12", tag: "♨️ 泡風呂", t: "在櫃台等候的時間,還可以接受嗎?" },
+    { id: "q13", tag: "☕ 來一杯", t: "園區店家的服務怎麼樣?" },
+    { id: "q14", tag: "☕ 來一杯", t: "停車方便嗎?", extra: "今天沒開車" },
+    { id: "q15", tag: "☕ 來一杯", t: "停車場好不好找?", extra: "今天沒開車" },
+    { id: "q16", tag: "☕ 來一杯", t: "會推薦朋友來森林風呂嗎?",
+      opts: [{ em: "🙌", v: "一定會" }, { em: "👍", v: "應該會" }, { em: "🤔", v: "還不確定" }, { em: "🙅", v: "應該不會" }] }
+  ];
+  var POOL_LOCAL = [
+    { id: "q17", t: "礁溪溫泉公園的經營,有讓宜蘭觀光更好嗎?" },
+    { id: "q18", t: "有幫宜蘭的觀光形象加分嗎?" },
+    { id: "q19", t: "園區有呈現宜蘭在地特色(在地食材、文化設計、自然風格)嗎?" },
+    { id: "q20", t: "園區的活動或佈置,讓你更認識宜蘭的文化或自然嗎?" },
+    { id: "q21", t: "園區有提供宜蘭觀光資訊(景點、餐廳、活動推薦)嗎?" },
+    { id: "q22", t: "園區的免費公益活動、按摩小站,你覺得如何?" },
+    { id: "q23", t: "在地民眾免費泡湯回饋活動,你覺得如何?" },
+    { id: "q24", t: "與佛光大學合作的在地創生商品,你覺得如何?" }
+  ].map(function (q) { q.tag = "🏞️ 宜蘭好在地"; q.extra = "不清楚/沒注意"; return q; });
+  var POOL_FUN = [
+    { id: "f1", tag: "🎈 隨便聊聊", t: "泡湯的時候,腦袋在想什麼?",
+      opts: [{ em: "☁️", v: "什麼都沒想,放空中" }, { em: "🍜", v: "等一下吃什麼" }, { em: "😭", v: "工作…(不要想了)" }, { em: "🤔", v: "人生的大道理" }, { em: "♨️", v: "好想再泡一下" }] },
+    { id: "f2", tag: "🎈 隨便聊聊", t: "泡完湯,最想來一杯什麼?",
+      opts: [{ em: "☕", v: "熱咖啡" }, { em: "🧊", v: "冰咖啡" }, { em: "🍊", v: "金棗飲品" }, { em: "🍰", v: "甜點配咖啡" }, { em: "😴", v: "先躺一下再說" }] },
+    { id: "f3", tag: "🎈 隨便聊聊", t: "如果森林風呂是一種動物,牠是?",
+      opts: [{ em: "🦫", v: "水豚(泡到不想動)" }, { em: "🐒", v: "日本猴(泡湯專家)" }, { em: "🐢", v: "烏龜(慢慢來)" }, { em: "🐱", v: "貓(舒服到瞇眼)" }] }
+  ];
+  var AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"];
+  var FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"];
+
+  var FORTUNES = [
+    { l: "大吉", p: "今日宜泡湯、宜放空<br>宜喝一杯咖啡" },
+    { l: "湯吉", p: "溫泉泡暖了身體<br>好運也跟著暖起來" },
+    { l: "咖啡吉", p: "一杯熱咖啡<br>把今天的好心情留久一點" },
+    { l: "中吉", p: "慢慢走、慢慢泡<br>好事正在路上" },
+    { l: "森林吉", p: "聽聽竹林的風聲<br>煩惱都放在湯裡了" },
+    { l: "福吉", p: "泡得開心、吃得開心<br>福氣自然跟著來" }
+  ];
+  var NUM = ["一", "二", "三", "四", "五", "六", "七", "八"];
+
+  // ===== 工具 =====
+  function $(id) { return document.getElementById(id); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+  function today() { var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  var KEY = "fr-omikuji-" + today();
+  function load() { try { var s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+  function save(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
+  function show(id) { var s = document.querySelectorAll(".screen"); for (var i = 0; i < s.length; i++) s[i].classList.remove("on"); $(id).classList.add("on"); window.scrollTo(0, 0); }
+
+  // ===== 狀態 =====
+  var questions = [];   // 本次 8 題(第 8 題為基本資料卡)
+  var answers = {};     // id -> 答案
+  var idx = 0;
+
+  function buildSet() {
+    // 2 固定 + 3 滿意度隨機 + 1 宜蘭好在地 + 1 趣味,打散後最後接基本資料卡
+    var mid = shuffle(CORE.concat(pick(POOL_SAT, 3), pick(POOL_LOCAL, 1), pick(POOL_FUN, 1)));
+    return mid.concat([{ id: "basic", tag: "🎒 認識你一下", basic: true }]);
+  }
+
+  function renderSticks(el, cur) {
+    var h = "";
+    for (var i = 0; i < 8; i++) h += '<i class="' + (i < cur ? "done" : i === cur ? "now" : "") + '"></i>';
+    el.innerHTML = h;
+  }
+
+  function renderQ() {
+    var q = questions[idx];
+    renderSticks($("sticks"), idx);
+    $("qno").textContent = "第" + NUM[idx] + "籤";
+    $("qtag").textContent = q.tag;
+    $("btn-back").style.visibility = idx === 0 ? "hidden" : "visible";
+    var body = $("qbody");
+
+    if (q.basic) {
+      var h = '<div class="qtext">最後一籤!你是…</div>';
+      h += '<div class="grp-label">年齡</div><div class="chips" data-k="age">';
+      AGES.forEach(function (a) { h += '<button class="chip' + (answers.age === a ? " sel" : "") + '" data-v="' + a + '">' + a + "</button>"; });
+      h += '</div><div class="grp-label">多久來泡一次?</div><div class="chips" data-k="freq">';
+      FREQS.forEach(function (a) { h += '<button class="chip' + (answers.freq === a ? " sel" : "") + '" data-v="' + a + '">' + a + "</button>"; });
+      h += "</div>";
+      body.innerHTML = h;
+      var groups = body.querySelectorAll(".chips");
+      Array.prototype.forEach.call(groups, function (g) {
+        g.addEventListener("click", function (e) {
+          var b = e.target.closest(".chip"); if (!b) return;
+          answers[g.getAttribute("data-k")] = b.getAttribute("data-v");
+          Array.prototype.forEach.call(g.children, function (c) { c.classList.toggle("sel", c === b); });
+          if (answers.age && answers.freq) setTimeout(next, 280);
+        });
+      });
+      return;
+    }
+
+    var opts = (q.opts || SCALE).slice();
+    var h2 = '<div class="qtext">' + q.t + '</div><div class="opts">';
+    opts.forEach(function (o) {
+      h2 += '<button class="opt' + (answers[q.id] === o.v ? " sel" : "") + '" data-v="' + o.v + '"><span class="em">' + o.em + "</span>" + o.v + "</button>";
+    });
+    if (q.extra) h2 += '<button class="opt soft' + (answers[q.id] === q.extra ? " sel" : "") + '" data-v="' + q.extra + '"><span class="em">🤷</span>' + q.extra + "</button>";
+    h2 += "</div>";
+    body.innerHTML = h2;
+    body.querySelector(".opts").addEventListener("click", function (e) {
+      var b = e.target.closest(".opt"); if (!b) return;
+      answers[q.id] = b.getAttribute("data-v");
+      Array.prototype.forEach.call(this.children, function (c) { c.classList.toggle("sel", c === b); });
+      setTimeout(next, 280);
+    });
+  }
+
+  function next() {
+    if (idx < questions.length - 1) { idx++; renderQ(); window.scrollTo(0, 0); }
+    else { renderSticks($("sticks2"), 8); show("s-msg"); }
+  }
+
+  // ===== 結果 =====
+  var clockTimer = null;
+  function showResult(r, repeat) {
+    $("luck").textContent = r.luck;
+    $("poem").innerHTML = r.poem;
+    $("cno").textContent = "No." + r.coupon;
+    $("again").hidden = !repeat;
+    show("s-result");
+    function tick() {
+      var d = new Date();
+      $("clock").textContent = today() + " " + d.toLocaleTimeString("zh-TW", { hour12: false });
+    }
+    tick();
+    if (clockTimer) clearInterval(clockTimer);
+    clockTimer = setInterval(tick, 1000);
+  }
+
+  function submit() {
+    var btn = $("btn-submit");
+    btn.disabled = true; btn.textContent = "抽籤中…";
+    var f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+    var payload = {
+      answers: answers,
+      asked: questions.map(function (q) { return q.id; }).join(","),
+      message: $("msg").value.trim(),
+      luck: f.l
+    };
+    function done(coupon) {
+      var r = { luck: f.l, poem: f.p, coupon: coupon };
+      save(r);
+      showResult(r, false);
+    }
+    function fail() {
+      btn.disabled = false; btn.textContent = "看我的籤詩 🎋";
+      alert("網路好像不太穩,請再按一次 🙏");
+    }
+    if (window.google && google.script && google.script.run) {
+      google.script.run.withSuccessHandler(done).withFailureHandler(fail).submit(payload);
+    } else {
+      // 預覽模式(不是從 Apps Script 開啟):不存資料,券號顯示 DEMO
+      setTimeout(function () { done("DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4)); }, 600);
+    }
+  }
+
+  // ===== 事件 =====
+  $("btn-draw").addEventListener("click", function () {
+    var t = $("tube"), b = this;
+    b.disabled = true;
+    t.classList.remove("shake", "popped"); void t.offsetWidth;
+    t.classList.add("shake");
+    setTimeout(function () { t.classList.add("popped"); }, 850);
+    setTimeout(function () {
+      questions = buildSet(); answers = {}; idx = 0;
+      renderQ(); show("s-q"); b.disabled = false;
+      t.classList.remove("shake", "popped");
+    }, 1500);
+  });
+  $("btn-back").addEventListener("click", function () { if (idx > 0) { idx--; renderQ(); } });
+  $("btn-back2").addEventListener("click", function () { idx = questions.length - 1; renderQ(); show("s-q"); });
+  $("btn-submit").addEventListener("click", submit);
+
+  // 今天已抽過 → 直接顯示同一張籤(同一支手機每天限領一次)
+  var prev = load();
+  if (prev) showResult(prev, true);
+})();
+</script>
+</body>
+</html>
