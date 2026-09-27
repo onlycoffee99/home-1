@@ -92,6 +92,13 @@
   .chip.sel { border-color: var(--forest); background: var(--forest-2); }
   .back { margin-top: 14px; }
 
+  .mail { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .mail input[type=email] { width: 100%; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font: 18px "Noto Sans TC", sans-serif; background: #fff; color: var(--ink); }
+  .agree { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; margin-top: 10px; line-height: 1.5; }
+  .agree input { width: 20px; height: 20px; margin-top: 2px; flex: none; }
+  .agree a { color: var(--forest); }
+  .privacy { font-size: 13px; color: var(--ink-2); background: var(--paper); border-radius: 8px; padding: 10px; margin-top: 8px; line-height: 1.6; }
+  .err { color: var(--torii); font-size: 15px; margin-top: 8px; font-weight: 700; }
   textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font: 18px "Noto Sans TC", sans-serif; background: #fff; color: var(--ink); resize: vertical; }
 
   /* 籤詩 */
@@ -166,6 +173,20 @@
       <div class="qno">最後一句話</div>
       <div class="qtext" style="margin-top:14px">有什麼想跟我們說的嗎?💬</div>
       <textarea id="msg" maxlength="300" placeholder="可以不寫,直接按下面抽籤詩"></textarea>
+      <div class="mail">
+        <div class="grp-label">📮 想收到森林風呂的優惠和活動消息嗎?(選填)</div>
+        <input type="email" id="email" maxlength="100" autocomplete="email" inputmode="email" placeholder="留下 email(不留也能領咖啡券)">
+        <label class="agree"><input type="checkbox" id="agree"><span>我同意提供 email 收取優惠訊息(<a href="#" id="pv-toggle">個資說明</a>)</span></label>
+        <div class="privacy" id="privacy" hidden>
+          蒐集者:輕車悠遊股份有限公司(礁溪溫泉公園森林風呂)。<br>
+          目的:寄送森林風呂及園區店家(時間到咖啡館)之優惠與活動訊息。<br>
+          個資類別:電子郵件地址。<br>
+          利用期間、地區、對象及方式:自您同意起至您要求停止為止,於臺灣以電子郵件寄送,不提供第三人。<br>
+          您可隨時請求查詢、閱覽、更正、停止寄送或刪除,請洽森林風呂櫃台 03-987-6416。<br>
+          不提供 email 不影響領取咖啡券。
+        </div>
+        <div class="err" id="mail-err" hidden></div>
+      </div>
     </div>
     <div style="height:16px"></div>
     <button class="btn" id="btn-submit">看我的籤詩 🎋</button>
@@ -368,12 +389,17 @@
 
   function submit() {
     var btn = $("btn-submit");
+    var email = $("email").value.trim(), agree = $("agree").checked, err = $("mail-err");
+    err.hidden = true;
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "email 格式好像不對,請再檢查一下(不想留可以清空)"; err.hidden = false; return; }
+    if (email && !agree) { err.textContent = "要收優惠訊息,請勾選同意;不想留 email 可以清空"; err.hidden = false; return; }
     btn.disabled = true; btn.textContent = "抽籤中…";
     var f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
     var payload = {
       answers: answers,
       asked: questions.map(function (q) { return q.id; }).join(","),
       message: $("msg").value.trim(),
+      email: email && agree ? email : "",
       luck: f.l
     };
     function done(coupon) {
@@ -409,6 +435,7 @@
   $("btn-back").addEventListener("click", function () { if (idx > 0) { idx--; renderQ(); } });
   $("btn-back2").addEventListener("click", function () { idx = questions.length - 1; renderQ(); show("s-q"); });
   $("btn-submit").addEventListener("click", submit);
+  $("pv-toggle").addEventListener("click", function (e) { e.preventDefault(); $("privacy").hidden = !$("privacy").hidden; });
 
   // 今天已抽過 → 直接顯示同一張籤(同一支手機每天限領一次)
   var prev = load();

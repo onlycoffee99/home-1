@@ -52,8 +52,12 @@ var COLUMNS = [
   ['v2', '宜蘭住宿晚數'],
   ['v3', '同行對象'],
   ['v4', '資訊來源'],
-  ['v5', '宜蘭其他行程']
+  ['v5', '宜蘭其他行程'],
+  // 115/9/27 新增:選填 email(個資,匯出時排除)
+  ['email', 'Email(選填,同意收優惠)']
 ];
+// 含個資的欄位:只留在試算表,?export 匯出時不提供
+var PRIVATE_COLUMNS = ['email'];
 
 function doGet(e) {
   var key = PropertiesService.getScriptProperties().getProperty('EXPORT_KEY');
@@ -62,7 +66,11 @@ function doGet(e) {
       return ContentService.createTextOutput('{"error":"forbidden"}').setMimeType(ContentService.MimeType.JSON);
     }
     var values = getSheet_().getDataRange().getDisplayValues();
-    return ContentService.createTextOutput(JSON.stringify({ columns: COLUMNS, rows: values.slice(1) }))
+    var keep = [];
+    COLUMNS.forEach(function (c, i) { if (PRIVATE_COLUMNS.indexOf(c[0]) < 0) keep.push(i); });
+    var cols = keep.map(function (i) { return COLUMNS[i]; });
+    var rows = values.slice(1).map(function (r) { return keep.map(function (i) { return r[i] === undefined ? '' : r[i]; }); });
+    return ContentService.createTextOutput(JSON.stringify({ columns: cols, rows: rows }))
       .setMimeType(ContentService.MimeType.JSON);
   }
   return HtmlService.createHtmlOutputFromFile('Index')
@@ -108,6 +116,10 @@ function submit(payload) {
       if (k === 'luck') return clip(payload.luck, 10);
       if (k === 'message') return clip(payload.message, 300);
       if (k === 'asked') return clip(payload.asked, 200);
+      if (k === 'email') {
+        var m = String(payload.email || '').trim().slice(0, 100);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m) ? clip(m, 100) : '';
+      }
       return clip(a[k], 40);
     });
     sh.appendRow(row);
