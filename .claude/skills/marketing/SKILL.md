@@ -54,6 +54,9 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 ## 成效週報(第 4 階段啟用後)
 每週一抓 IG 洞察、LINE 後台、Google 商家成效,寫 `行銷/成效/YYYY-Wnn.md`,寄週報,並在下週產稿時引用。
 
+## 森林風呂御神籤問卷
+- 問卷報告、改題目、接新問卷案 → 改用 `survey` skill(`.claude/skills/survey/SKILL.md`)。
+
 ## 工具
 - Word/PDF 版需求:`tools/md2docx.js`
 - 素材:Google 雲端硬碟「行銷」資料夾(ID 見品牌資料第七節)
