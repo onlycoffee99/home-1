@@ -127,9 +127,15 @@
   @keyframes unfold { from { transform: scaleY(.1); opacity: 0; } to { transform: none; opacity: 1; } }
   .fno { font-family: "Noto Serif TC", serif; color: var(--ink-2); letter-spacing: .3em; }
   .jie { font-family: "Noto Serif TC", serif; font-weight: 700; color: var(--forest); font-size: 17px; margin: 0 0 12px; }
-  .cafe { background: var(--forest-2); border-radius: 10px; padding: 8px 12px; font-size: 16px; line-height: 1.6; }
-  .cafe b { color: var(--forest); }
-  .cafe span { font-size: 13px; color: var(--ink-2); }
+  .en { display: block; font-family: "Noto Sans TC", system-ui, sans-serif; font-weight: 400; font-size: 13px; color: var(--ink-2); line-height: 1.35; letter-spacing: 0; }
+  .qtext .en { font-size: 14px; margin-top: 2px; }
+  .opt .en { font-size: 12px; }
+  .chip .en { display: inline; font-size: 11px; }
+  .items { text-align: left; border-top: 1px dashed var(--torii-2); border-bottom: 1px dashed var(--torii-2); padding: 6px 2px; margin-bottom: 10px; font-size: 15px; line-height: 1.7; }
+  .items b { color: var(--torii); display: inline-block; width: 3.2em; }
+  .cafe { background: var(--forest-2); border-radius: 10px; padding: 8px 12px; text-align: left; font-size: 15px; line-height: 1.6; }
+  .cafe .h { font-weight: 700; color: var(--forest); }
+  .cafe .note2 { font-size: 12px; color: var(--ink-2); }
   .claim { margin-top: 12px; background: var(--torii); color: #fff; border-radius: 14px; padding: 12px; text-align: center; box-shadow: 0 4px 0 #8c2e21; }
   .claim .big { font-size: 20px; font-weight: 900; }
   .claim .big2 { font-size: 18px; font-weight: 700; line-height: 1.5; }
@@ -151,7 +157,7 @@
   <!-- 開始 -->
   <section class="screen on" id="s-start">
     <h1>森林風呂御神籤</h1>
-    <p class="sub">泡完湯,來抽一支好運籤吧 ♨️</p>
+    <p class="sub">泡完湯,來抽一支好運籤吧 ♨️<span class="en">Forest Onsen Fortune — draw your lucky slip!</span></p>
     <div class="tube-box">
       <svg class="tube" id="tube" viewBox="0 0 180 230" aria-hidden="true">
         <g fill="#c9a06d" stroke="#8a6239" stroke-width="2">
@@ -172,9 +178,9 @@
         <text x="90" y="174" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">籤</text>
       </svg>
     </div>
-    <div class="gift">答完 <b>10</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕</div>
-    <button class="btn" id="btn-draw">搖一搖・抽籤</button>
-    <p class="note">大約 2 分鐘・不用填名字電話</p>
+    <div class="gift">答完 <b>10</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕<span class="en">Answer 10 quick questions, get NT$30 off at Time Café</span></div>
+    <button class="btn" id="btn-draw">搖一搖・抽籤 <span style="font-size:15px;font-weight:500">Draw</span></button>
+    <p class="note">大約 2 分鐘・不用填名字電話<span class="en">About 2 minutes · No name or phone needed</span></p>
   </section>
 
   <!-- 題目 -->
@@ -193,10 +199,10 @@
     <div class="sticks" id="sticks2"></div>
     <div class="qcard">
       <div class="qno">最後一句話</div>
-      <div class="qtext" style="margin-top:14px">有什麼想跟我們說的嗎?💬</div>
+      <div class="qtext" style="margin-top:14px">有什麼想跟我們說的嗎?💬<span class="en">Anything you'd like to tell us? (optional)</span></div>
       <textarea id="msg" maxlength="300" placeholder="可以不寫,直接按下面抽籤詩"></textarea>
       <div class="mail">
-        <div class="grp-label">📮 想收到森林風呂的優惠和活動消息嗎?(選填)</div>
+        <div class="grp-label">📮 想收到森林風呂的優惠和活動消息嗎?(選填)<span class="en">Get Forest Onsen offers by email (optional)</span></div>
         <input type="email" id="email" maxlength="100" autocomplete="email" inputmode="email" placeholder="留下 email(不留也能領咖啡券)">
         <label class="agree"><input type="checkbox" id="agree"><span>我同意提供 email 收取優惠訊息(<a href="#" id="pv-toggle">個資說明</a>)</span></label>
         <div class="privacy" id="privacy" hidden>
@@ -211,35 +217,38 @@
       </div>
     </div>
     <div style="height:16px"></div>
-    <button class="btn" id="btn-submit">看我的籤詩 🎋</button>
+    <button class="btn" id="btn-submit">看我的籤詩 🎋 <span style="font-size:15px;font-weight:500">See my fortune</span></button>
     <button class="btn ghost" id="btn-back2">← 上一籤</button>
   </section>
 
   <!-- 抽到的籤支 -->
   <section class="screen" id="s-stick">
     <div class="stickwrap">
-      <div class="serif" style="font-size:20px">你抽到了</div>
+      <div class="serif" style="font-size:20px">你抽到了<span class="en">You drew</span></div>
       <div class="bigstick" id="bigstick"><span id="stickno"></span></div>
-      <div class="tap">👆 點籤,打開你的籤詩</div>
+      <div class="tap">👆 點籤,打開你的籤詩<span class="en">Tap the stick to open your fortune</span></div>
     </div>
   </section>
 
-  <!-- 結果(手機一個畫面看完) -->
+  <!-- 結果 -->
   <section class="screen" id="s-result">
-    <div class="again" id="again" hidden>今天已經抽過囉 😊</div>
+    <div class="again" id="again" hidden>今天已經抽過囉 😊 <span style="font-weight:400;font-size:13px">Already drawn today</span></div>
     <div class="omikuji" id="slip">
       <div class="fno" id="fno"></div>
       <div class="luck" id="luck"></div>
+      <div class="en" id="luck-en" style="margin:-4px 0 6px;font-size:14px"></div>
       <div class="poem" id="poem"></div>
       <div class="jie" id="jie"></div>
-      <div class="cafe">☕ 今日幸運飲品:<b>宜蘭金棗茶</b><br><span>時間到咖啡館・就在礁溪溫泉公園裡</span></div>
+      <div class="items" id="items"></div>
+      <div class="cafe" id="cafe"></div>
     </div>
     <div class="claim">
       <div class="big">🎁 時間到咖啡館 折 30 元</div>
       <div class="coupon"><span class="no" id="cno"></span><span class="live"><span class="dot"></span><span id="clock"></span></span></div>
       <div class="big2">👉 出示此畫面到<b>【森林風呂櫃台】</b><br>索取咖啡券</div>
+      <div style="font-size:13px;opacity:.95;margin-top:4px">Show this screen at the Forest Onsen counter<br>to get your NT$30 Time Café coupon</div>
     </div>
-    <div class="rules">限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
+    <div class="rules">限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零<br>One coupon per visit · One per person per day · No cash value</div>
   </section>
 
   <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館
@@ -312,16 +321,56 @@
   var AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"];
   var FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"];
 
-  // 籤詩(w=抽中權重,目前 8 種機率相同);幸運飲品統一為宜蘭金棗茶(寫在結果頁 HTML)
+  // 12 支籤(w=抽中權重,目前機率相同)。飲品需為時間到咖啡館實際供應品項
   var FORTUNES = [
-    { n: "第一番", l: "時間到大吉", w: 1, p: "時到花開香滿徑<br>湯暖心安福自臨", k: "大有進益,放手去做便吉利" },
-    { n: "第二番", l: "大吉", w: 1, p: "雲開見月心所願<br>一路春風到眼前", k: "如願以償" },
-    { n: "第三番", l: "身體吉", w: 1, p: "溫泉潤骨身輕盈<br>一夜好眠到天明", k: "身體是最好的本錢,好好照顧它" },
-    { n: "第四番", l: "咖啡館吉", w: 1, p: "一杯香醇留午後<br>好友相伴話悠悠", k: "好的相遇,就在轉角的咖啡館" },
-    { n: "第五番", l: "泡湯吉", w: 1, p: "竹林風過湯煙起<br>煩惱隨水悄悄離", k: "會是一段愉快的旅程" },
-    { n: "第六番", l: "森林吉", w: 1, p: "綠蔭深處聞鳥語<br>心靜自然見光明", k: "放慢腳步,好運就在身邊" },
-    { n: "第七番", l: "福吉", w: 1, p: "靜水深流藏智慧<br>細細思量見花開", k: "靜下心來好好思考,定有成果" },
-    { n: "第八番", l: "光明吉", w: 1, p: "心若坦蕩天自晴<br>一路光明照前程", k: "保持一顆坦率的心,是邁向光明人生的起點" }
+    { n: "第一番", l: "時間到大吉", le: "Great Fortune · Time Has Come", w: 1, p: "時到花開香滿徑<br>湯暖心安福自臨",
+      k: "大有進益,放手去做便吉利", ke: "Great progress ahead — go for it and luck will follow.",
+      wish: "時機到了,勇敢開口就能成", health: "氣色正好,神清氣爽", travel: "隨心出發,處處有驚喜",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "到時間到咖啡館坐一下,把好運喝進心裡" },
+    { n: "第二番", l: "大吉", le: "Great Blessing", w: 1, p: "雲開見月心所願<br>一路春風到眼前",
+      k: "如願以償", ke: "Your wish will come true.",
+      wish: "心想事成", health: "精神飽滿", travel: "一路順風",
+      drink: "熱拿鐵", de: "Hot Latte", act: "跟今天同行的人說聲謝謝" },
+    { n: "第三番", l: "身體吉", le: "Blessing of Well-being", w: 1, p: "溫泉潤骨身輕盈<br>一夜好眠到天明",
+      k: "自性可以創造任何可能", ke: "Your true self can create anything.",
+      wish: "慢慢來,會實現", health: "大吉,今晚好眠", travel: "放慢腳步,不趕行程",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "泡完湯記得多喝水" },
+    { n: "第四番", l: "咖啡館吉", le: "Café Blessing", w: 1, p: "一杯香醇留午後<br>好友相伴話悠悠",
+      k: "每一塊拼圖都是一種滋味", ke: "Every piece of the puzzle has its own flavor.",
+      wish: "與人分享,好事加倍", health: "心情放鬆,身體自然好", travel: "在喜歡的地方多留一會兒",
+      drink: "手沖咖啡", de: "Pour-over Coffee", act: "到咖啡館點一杯,和朋友聊聊天" },
+    { n: "第五番", l: "泡湯吉", le: "Hot Spring Blessing", w: 1, p: "竹林風過湯煙起<br>煩惱隨水悄悄離",
+      k: "會是一段愉快的旅程", ke: "It will be a delightful journey.",
+      wish: "放下煩惱,願望自來", health: "筋骨舒暢", travel: "大吉,處處是好風景",
+      drink: "冰美式", de: "Iced Americano", act: "泡完湯,到咖啡館喝杯涼的" },
+    { n: "第六番", l: "森林吉", le: "Forest Blessing", w: 1, p: "綠蔭深處聞鳥語<br>心靜自然見光明",
+      k: "善意的存在,是路徑的發展", ke: "Kindness shapes the path ahead.",
+      wish: "耐心等待,時機將至", health: "多走走,身心舒暢", travel: "在公園散散步,會有小驚喜",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "在公園散步十分鐘,再去咖啡館歇歇腳" },
+    { n: "第七番", l: "福吉", le: "Blessing of Fortune", w: 1, p: "靜水深流藏智慧<br>細細思量見花開",
+      k: "靜下心來好好思考,定有成果", ke: "Calm your mind and think it through — success will come.",
+      wish: "想清楚再出發,必有收穫", health: "早睡早起", travel: "計畫好再出門",
+      drink: "熱美式", de: "Hot Americano", act: "找個安靜角落,喝杯咖啡想一想" },
+    { n: "第八番", l: "光明吉", le: "Bright Blessing", w: 1, p: "心若坦蕩天自晴<br>一路光明照前程",
+      k: "保持一顆坦率的心,是邁向光明人生的起點", ke: "An honest heart is the first step to a bright life.",
+      wish: "真心相待,自有回應", health: "心情開朗,身體輕鬆", travel: "一路晴朗,放心出發",
+      drink: "冰拿鐵", de: "Iced Latte", act: "把今天的好心情,分享給身邊的人" },
+    { n: "第九番", l: "花路吉", le: "Flower Path Blessing", w: 1, p: "一道微光照前方<br>花開滿路送芬芳",
+      k: "送上一道光,走向花路", ke: "A ray of light guides you onto a path of flowers.",
+      wish: "心中所盼,正在路上", health: "神采奕奕", travel: "沿途花開,處處美景",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "拍一張公園的花,留住今天的光" },
+    { n: "第十番", l: "拼圖吉", le: "Puzzle Blessing", w: 1, p: "一片一片拼人生<br>酸甜滋味皆是真",
+      k: "人生是創造披薩的拼圖旅程", ke: "Life is a puzzle journey — built slice by slice, like a pizza.",
+      wish: "一步步拼湊,終會完整", health: "均衡飲食,元氣滿滿", travel: "走走停停,收集回憶",
+      drink: "熱拿鐵", de: "Hot Latte", act: "和朋友分享今天最開心的一件事" },
+    { n: "第十一番", l: "自在吉", le: "Blessing of Freedom", w: 1, p: "步步行來皆有意<br>心隨自在任東西",
+      k: "每個節點的意義,是自己賦予的", ke: "Every milestone means what you choose it to mean.",
+      wish: "照自己的節奏就好", health: "身心自在", travel: "隨興出發,不必趕路",
+      drink: "手沖咖啡", de: "Pour-over Coffee", act: "找個喜歡的位子,慢慢品嚐" },
+    { n: "第十二番", l: "快樂吉", le: "Blessing of Joy", w: 1, p: "笑迎晨光心自暖<br>此刻便是樂開端",
+      k: "準備快樂吧,每刻都是快樂的起點", ke: "Get ready to be happy — every moment is a new start of joy.",
+      wish: "好事就在眼前", health: "笑口常開", travel: "開心出門,平安回家",
+      drink: "冰拿鐵", de: "Iced Latte", act: "對著鏡子笑一個" }
   ];
   function drawFortune() {
     var total = 0, i, r;
@@ -330,6 +379,60 @@
     for (i = 0; i < FORTUNES.length; i++) { r -= FORTUNES[i].w; if (r < 0) return i; }
     return FORTUNES.length - 1;
   }
+  // 題目與選項英文(顯示用,存進試算表的仍是中文)
+  var EN = {
+    "今天的溫泉水,泡起來怎麼樣?": "How was the hot spring water today?",
+    "湯區環境乾淨嗎?": "Was the bathing area clean?",
+    "你從哪裡來?": "Where are you from?",
+    "整體來說,今天在森林風呂開心嗎?": "Overall, did you enjoy Forest Onsen today?",
+    "公園的風景,看起來舒服嗎?": "How do you like the park scenery?",
+    "公園走道、草地乾不乾淨?": "Were the park paths and lawns clean?",
+    "公園的廁所(含泡腳池旁)乾淨嗎?": "Were the park restrooms clean?",
+    "泡腳池乾淨嗎?": "Was the foot bath clean?",
+    "需要幫忙時,工作人員有主動協助、馬上處理嗎?": "Did staff help you promptly when needed?",
+    "垃圾分類、資源回收做得好嗎?": "How is the recycling and waste sorting?",
+    "園區防蚊蟲做得如何?🦟": "How is mosquito control in the park?",
+    "風呂的廁所乾淨嗎?": "Were the onsen restrooms clean?",
+    "櫃台人員親切嗎?": "Were the counter staff friendly?",
+    "在櫃台等候的時間,還可以接受嗎?": "Was the waiting time at the counter OK?",
+    "園區店家的服務怎麼樣?": "How was the service at shops in the park?",
+    "停車方便嗎?": "Was parking convenient?",
+    "停車場好不好找?": "Was the parking lot easy to find?",
+    "會推薦朋友來森林風呂嗎?": "Would you recommend Forest Onsen to friends?",
+    "礁溪溫泉公園的經營,有讓宜蘭觀光更好嗎?": "Does the park make Yilan tourism better?",
+    "有幫宜蘭的觀光形象加分嗎?": "Does it improve Yilan's tourism image?",
+    "園區有呈現宜蘭在地特色(在地食材、文化設計、自然風格)嗎?": "Does the park show local Yilan features?",
+    "園區的活動或佈置,讓你更認識宜蘭的文化或自然嗎?": "Did the park help you learn about Yilan?",
+    "園區有提供宜蘭觀光資訊(景點、餐廳、活動推薦)嗎?": "Did you find Yilan travel info here?",
+    "園區的免費公益活動、按摩小站,你覺得如何?": "How are the free events and massage corner?",
+    "在地民眾免費泡湯回饋活動,你覺得如何?": "How is the free bathing program for locals?",
+    "與佛光大學合作的在地創生商品,你覺得如何?": "How are the local products made with Fo Guang University?",
+    "這趟在宜蘭住幾晚?": "How many nights are you staying in Yilan?",
+    "今天跟誰一起來?": "Who did you come with today?",
+    "怎麼知道森林風呂的?": "How did you hear about Forest Onsen?",
+    "這趟還會去宜蘭哪裡?(選最主要的)": "Where else in Yilan are you going?",
+    "泡湯的時候,腦袋在想什麼?": "What's on your mind while soaking?",
+    "泡完湯,最想來一杯什麼?": "What would you like to drink after the bath?",
+    "如果森林風呂是一種動物,牠是?": "If Forest Onsen were an animal, it'd be…",
+    "非常滿意": "Very satisfied", "滿意": "Satisfied", "普通": "Neutral", "不滿意": "Dissatisfied", "非常不滿意": "Very dissatisfied",
+    "今天沒需要幫忙": "Didn't need help", "今天沒開車": "Didn't drive", "不清楚/沒注意": "Not sure",
+    "一定會": "Definitely", "應該會": "Probably", "還不確定": "Not sure yet", "應該不會": "Probably not",
+    "宜蘭在地": "Yilan local", "基隆、台北、新北": "Keelung / Taipei / New Taipei", "桃園、新竹、苗栗": "Taoyuan / Hsinchu / Miaoli",
+    "台中、彰化、南投": "Taichung / Changhua / Nantou", "雲林、嘉義、台南": "Yunlin / Chiayi / Tainan", "高雄、屏東": "Kaohsiung / Pingtung",
+    "花蓮、台東": "Hualien / Taitung", "離島": "Outlying islands", "國外": "From overseas",
+    "當天來回": "Day trip", "住 1 晚": "1 night", "住 2 晚": "2 nights", "住 3 晚以上": "3+ nights", "我住宜蘭": "I live in Yilan",
+    "自己來": "Alone", "伴侶": "Partner", "家人(帶小孩)": "Family with kids", "家人(帶長輩)": "Family with elders", "朋友": "Friends", "旅行團": "Tour group",
+    "親友推薦": "Friends & family", "Google 地圖": "Google Maps", "IG、FB": "Instagram / Facebook", "YouTube": "YouTube",
+    "旅遊網站、部落格": "Travel sites / blogs", "路過看到": "Walked by", "老客人了": "Regular visitor",
+    "只在礁溪": "Only Jiaoxi", "頭城、外澳": "Toucheng / Wai'ao", "宜蘭市": "Yilan City", "羅東": "Luodong",
+    "冬山、五結、三星": "Dongshan / Wujie / Sanxing", "蘇澳、南方澳": "Su'ao / Nanfang'ao", "大同、太平山": "Datong / Taipingshan", "還沒決定": "Not decided",
+    "什麼都沒想,放空中": "Nothing, just relaxing", "等一下吃什麼": "What to eat next", "工作…(不要想了)": "Work… (stop it!)",
+    "人生的大道理": "The meaning of life", "好想再泡一下": "I want to soak longer",
+    "熱咖啡": "Hot coffee", "冰咖啡": "Iced coffee", "金棗飲品": "Kumquat drink", "甜點配咖啡": "Dessert & coffee", "先躺一下再說": "A nap first",
+    "水豚(泡到不想動)": "Capybara", "日本猴(泡湯專家)": "Snow monkey", "烏龜(慢慢來)": "Turtle", "貓(舒服到瞇眼)": "Cat",
+    "今天第一次來 🎉": "First visit", "一年 3 次以下": "< 3 times a year", "一年 3~10 次": "3–10 times a year", "一年 10 次以上": "10+ times a year", "天天都來 😎": "Every day"
+  };
+  function en(t) { return EN[t] ? '<span class="en">' + EN[t] + "</span>" : ""; }
   var NUM = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
   var TOTAL = 10;
 
@@ -369,11 +472,11 @@
     var body = $("qbody");
 
     if (q.basic) {
-      var h = '<div class="qtext">最後一籤!你是…</div>';
-      h += '<div class="grp-label">年齡</div><div class="chips" data-k="age">';
+      var h = '<div class="qtext">最後一籤!你是…<span class="en">Last one! About you</span></div>';
+      h += '<div class="grp-label">年齡 <span class="en" style="display:inline">Age</span></div><div class="chips" data-k="age">';
       AGES.forEach(function (a) { h += '<button class="chip' + (answers.age === a ? " sel" : "") + '" data-v="' + a + '">' + a + "</button>"; });
-      h += '</div><div class="grp-label">多久來泡一次?</div><div class="chips" data-k="freq">';
-      FREQS.forEach(function (a) { h += '<button class="chip' + (answers.freq === a ? " sel" : "") + '" data-v="' + a + '">' + a + "</button>"; });
+      h += '</div><div class="grp-label">多久來泡一次? <span class="en" style="display:inline">How often do you visit?</span></div><div class="chips" data-k="freq">';
+      FREQS.forEach(function (a) { h += '<button class="chip' + (answers.freq === a ? " sel" : "") + '" data-v="' + a + '">' + a + " " + en(a) + "</button>"; });
       h += "</div>";
       body.innerHTML = h;
       var groups = body.querySelectorAll(".chips");
@@ -389,11 +492,11 @@
     }
 
     var opts = (q.opts || SCALE).slice();
-    var h2 = '<div class="qtext">' + q.t + '</div><div class="opts">';
+    var h2 = '<div class="qtext">' + q.t + en(q.t) + '</div><div class="opts">';
     opts.forEach(function (o) {
-      h2 += '<button class="opt' + (answers[q.id] === o.v ? " sel" : "") + '" data-v="' + o.v + '"><span class="em">' + o.em + "</span>" + o.v + "</button>";
+      h2 += '<button class="opt' + (answers[q.id] === o.v ? " sel" : "") + '" data-v="' + o.v + '"><span class="em">' + o.em + "</span><span>" + o.v + en(o.v) + "</span></button>";
     });
-    if (q.extra) h2 += '<button class="opt soft' + (answers[q.id] === q.extra ? " sel" : "") + '" data-v="' + q.extra + '"><span class="em">🤷</span>' + q.extra + "</button>";
+    if (q.extra) h2 += '<button class="opt soft' + (answers[q.id] === q.extra ? " sel" : "") + '" data-v="' + q.extra + '"><span class="em">🤷</span><span>' + q.extra + en(q.extra) + "</span></button>";
     h2 += "</div>";
     body.innerHTML = h2;
     body.querySelector(".opts").addEventListener("click", function (e) {
@@ -416,8 +519,12 @@
     $("fno").textContent = "森林風呂御神籤・" + f.n;
     $("luck").textContent = f.l;
     $("luck").style.fontSize = f.l.length > 3 ? "38px" : "";
+    $("luck-en").textContent = f.le;
     $("poem").innerHTML = f.p;
-    $("jie").innerHTML = "(" + (f.k.length > 12 ? f.k.replace(",", ",<br>") : f.k) + ")";
+    $("jie").innerHTML = "(" + (f.k.length > 12 ? f.k.replace(",", ",<br>") : f.k) + ")" + '<span class="en">' + f.ke + "</span>";
+    $("items").innerHTML = "<div><b>願望</b>" + f.wish + "</div><div><b>健康</b>" + f.health + "</div><div><b>旅行</b>" + f.travel + "</div>";
+    $("cafe").innerHTML = '<div class="h">☕ 時間到咖啡館 開運指南</div>今日幸運飲品:<b>' + f.drink + "</b> <span class=\"note2\">" + f.de +
+      "</span><br>開運行動:" + f.act + '<br><span class="note2">Lucky drink at Time Café, inside the park ・ IG @5wudou</span>';
     $("slip").classList.remove("open"); void $("slip").offsetWidth; $("slip").classList.add("open");
     $("cno").textContent = "No." + r.coupon;
     $("again").hidden = !repeat;
