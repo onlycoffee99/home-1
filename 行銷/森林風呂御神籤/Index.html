@@ -136,14 +136,14 @@
   .cafe { background: var(--forest-2); border-radius: 10px; padding: 8px 12px; text-align: left; font-size: 15px; line-height: 1.6; }
   .cafe .h { font-weight: 700; color: var(--forest); }
   .cafe .note2 { font-size: 12px; color: var(--ink-2); }
-  .claim { margin-top: 12px; background: var(--torii); color: #fff; border-radius: 14px; padding: 12px; text-align: center; box-shadow: 0 4px 0 #8c2e21; }
-  .claim .big { font-size: 20px; font-weight: 900; }
-  .claim .big2 { font-size: 18px; font-weight: 700; line-height: 1.5; }
-  .claim .big2 b { color: #ffe9a8; }
-  .claim .coupon { display: flex; align-items: center; justify-content: space-between; margin: 6px auto; padding: 4px 12px; color: var(--ink); max-width: 260px; border-radius: 8px; }
-  .claim .coupon .no { font-size: 18px; letter-spacing: .04em; }
-  .claim .live { margin: 0; font-size: 12px; gap: 5px; }
-  .claim .live .dot { width: 8px; height: 8px; }
+  .claim { margin-top: 10px; background: var(--torii); color: #fff; border-radius: 12px; padding: 8px 10px; text-align: center; }
+  .claim .c1 { font-size: 16px; font-weight: 900; }
+  .claim .c1 .no { display: inline-block; background: #fff; color: var(--torii); font-family: "Noto Serif TC", serif; font-size: 15px; border-radius: 6px; padding: 0 8px; margin-left: 4px; }
+  .claim .c2 { font-size: 15px; font-weight: 700; margin-top: 2px; }
+  .claim .c2 b { color: #ffe9a8; }
+  .claim .c3 { font-size: 11px; opacity: .95; margin-top: 2px; }
+  .claim .live { display: inline-flex; margin: 0; font-size: 11px; color: #fff; gap: 4px; }
+  .claim .live .dot { width: 7px; height: 7px; background: #9ff0b4; }
   .show { margin-top: 16px; background: var(--forest); color: #fff; border-radius: 12px; padding: 12px; text-align: center; font-weight: 700; }
   .rules { font-size: 12px; color: var(--ink-2); margin-top: 10px; text-align: center; }
   .again { text-align: center; color: var(--forest); font-weight: 700; margin-bottom: 10px; }
@@ -244,10 +244,9 @@
       <div class="cafe" id="cafe"></div>
     </div>
     <div class="claim">
-      <div class="big">🎁 時間到咖啡館 折 30 元</div>
-      <div class="coupon"><span class="no" id="cno"></span><span class="live"><span class="dot"></span><span id="clock"></span></span></div>
-      <div class="big2">👉 出示此畫面到<b>【森林風呂櫃台】</b><br>索取咖啡券</div>
-      <div style="font-size:13px;opacity:.95;margin-top:2px">Show this screen at the Forest Onsen counter to get your coupon</div>
+      <div class="c1">🎁 時間到咖啡館 折 30 元 <span class="no" id="cno"></span></div>
+      <div class="c2">👉 出示此畫面到<b>【森林風呂櫃台】</b>索取咖啡券</div>
+      <div class="c3"><span class="live"><span class="dot"></span><span id="clock"></span></span> ・ Show this at the Forest Onsen counter</div>
     </div>
     <div class="rules">限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零<br>One coupon per visit · One per person per day · No cash value</div>
   </section>
