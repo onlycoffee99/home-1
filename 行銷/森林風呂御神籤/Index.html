@@ -140,9 +140,10 @@
   .claim .big { font-size: 20px; font-weight: 900; }
   .claim .big2 { font-size: 18px; font-weight: 700; line-height: 1.5; }
   .claim .big2 b { color: #ffe9a8; }
-  .claim .coupon { display: flex; align-items: center; justify-content: space-between; margin: 8px 0; padding: 8px 12px; color: var(--ink); }
-  .claim .coupon .no { font-size: 26px; }
-  .claim .live { margin: 0; font-size: 14px; }
+  .claim .coupon { display: flex; align-items: center; justify-content: space-between; margin: 6px auto; padding: 4px 12px; color: var(--ink); max-width: 260px; border-radius: 8px; }
+  .claim .coupon .no { font-size: 18px; letter-spacing: .04em; }
+  .claim .live { margin: 0; font-size: 12px; gap: 5px; }
+  .claim .live .dot { width: 8px; height: 8px; }
   .show { margin-top: 16px; background: var(--forest); color: #fff; border-radius: 12px; padding: 12px; text-align: center; font-weight: 700; }
   .rules { font-size: 12px; color: var(--ink-2); margin-top: 10px; text-align: center; }
   .again { text-align: center; color: var(--forest); font-weight: 700; margin-bottom: 10px; }
@@ -157,7 +158,7 @@
   <!-- 開始 -->
   <section class="screen on" id="s-start">
     <h1>森林風呂御神籤</h1>
-    <p class="sub">泡完湯,來抽一支好運籤吧 ♨️<span class="en">森林風呂 Fortune — draw your lucky slip!</span></p>
+    <p class="sub">泡完湯,來抽一支好運籤吧 ♨️<span class="en">Forest Onsen Fortune — draw your lucky slip!</span></p>
     <div class="tube-box">
       <svg class="tube" id="tube" viewBox="0 0 180 230" aria-hidden="true">
         <g fill="#c9a06d" stroke="#8a6239" stroke-width="2">
@@ -202,7 +203,7 @@
       <div class="qtext" style="margin-top:14px">有什麼想跟我們說的嗎?💬<span class="en">Anything you'd like to tell us? (optional)</span></div>
       <textarea id="msg" maxlength="300" placeholder="可以不寫,直接按下面抽籤詩"></textarea>
       <div class="mail">
-        <div class="grp-label">📮 想收到森林風呂的優惠和活動消息嗎?(選填)<span class="en">Get 森林風呂 offers by email (optional)</span></div>
+        <div class="grp-label">📮 想收到森林風呂的優惠和活動消息嗎?(選填)<span class="en">Get Forest Onsen offers by email (optional)</span></div>
         <input type="email" id="email" maxlength="100" autocomplete="email" inputmode="email" placeholder="留下 email(不留也能領咖啡券)">
         <label class="agree"><input type="checkbox" id="agree"><span>我同意提供 email 收取優惠訊息(<a href="#" id="pv-toggle">個資說明</a>)</span></label>
         <div class="privacy" id="privacy" hidden>
@@ -246,7 +247,7 @@
       <div class="big">🎁 時間到咖啡館 折 30 元</div>
       <div class="coupon"><span class="no" id="cno"></span><span class="live"><span class="dot"></span><span id="clock"></span></span></div>
       <div class="big2">👉 出示此畫面到<b>【森林風呂櫃台】</b><br>索取咖啡券</div>
-      <div style="font-size:13px;opacity:.95;margin-top:2px">Show this screen at the counter to get your coupon</div>
+      <div style="font-size:13px;opacity:.95;margin-top:2px">Show this screen at the Forest Onsen counter to get your coupon</div>
     </div>
     <div class="rules">限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零<br>One coupon per visit · One per person per day · No cash value</div>
   </section>
@@ -265,40 +266,40 @@
     { em: "😍", v: "非常滿意" }, { em: "😊", v: "滿意" }, { em: "😐", v: "普通" },
     { em: "😕", v: "不滿意" }, { em: "😫", v: "非常不滿意" }
   ];
-  var OVERALL = { id: "q00", tag: "⛩️ 開籤", t: "整體來說,今天在森林風呂開心嗎?" };
+  var OVERALL = { id: "q00", tag: "⛩️ 開籤", t: "整體來說,今天對森林風呂滿意嗎?" };
   var CORE = [
-    { id: "q08", tag: "♨️ 泡風呂", t: "今天的溫泉水,泡起來怎麼樣?" },
-    { id: "q09", tag: "♨️ 泡風呂", t: "湯區環境乾淨嗎?" },
+    { id: "q08", tag: "♨️ 泡風呂", t: "今天的溫泉水質,你滿意嗎?" },
+    { id: "q09", tag: "♨️ 泡風呂", t: "湯區環境的清潔,你滿意嗎?" },
     { id: "v1", tag: "🗺️ 旅人小檔案", t: "你從哪裡來?",
       opts: [{ em: "🏡", v: "宜蘭在地" }, { em: "🏙️", v: "基隆、台北、新北" }, { em: "🚄", v: "桃園、新竹、苗栗" }, { em: "⛰️", v: "台中、彰化、南投" },
              { em: "🌾", v: "雲林、嘉義、台南" }, { em: "🌴", v: "高雄、屏東" }, { em: "🌊", v: "花蓮、台東" }, { em: "🏝️", v: "離島" }, { em: "✈️", v: "國外" }] }
   ];
   var POOL_SAT = [
-    { id: "q01", tag: "🌳 逛公園", t: "公園的風景,看起來舒服嗎?" },
-    { id: "q02", tag: "🌳 逛公園", t: "公園走道、草地乾不乾淨?" },
-    { id: "q03", tag: "🌳 逛公園", t: "公園的廁所(含泡腳池旁)乾淨嗎?" },
-    { id: "q04", tag: "🌳 逛公園", t: "泡腳池乾淨嗎?" },
-    { id: "q05", tag: "🌳 逛公園", t: "需要幫忙時,工作人員有主動協助、馬上處理嗎?", extra: "今天沒需要幫忙" },
-    { id: "q06", tag: "🌳 逛公園", t: "垃圾分類、資源回收做得好嗎?" },
-    { id: "q07", tag: "🌳 逛公園", t: "園區防蚊蟲做得如何?🦟" },
-    { id: "q10", tag: "♨️ 泡風呂", t: "風呂的廁所乾淨嗎?" },
-    { id: "q11", tag: "♨️ 泡風呂", t: "櫃台人員親切嗎?" },
-    { id: "q12", tag: "♨️ 泡風呂", t: "在櫃台等候的時間,還可以接受嗎?" },
-    { id: "q13", tag: "☕ 來一杯", t: "園區店家的服務怎麼樣?" },
-    { id: "q14", tag: "☕ 來一杯", t: "停車方便嗎?", extra: "今天沒開車" },
-    { id: "q15", tag: "☕ 來一杯", t: "停車場好不好找?", extra: "今天沒開車" },
+    { id: "q01", tag: "🌳 逛公園", t: "公園的景觀,你滿意嗎?" },
+    { id: "q02", tag: "🌳 逛公園", t: "公園走道、草地的清潔,你滿意嗎?" },
+    { id: "q03", tag: "🌳 逛公園", t: "公園廁所(含泡腳池旁)的清潔,你滿意嗎?" },
+    { id: "q04", tag: "🌳 逛公園", t: "泡腳池的清潔,你滿意嗎?" },
+    { id: "q05", tag: "🌳 逛公園", t: "需要幫忙時,工作人員的主動協助,你滿意嗎?", extra: "今天沒需要幫忙" },
+    { id: "q06", tag: "🌳 逛公園", t: "園區的垃圾分類、資源回收,你滿意嗎?" },
+    { id: "q07", tag: "🌳 逛公園", t: "園區的防蚊蟲,你滿意嗎?🦟" },
+    { id: "q10", tag: "♨️ 泡風呂", t: "風呂廁所的清潔,你滿意嗎?" },
+    { id: "q11", tag: "♨️ 泡風呂", t: "櫃台人員的服務態度,你滿意嗎?" },
+    { id: "q12", tag: "♨️ 泡風呂", t: "櫃台的等候時間,你滿意嗎?" },
+    { id: "q13", tag: "☕ 來一杯", t: "園區店家的服務,你滿意嗎?" },
+    { id: "q14", tag: "☕ 來一杯", t: "停車的方便性,你滿意嗎?", extra: "今天沒開車" },
+    { id: "q15", tag: "☕ 來一杯", t: "停車場的位置指引,你滿意嗎?", extra: "今天沒開車" },
     { id: "q16", tag: "☕ 來一杯", t: "會推薦朋友來森林風呂嗎?",
       opts: [{ em: "🙌", v: "一定會" }, { em: "👍", v: "應該會" }, { em: "🤔", v: "還不確定" }, { em: "🙅", v: "應該不會" }] }
   ];
   var POOL_LOCAL = [
-    { id: "q17", t: "礁溪溫泉公園的經營,有讓宜蘭觀光更好嗎?" },
-    { id: "q18", t: "有幫宜蘭的觀光形象加分嗎?" },
-    { id: "q19", t: "園區有呈現宜蘭在地特色(在地食材、文化設計、自然風格)嗎?" },
-    { id: "q20", t: "園區的活動或佈置,讓你更認識宜蘭的文化或自然嗎?" },
-    { id: "q21", t: "園區有提供宜蘭觀光資訊(景點、餐廳、活動推薦)嗎?" },
-    { id: "q22", t: "園區的免費公益活動、按摩小站,你覺得如何?" },
-    { id: "q23", t: "在地民眾免費泡湯回饋活動,你覺得如何?" },
-    { id: "q24", t: "與佛光大學合作的在地創生商品,你覺得如何?" }
+    { id: "q17", t: "礁溪溫泉公園的經營對宜蘭觀光的貢獻,你滿意嗎?" },
+    { id: "q18", t: "園區對宜蘭觀光形象的提升,你滿意嗎?" },
+    { id: "q19", t: "園區呈現的宜蘭在地特色(在地食材、文化設計、自然風格),你滿意嗎?" },
+    { id: "q20", t: "園區的活動或佈置,讓你認識宜蘭的文化與自然,你滿意嗎?" },
+    { id: "q21", t: "園區提供的宜蘭觀光資訊(景點、餐廳、活動推薦),你滿意嗎?" },
+    { id: "q22", t: "園區的免費公益活動、按摩小站,你滿意嗎?" },
+    { id: "q23", t: "在地民眾免費泡湯回饋活動,你滿意嗎?" },
+    { id: "q24", t: "與佛光大學合作的在地創生商品,你滿意嗎?" }
   ].map(function (q) { q.tag = "🏞️ 宜蘭好在地"; q.extra = "不清楚/沒注意"; return q; });
   var POOL_TRAVEL = [
     { id: "v2", tag: "🗺️ 旅人小檔案", t: "這趟在宜蘭住幾晚?",
@@ -381,55 +382,55 @@
   }
   // 題目與選項英文(顯示用,存進試算表的仍是中文)
   var EN = {
-    "今天的溫泉水,泡起來怎麼樣?": "How was the hot spring water today?",
-    "湯區環境乾淨嗎?": "Was the bathing area clean?",
+    "今天的溫泉水質,你滿意嗎?": "How satisfied are you with the hot spring water today?",
+    "湯區環境的清潔,你滿意嗎?": "How satisfied are you with the cleanliness of the bathing area?",
     "你從哪裡來?": "Where are you from?",
-    "整體來說,今天在森林風呂開心嗎?": "Overall, did you enjoy 森林風呂 today?",
-    "公園的風景,看起來舒服嗎?": "How do you like the park scenery?",
-    "公園走道、草地乾不乾淨?": "Were the park paths and lawns clean?",
-    "公園的廁所(含泡腳池旁)乾淨嗎?": "Were the park restrooms clean?",
-    "泡腳池乾淨嗎?": "Was the foot bath clean?",
-    "需要幫忙時,工作人員有主動協助、馬上處理嗎?": "Did staff help you promptly when needed?",
-    "垃圾分類、資源回收做得好嗎?": "How is the recycling and waste sorting?",
-    "園區防蚊蟲做得如何?🦟": "How is mosquito control in the park?",
-    "風呂的廁所乾淨嗎?": "Were the onsen restrooms clean?",
-    "櫃台人員親切嗎?": "Were the counter staff friendly?",
-    "在櫃台等候的時間,還可以接受嗎?": "Was the waiting time at the counter OK?",
-    "園區店家的服務怎麼樣?": "How was the service at shops in the park?",
-    "停車方便嗎?": "Was parking convenient?",
-    "停車場好不好找?": "Was the parking lot easy to find?",
-    "會推薦朋友來森林風呂嗎?": "Would you recommend 森林風呂 to friends?",
-    "礁溪溫泉公園的經營,有讓宜蘭觀光更好嗎?": "Does the park make Yilan tourism better?",
-    "有幫宜蘭的觀光形象加分嗎?": "Does it improve Yilan's tourism image?",
-    "園區有呈現宜蘭在地特色(在地食材、文化設計、自然風格)嗎?": "Does the park show local Yilan features?",
-    "園區的活動或佈置,讓你更認識宜蘭的文化或自然嗎?": "Did the park help you learn about Yilan?",
-    "園區有提供宜蘭觀光資訊(景點、餐廳、活動推薦)嗎?": "Did you find Yilan travel info here?",
-    "園區的免費公益活動、按摩小站,你覺得如何?": "How are the free events and massage corner?",
-    "在地民眾免費泡湯回饋活動,你覺得如何?": "How is the free bathing program for locals?",
-    "與佛光大學合作的在地創生商品,你覺得如何?": "How are the local products made with Fo Guang University?",
-    "這趟在宜蘭住幾晚?": "How many nights are you staying in Yilan?",
+    "整體來說,今天對森林風呂滿意嗎?": "Overall, how satisfied are you with Forest Onsen today?",
+    "公園的景觀,你滿意嗎?": "How satisfied are you with the park scenery?",
+    "公園走道、草地的清潔,你滿意嗎?": "How satisfied are you with the cleanliness of the park paths and lawns?",
+    "公園廁所(含泡腳池旁)的清潔,你滿意嗎?": "How satisfied are you with the cleanliness of the park restrooms (incl. near the foot bath)?",
+    "泡腳池的清潔,你滿意嗎?": "How satisfied are you with the cleanliness of the foot bath?",
+    "需要幫忙時,工作人員的主動協助,你滿意嗎?": "How satisfied are you with the staff's help when you needed it?",
+    "園區的垃圾分類、資源回收,你滿意嗎?": "How satisfied are you with the waste sorting and recycling in the park?",
+    "園區的防蚊蟲,你滿意嗎?🦟": "How satisfied are you with mosquito control in the park?",
+    "風呂廁所的清潔,你滿意嗎?": "How satisfied are you with the cleanliness of the Forest Onsen restrooms?",
+    "櫃台人員的服務態度,你滿意嗎?": "How satisfied are you with the counter staff's attitude?",
+    "櫃台的等候時間,你滿意嗎?": "How satisfied are you with the waiting time at the counter?",
+    "園區店家的服務,你滿意嗎?": "How satisfied are you with the service of the shops in the park?",
+    "停車的方便性,你滿意嗎?": "How satisfied are you with parking convenience?",
+    "停車場的位置指引,你滿意嗎?": "How satisfied are you with the signage to the parking lot?",
+    "會推薦朋友來森林風呂嗎?": "Would you recommend Forest Onsen to your friends?",
+    "礁溪溫泉公園的經營對宜蘭觀光的貢獻,你滿意嗎?": "How satisfied are you with the park's contribution to Yilan tourism?",
+    "園區對宜蘭觀光形象的提升,你滿意嗎?": "How satisfied are you with how the park improves Yilan's tourism image?",
+    "園區呈現的宜蘭在地特色(在地食材、文化設計、自然風格),你滿意嗎?": "How satisfied are you with the local Yilan features shown in the park (local food, cultural design, natural style)?",
+    "園區的活動或佈置,讓你認識宜蘭的文化與自然,你滿意嗎?": "How satisfied are you with how the park's events and decor introduce Yilan's culture and nature?",
+    "園區提供的宜蘭觀光資訊(景點、餐廳、活動推薦),你滿意嗎?": "How satisfied are you with the Yilan travel information provided (sights, restaurants, events)?",
+    "園區的免費公益活動、按摩小站,你滿意嗎?": "How satisfied are you with the free community events and the massage corner?",
+    "在地民眾免費泡湯回饋活動,你滿意嗎?": "How satisfied are you with the free bathing program for local residents?",
+    "與佛光大學合作的在地創生商品,你滿意嗎?": "How satisfied are you with the local products made with Fo Guang University?",
+    "這趟在宜蘭住幾晚?": "How many nights are you staying in Yilan on this trip?",
     "今天跟誰一起來?": "Who did you come with today?",
-    "怎麼知道森林風呂的?": "How did you hear about 森林風呂?",
-    "這趟還會去宜蘭哪裡?(選最主要的)": "Where else in Yilan are you going?",
+    "怎麼知道森林風呂的?": "How did you hear about Forest Onsen?",
+    "這趟還會去宜蘭哪裡?(選最主要的)": "Where else in Yilan will you go on this trip? (main one)",
     "泡湯的時候,腦袋在想什麼?": "What's on your mind while soaking?",
-    "泡完湯,最想來一杯什麼?": "What would you like to drink after the bath?",
-    "如果森林風呂是一種動物,牠是?": "If 森林風呂 were an animal, it'd be…",
+    "泡完湯,最想來一杯什麼?": "After your bath, what would you most like to drink?",
+    "如果森林風呂是一種動物,牠是?": "If Forest Onsen were an animal, what would it be?",
     "非常滿意": "Very satisfied", "滿意": "Satisfied", "普通": "Neutral", "不滿意": "Dissatisfied", "非常不滿意": "Very dissatisfied",
-    "今天沒需要幫忙": "Didn't need help", "今天沒開車": "Didn't drive", "不清楚/沒注意": "Not sure",
+    "今天沒需要幫忙": "Didn't need help today", "今天沒開車": "Didn't drive today", "不清楚/沒注意": "Not sure / didn't notice",
     "一定會": "Definitely", "應該會": "Probably", "還不確定": "Not sure yet", "應該不會": "Probably not",
     "宜蘭在地": "Yilan local", "基隆、台北、新北": "Keelung / Taipei / New Taipei", "桃園、新竹、苗栗": "Taoyuan / Hsinchu / Miaoli",
     "台中、彰化、南投": "Taichung / Changhua / Nantou", "雲林、嘉義、台南": "Yunlin / Chiayi / Tainan", "高雄、屏東": "Kaohsiung / Pingtung",
-    "花蓮、台東": "Hualien / Taitung", "離島": "Outlying islands", "國外": "From overseas",
+    "花蓮、台東": "Hualien / Taitung", "離島": "Outlying islands", "國外": "Overseas",
     "當天來回": "Day trip", "住 1 晚": "1 night", "住 2 晚": "2 nights", "住 3 晚以上": "3+ nights", "我住宜蘭": "I live in Yilan",
     "自己來": "Alone", "伴侶": "Partner", "家人(帶小孩)": "Family with kids", "家人(帶長輩)": "Family with elders", "朋友": "Friends", "旅行團": "Tour group",
     "親友推薦": "Friends & family", "Google 地圖": "Google Maps", "IG、FB": "Instagram / Facebook", "YouTube": "YouTube",
     "旅遊網站、部落格": "Travel sites / blogs", "路過看到": "Walked by", "老客人了": "Regular visitor",
     "只在礁溪": "Only Jiaoxi", "頭城、外澳": "Toucheng / Wai'ao", "宜蘭市": "Yilan City", "羅東": "Luodong",
     "冬山、五結、三星": "Dongshan / Wujie / Sanxing", "蘇澳、南方澳": "Su'ao / Nanfang'ao", "大同、太平山": "Datong / Taipingshan", "還沒決定": "Not decided",
-    "什麼都沒想,放空中": "Nothing, just relaxing", "等一下吃什麼": "What to eat next", "工作…(不要想了)": "Work… (stop it!)",
+    "什麼都沒想,放空中": "Nothing, just relaxing", "等一下吃什麼": "What to eat next", "工作…(不要想了)": "Work… (stop thinking!)",
     "人生的大道理": "The meaning of life", "好想再泡一下": "I want to soak longer",
-    "熱咖啡": "Hot coffee", "冰咖啡": "Iced coffee", "金棗飲品": "Kumquat drink", "甜點配咖啡": "Dessert & coffee", "先躺一下再說": "A nap first",
-    "水豚(泡到不想動)": "Capybara", "日本猴(泡湯專家)": "Snow monkey", "烏龜(慢慢來)": "Turtle", "貓(舒服到瞇眼)": "Cat",
+    "熱咖啡": "Hot coffee", "冰咖啡": "Iced coffee", "金棗飲品": "Kumquat drink", "甜點配咖啡": "Dessert & coffee", "先躺一下再說": "A little rest first",
+    "水豚(泡到不想動)": "Capybara (too relaxed to move)", "日本猴(泡湯專家)": "Snow monkey (onsen expert)", "烏龜(慢慢來)": "Turtle (take it slow)", "貓(舒服到瞇眼)": "Cat (so comfy)",
     "今天第一次來 🎉": "First visit", "一年 3 次以下": "< 3 times a year", "一年 3~10 次": "3–10 times a year", "一年 10 次以上": "10+ times a year", "天天都來 😎": "Every day"
   };
   function en(t) { return EN[t] ? '<span class="en">' + EN[t] + "</span>" : ""; }
