@@ -115,6 +115,25 @@
   .live { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; color: var(--ink-2); margin-top: 8px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; background: #3aa35b; animation: blink 1s infinite; }
   @keyframes blink { 50% { opacity: .2; } }
+  /* 抽到的籤支 */
+  .stickwrap { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; }
+  .bigstick { width: 64px; height: 300px; margin: 10px auto 18px; border-radius: 6px 6px 10px 10px; background: linear-gradient(90deg, #d9b47e, #efd3a0 45%, #d2a86d); border: 2px solid var(--wood-2); position: relative; animation: drop .7s cubic-bezier(.2,1.4,.4,1); cursor: pointer; }
+  .bigstick::before { content: ""; position: absolute; left: -2px; right: -2px; top: -2px; height: 34px; background: var(--torii); border-radius: 6px 6px 0 0; }
+  .bigstick span { position: absolute; top: 60px; left: 0; right: 0; writing-mode: vertical-rl; margin: 0 auto; font-family: "Noto Serif TC", serif; font-weight: 900; font-size: 30px; color: var(--torii); letter-spacing: .25em; }
+  @keyframes drop { from { transform: translateY(-120px) rotate(-8deg); opacity: 0; } to { transform: none; opacity: 1; } }
+  .tap { color: var(--ink-2); animation: blink 1.4s infinite; }
+  /* 籤詩內容 */
+  .omikuji.open { animation: unfold .6s ease; transform-origin: top; }
+  @keyframes unfold { from { transform: scaleY(.1); opacity: 0; } to { transform: none; opacity: 1; } }
+  .fno { font-family: "Noto Serif TC", serif; color: var(--ink-2); letter-spacing: .3em; }
+  .jie { font-family: "Noto Serif TC", serif; font-weight: 700; color: var(--forest); font-size: 18px; margin: -4px 0 14px; }
+  .items { text-align: left; border-top: 1px dashed var(--torii-2); border-bottom: 1px dashed var(--torii-2); padding: 10px 4px; margin-bottom: 12px; font-size: 16px; line-height: 1.8; }
+  .items b { color: var(--torii); display: inline-block; width: 4.5em; }
+  .cafe { background: var(--forest-2); border-radius: 10px; padding: 10px 12px; text-align: left; font-size: 15px; line-height: 1.7; margin-bottom: 4px; }
+  .cafe .h { font-weight: 700; color: var(--forest); }
+  .claim { margin-top: 16px; background: var(--torii); color: #fff; border-radius: 14px; padding: 14px 12px; text-align: center; box-shadow: 0 4px 0 #8c2e21; }
+  .claim .big { font-size: 21px; font-weight: 900; line-height: 1.5; }
+  .claim .small { font-size: 15px; opacity: .95; margin-top: 4px; }
   .show { margin-top: 16px; background: var(--forest); color: #fff; border-radius: 12px; padding: 12px; text-align: center; font-weight: 700; }
   .rules { font-size: 14px; color: var(--ink-2); margin-top: 14px; line-height: 1.7; }
   .again { text-align: center; color: var(--forest); font-weight: 700; margin-bottom: 10px; }
@@ -193,20 +212,35 @@
     <button class="btn ghost" id="btn-back2">← 上一籤</button>
   </section>
 
+  <!-- 抽到的籤支 -->
+  <section class="screen" id="s-stick">
+    <div class="stickwrap">
+      <div class="serif" style="font-size:20px">你抽到了</div>
+      <div class="bigstick" id="bigstick"><span id="stickno"></span></div>
+      <div class="tap">👆 點籤,打開你的籤詩</div>
+    </div>
+  </section>
+
   <!-- 結果 -->
   <section class="screen" id="s-result">
     <div class="again" id="again" hidden>今天已經抽過囉,這是你的籤 😊</div>
-    <div class="omikuji">
-      <div class="serif" style="color:var(--ink-2)">森林風呂御神籤</div>
+    <div class="omikuji" id="slip">
+      <div class="fno" id="fno"></div>
       <div class="luck" id="luck"></div>
       <div class="poem" id="poem"></div>
-      <div class="coupon">
-        <div class="t">🎁 時間到咖啡館 折 30 元</div>
-        <div class="no" id="cno"></div>
-      </div>
-      <div class="live"><span class="dot"></span><span id="clock"></span></div>
+      <div class="jie" id="jie"></div>
+      <div class="items" id="items"></div>
+      <div class="cafe" id="cafe"></div>
     </div>
-    <div class="show">請把這個畫面給風呂櫃台看<br>領取紙本咖啡券 ☕</div>
+    <div class="claim">
+      <div class="big">🎁 恭喜獲得<br>時間到咖啡館 折 30 元</div>
+      <div class="coupon" style="margin:10px 0 6px;color:var(--ink)">
+        <div class="no" id="cno"></div>
+        <div class="live"><span class="dot"></span><span id="clock"></span></div>
+      </div>
+      <div class="big" style="font-size:19px">👉 請出示此畫面<br>到【森林風呂櫃台】索取咖啡券</div>
+      <div class="small">領到券後,帶著它到園區裡的時間到咖啡館使用 ☕</div>
+    </div>
     <div class="rules">
       ・咖啡券限時間到咖啡館(公園一館)使用,每次消費限用 1 張<br>
       ・每人每天限領 1 次・不得兌換現金、不找零
@@ -283,14 +317,37 @@
   var AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"];
   var FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"];
 
+  // 籤詩(w=抽中權重;「時間到大吉」較稀有)。飲品以現場菜單為準
   var FORTUNES = [
-    { l: "大吉", p: "今日宜泡湯、宜放空<br>宜喝一杯咖啡" },
-    { l: "湯吉", p: "溫泉泡暖了身體<br>好運也跟著暖起來" },
-    { l: "咖啡吉", p: "一杯熱咖啡<br>把今天的好心情留久一點" },
-    { l: "中吉", p: "慢慢走、慢慢泡<br>好事正在路上" },
-    { l: "森林吉", p: "聽聽竹林的風聲<br>煩惱都放在湯裡了" },
-    { l: "福吉", p: "泡得開心、吃得開心<br>福氣自然跟著來" }
+    { n: "第一番", l: "時間到大吉", w: 8, p: "時到花開香滿徑<br>湯暖心安福自臨", k: "大有進益,放手去做便吉利",
+      wish: "時機到了,勇敢開口就能成", health: "氣色正好,神清氣爽", travel: "隨心出發,處處有驚喜",
+      drink: "金棗飲品", act: "到時間到咖啡館坐一下,把好運喝進心裡" },
+    { n: "第二番", l: "大吉", w: 14, p: "雲開見月心所願<br>一路春風到眼前", k: "如願以償",
+      wish: "心想事成", health: "精神飽滿", travel: "一路順風",
+      drink: "熱拿鐵", act: "跟今天同行的人說聲謝謝" },
+    { n: "第三番", l: "身體吉", w: 14, p: "溫泉潤骨身輕盈<br>一夜好眠到天明", k: "身體是最好的本錢,好好照顧它",
+      wish: "慢慢來,會實現", health: "大吉,今晚好眠", travel: "放慢腳步,不趕行程",
+      drink: "溫熱的飲品", act: "泡完湯記得多喝水" },
+    { n: "第四番", l: "咖啡館吉", w: 16, p: "一杯香醇留午後<br>好友相伴話悠悠", k: "好的相遇,就在轉角的咖啡館",
+      wish: "與人分享,好事加倍", health: "心情放鬆,身體自然好", travel: "在喜歡的地方多留一會兒",
+      drink: "手沖咖啡", act: "到時間到咖啡館點一杯,和朋友聊聊天" },
+    { n: "第五番", l: "泡湯吉", w: 16, p: "竹林風過湯煙起<br>煩惱隨水悄悄離", k: "會是一段愉快的旅程",
+      wish: "放下煩惱,願望自來", health: "筋骨舒暢", travel: "大吉,處處是好風景",
+      drink: "冰美式", act: "泡完湯,到咖啡館吹吹冷氣、喝杯涼的" },
+    { n: "第六番", l: "森林吉", w: 16, p: "綠蔭深處聞鳥語<br>心靜自然見光明", k: "放慢腳步,好運就在身邊",
+      wish: "耐心等待,時機將至", health: "多走走,身心舒暢", travel: "在公園散散步,會有小驚喜",
+      drink: "金棗飲品", act: "在公園散步十分鐘,再去咖啡館歇歇腳" },
+    { n: "第七番", l: "吉", w: 16, p: "靜水深流藏智慧<br>細細思量見花開", k: "靜下心來好好思考,定有成果",
+      wish: "想清楚再出發,必有收穫", health: "早睡早起", travel: "計畫好再出門",
+      drink: "熱美式", act: "找個安靜角落,喝杯咖啡想一想" }
   ];
+  function drawFortune() {
+    var total = 0, i, r;
+    for (i = 0; i < FORTUNES.length; i++) total += FORTUNES[i].w;
+    r = Math.random() * total;
+    for (i = 0; i < FORTUNES.length; i++) { r -= FORTUNES[i].w; if (r < 0) return i; }
+    return FORTUNES.length - 1;
+  }
   var NUM = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
   var TOTAL = 10;
 
@@ -373,8 +430,16 @@
   // ===== 結果 =====
   var clockTimer = null;
   function showResult(r, repeat) {
-    $("luck").textContent = r.luck;
-    $("poem").innerHTML = r.poem;
+    var f = FORTUNES[r.fi] || FORTUNES[0];
+    $("fno").textContent = "森林風呂御神籤 ・ " + f.n;
+    $("luck").textContent = f.l;
+    $("luck").style.fontSize = f.l.length > 3 ? "40px" : "";
+    $("poem").innerHTML = f.p;
+    $("jie").textContent = "(" + f.k + ")";
+    $("items").innerHTML = "<div><b>願望</b>" + f.wish + "</div><div><b>健康</b>" + f.health + "</div><div><b>旅行</b>" + f.travel + "</div>";
+    $("cafe").innerHTML = '<div class="h">☕ 時間到咖啡館 開運指南</div>今日幸運飲品:' + f.drink +
+      '<br>開運行動:' + f.act + '<br><span style="color:var(--ink-2);font-size:13px">就在礁溪溫泉公園裡 ・ IG @5wudou ・ 飲品以現場供應為準</span>';
+    $("slip").classList.remove("open"); void $("slip").offsetWidth; $("slip").classList.add("open");
     $("cno").textContent = "No." + r.coupon;
     $("again").hidden = !repeat;
     show("s-result");
@@ -394,7 +459,7 @@
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "email 格式好像不對,請再檢查一下(不想留可以清空)"; err.hidden = false; return; }
     if (email && !agree) { err.textContent = "要收優惠訊息,請勾選同意;不想留 email 可以清空"; err.hidden = false; return; }
     btn.disabled = true; btn.textContent = "抽籤中…";
-    var f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+    var fi = drawFortune(), f = FORTUNES[fi];
     var payload = {
       answers: answers,
       asked: questions.map(function (q) { return q.id; }).join(","),
@@ -403,9 +468,12 @@
       luck: f.l
     };
     function done(coupon) {
-      var r = { luck: f.l, poem: f.p, coupon: coupon };
+      var r = { fi: fi, coupon: coupon };
       save(r);
-      showResult(r, false);
+      // 先出現籤支,點開才看到籤詩
+      $("stickno").textContent = f.n;
+      show("s-stick");
+      $("bigstick").onclick = function () { showResult(r, false); };
     }
     function fail() {
       btn.disabled = false; btn.textContent = "看我的籤詩 🎋";
@@ -439,6 +507,10 @@
 
   // 今天已抽過 → 直接顯示同一張籤(同一支手機每天限領一次)
   var prev = load();
+  if (prev && prev.fi === undefined) {
+    prev.fi = 0;
+    for (var i = 0; i < FORTUNES.length; i++) if (FORTUNES[i].l === prev.luck) prev.fi = i;
+  }
   if (prev) showResult(prev, true);
 })();
 </script>
