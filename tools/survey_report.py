@@ -152,10 +152,10 @@ def build(rows, names, start, end):
         lines.append("- 各題不滿意比例均未達 10%(僅計有效份數 10 份以上之題目)")
     issued = [r for r in rows if r.get("coupon", "").startswith("No.")]
     if issued:
-        red = sum(1 for r in issued if r.get("redeemed"))
         nowin = sum(1 for r in rows if r.get("coupon") == "未抽中")
         full = sum(1 for r in rows if r.get("coupon") == "今日額滿")
-        lines.append(f"- 咖啡券:發出 {len(issued)} 張,已在時間到咖啡館兌換 {red} 張(兌換率 {pct(red, len(issued))});未抽中 {nowin} 人、當日額滿 {full} 人")
+        closed = sum(1 for r in rows if r.get("coupon") == "公休不發券")
+        lines.append(f"- 咖啡券:發出 {len(issued)} 張;未抽中 {nowin} 人、當日額滿 {full} 人、週二公休未發 {closed} 人(實際兌換數請以咖啡館收回的紙本券為準)")
     first = sum(1 for r in rows if r.get("freq", "").startswith("今天第一次來"))
     lines.append(f"- 首次到訪遊客占 {pct(first, len(rows))}")
     org = [r["v1"] for r in rows if r.get("v1")]

@@ -142,7 +142,6 @@
   .claim .c2 { font-size: 15px; font-weight: 700; margin-top: 2px; }
   .claim .c2 b { color: #ffe9a8; }
   .claim .c5 { font-size: 12px; margin-top: 1px; }
-  .claim .c4 { font-size: 12px; font-weight: 700; background: rgba(255,255,255,.18); border-radius: 6px; padding: 1px 6px; margin-top: 3px; display: inline-block; }
   .claim .c3 { font-size: 11px; opacity: .95; margin-top: 2px; }
   .claim .live { display: inline-flex; margin: 0; font-size: 11px; color: #fff; gap: 4px; }
   .claim .live .dot { width: 7px; height: 7px; background: #9ff0b4; }
@@ -250,12 +249,11 @@
     <div class="claim">
       <div class="c1">🎁 時間到咖啡館 折 30 元 <span class="no" id="cno"></span></div>
       <div class="c2">👉 出示此畫面到<b>【森林風呂櫃台】</b>索取咖啡券</div>
-      <div class="c5">憑紙本券到時間到咖啡館折抵・30 天內有效</div>
-      <div class="c4">⚠️ 咖啡館週二公休,當日無法兌換 ・ Closed Tue.</div>
+      <div class="c5">憑紙本券到時間到咖啡館現折 30 元・<b style="color:#ffe9a8">限當日使用</b></div>
       <div class="c3"><span class="live"><span class="dot"></span><span id="clock"></span></span> ・ Show this at the Forest Onsen counter</div>
     </div>
     <div class="soldout" id="soldout" hidden></div>
-    <div class="rules">每日限量・限公園一館使用・週二公休無法兌換・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
+    <div class="rules">每日限量・限當日使用・限公園一館・週二公休不發券・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
   </section>
 
   <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館
@@ -540,7 +538,9 @@
     var has = !!r.coupon;
     document.querySelector(".claim").hidden = !has;
     $("soldout").hidden = has;
-    $("soldout").innerHTML = f.nowin
+    $("soldout").innerHTML = r.closed
+      ? '☕ 今天週二咖啡館公休,咖啡券暫停發送<br>謝謝你的填答!歡迎改天再來抽籤 🎋<span class="en">Time Café is closed on Tuesdays — no coupons today. Thank you!</span>'
+      : f.nowin
       ? '🍀 這次沒抽中咖啡券,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕<span class="en">No coupon this time — thank you! Try again tomorrow.</span>'
       : '🙏 今日咖啡券已送完,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕<span class="en">Today\'s coupons are all gone — thank you! Try again tomorrow.</span>';
     $("cno").textContent = has ? "No." + r.coupon : "";
@@ -574,7 +574,7 @@
       // 後端回傳 {coupon, nowin};沒抽中就改成第十三番
       if (typeof res !== "object" || res === null) res = { coupon: res || "", nowin: false };
       if (res.nowin) { for (var i = 0; i < FORTUNES.length; i++) if (FORTUNES[i].nowin) fi = i; f = FORTUNES[fi]; }
-      var r = { fi: fi, coupon: res.coupon || "" };
+      var r = { fi: fi, coupon: res.coupon || "", closed: !!res.closed };
       save(r);
       // 先出現籤支,點開才看到籤詩
       $("stickno").textContent = f.n;
@@ -589,7 +589,7 @@
       google.script.run.withSuccessHandler(done).withFailureHandler(fail).submit(payload);
     } else {
       // 預覽模式(不是從 Apps Script 開啟):不存資料,券號顯示 DEMO
-      setTimeout(function () { var nw = Math.random() < 0.09; done({ nowin: nw, coupon: nw ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4) }); }, 600);
+      setTimeout(function () { var nw = Math.random() < 0.09, cl = new Date().getDay() === 2; done({ nowin: nw && !cl, closed: cl, coupon: (nw || cl) ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4) }); }, 600);
     }
   }
 
