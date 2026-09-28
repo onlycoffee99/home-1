@@ -141,6 +141,7 @@
   .claim .c1 .no { display: inline-block; background: #fff; color: var(--torii); font-family: "Noto Serif TC", serif; font-size: 15px; border-radius: 6px; padding: 0 8px; margin-left: 4px; }
   .claim .c2 { font-size: 15px; font-weight: 700; margin-top: 2px; }
   .claim .c2 b { color: #ffe9a8; }
+  .claim .c4 { font-size: 12px; font-weight: 700; background: rgba(255,255,255,.18); border-radius: 6px; padding: 1px 6px; margin-top: 3px; display: inline-block; }
   .claim .c3 { font-size: 11px; opacity: .95; margin-top: 2px; }
   .claim .live { display: inline-flex; margin: 0; font-size: 11px; color: #fff; gap: 4px; }
   .claim .live .dot { width: 7px; height: 7px; background: #9ff0b4; }
@@ -181,7 +182,7 @@
         <text x="90" y="174" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">籤</text>
       </svg>
     </div>
-    <div class="gift">回答 <b>10</b> 個小問題,抽一支好運籤 🎋<br>再送 <b>時間到咖啡館 折 30 元</b> ☕<br><span class="limit">每日限量・送完為止</span><span class="en">Answer 10 quick questions, draw your fortune, and get NT$30 off at Time Café (limited daily)</span></div>
+    <div class="gift">回答 <b>10</b> 個小問題,抽一支好運籤 🎋<br>抽中再送 <b>時間到咖啡館 折 30 元</b> ☕<br><span class="limit">每日限量・送完為止</span><span class="en">Answer 10 quick questions and draw your fortune — win NT$30 off at Time Café (limited daily)</span></div>
     <button class="btn" id="btn-draw">搖一搖・抽籤 <span style="font-size:15px;font-weight:500">Draw</span></button>
     <p class="note">大約 2 分鐘・不用填名字電話<span class="en">About 2 minutes · No name or phone needed</span></p>
   </section>
@@ -248,10 +249,11 @@
     <div class="claim">
       <div class="c1">🎁 時間到咖啡館 折 30 元 <span class="no" id="cno"></span></div>
       <div class="c2">👉 出示此畫面到<b>【森林風呂櫃台】</b>索取咖啡券</div>
+      <div class="c4">⚠️ 咖啡館週二公休,當日無法兌換 ・ Closed Tue.</div>
       <div class="c3"><span class="live"><span class="dot"></span><span id="clock"></span></span> ・ Show this at the Forest Onsen counter</div>
     </div>
-    <div class="soldout" id="soldout" hidden>🙏 今日咖啡券已送完,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕<span class="en">Today's coupons are all gone — thank you! Try again tomorrow.</span></div>
-    <div class="rules">每日限量・限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
+    <div class="soldout" id="soldout" hidden></div>
+    <div class="rules">每日限量・限公園一館使用・週二公休無法兌換・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
   </section>
 
   <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館
@@ -324,7 +326,7 @@
   var AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"];
   var FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"];
 
-  // 12 支籤(w=抽中權重,目前機率相同)。飲品需為時間到咖啡館實際供應品項
+  // 13 支籤(w=抽中權重,目前機率相同);nowin=今日無抽中(不發券)。飲品需為時間到咖啡館實際供應品項
   var FORTUNES = [
     { n: "第一番", l: "時間到大吉", le: "Great Fortune · Time Has Come", w: 1, p: "時到花開香滿徑<br>湯暖心安福自臨",
       k: "大有進益,放手去做便吉利", ke: "Great progress ahead — go for it and luck will follow.",
@@ -373,7 +375,11 @@
     { n: "第十二番", l: "快樂吉", le: "Blessing of Joy", w: 1, p: "笑迎晨光心自暖<br>此刻便是樂開端",
       k: "準備快樂吧,每刻都是快樂的起點", ke: "Get ready to be happy — every moment is a new start of joy.",
       wish: "好事就在眼前", health: "笑口常開", travel: "開心出門,平安回家",
-      drink: "冰拿鐵", de: "Iced Latte", act: "對著鏡子笑一個" }
+      drink: "冰拿鐵", de: "Iced Latte", act: "對著鏡子笑一個" },
+    { n: "第十三番", l: "今日無抽中", le: "No coupon today", w: 1, nowin: true, p: "緣分未到莫心急<br>明日再來福自臨",
+      k: "好運在路上,明天再來試試手氣", ke: "Good luck is on its way — try again tomorrow.",
+      wish: "耐心等待,好事將近", health: "泡完湯,好好休息", travel: "慢慢走,好風景不會跑",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "到咖啡館坐坐,把好心情帶回家" }
   ];
   function drawFortune() {
     var total = 0, i, r;
@@ -532,6 +538,9 @@
     var has = !!r.coupon;
     document.querySelector(".claim").hidden = !has;
     $("soldout").hidden = has;
+    $("soldout").innerHTML = f.nowin
+      ? '🍀 這次沒抽中咖啡券,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕<span class="en">No coupon this time — thank you! Try again tomorrow.</span>'
+      : '🙏 今日咖啡券已送完,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕<span class="en">Today\'s coupons are all gone — thank you! Try again tomorrow.</span>';
     $("cno").textContent = has ? "No." + r.coupon : "";
     $("again").hidden = !repeat;
     show("s-result");
@@ -557,7 +566,8 @@
       asked: questions.map(function (q) { return q.id; }).join(","),
       message: $("msg").value.trim(),
       email: email && agree ? email : "",
-      luck: f.l
+      luck: f.l,
+      nowin: !!f.nowin
     };
     function done(coupon) {
       var r = { fi: fi, coupon: coupon };
@@ -575,7 +585,7 @@
       google.script.run.withSuccessHandler(done).withFailureHandler(fail).submit(payload);
     } else {
       // 預覽模式(不是從 Apps Script 開啟):不存資料,券號顯示 DEMO
-      setTimeout(function () { done("DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4)); }, 600);
+      setTimeout(function () { done(f.nowin ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4)); }, 600);
     }
   }
 

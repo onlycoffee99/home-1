@@ -104,8 +104,11 @@ function submit(payload) {
     var sh = getSheet_();
     var n = sh.getLastRow(); // 標題列佔 1 列,故第 n 份 = 第 n+1 列
     var coupon = ('0000' + n).slice(-4);
+    // 抽到「今日無抽中」:不發券
+    var nowin = !!(payload && payload.nowin);
+    if (nowin) coupon = '';
     // 每日限量:數今天已發出的券
-    if (DAILY_LIMIT > 0 && n > 1) {
+    if (coupon && DAILY_LIMIT > 0 && n > 1) {
       var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
       var tc = sh.getRange(2, 1, n - 1, 2).getDisplayValues(); // A 填答時間、B 券號
       var issued = tc.filter(function (r) { return r[0].indexOf(today) === 0 && r[1].indexOf('No.') === 0; }).length;
@@ -121,7 +124,7 @@ function submit(payload) {
     var row = COLUMNS.map(function (c) {
       var k = c[0];
       if (k === 'time') return Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
-      if (k === 'coupon') return coupon ? 'No.' + coupon : '今日額滿';
+      if (k === 'coupon') return coupon ? 'No.' + coupon : (nowin ? '未抽中' : '今日額滿');
       if (k === 'luck') return clip(payload.luck, 10);
       if (k === 'message') return clip(payload.message, 300);
       if (k === 'asked') return clip(payload.asked, 200);
