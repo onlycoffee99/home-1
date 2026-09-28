@@ -79,7 +79,10 @@ def load(args):
         with open(args.save_json, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False)
     ids = [c[0] for c in data["columns"]]
-    names = {c[0]: c[1] for c in data["columns"]}
+    class _Names(dict):
+        def __missing__(self, k):  # 欄位不存在時以代號顯示,不中斷
+            return k
+    names = _Names({c[0]: c[1] for c in data["columns"]})
     rows = [dict(zip(ids, r)) for r in data["rows"]]
     for r in rows:
         r["_t"] = parse_time(r.get("time"))
@@ -147,6 +150,12 @@ def build(rows, names, start, end):
         lines.append("- 不滿意(含非常不滿意)達 10% 以上:" + "、".join(f"{names[q]}({pct(stats[q]['bad'], stats[q]['n'])})" for q in watch))
     else:
         lines.append("- 各題不滿意比例均未達 10%(僅計有效份數 10 份以上之題目)")
+    issued = [r for r in rows if r.get("coupon", "").startswith("No.")]
+    if issued:
+        red = sum(1 for r in issued if r.get("redeemed"))
+        nowin = sum(1 for r in rows if r.get("coupon") == "未抽中")
+        full = sum(1 for r in rows if r.get("coupon") == "今日額滿")
+        lines.append(f"- 咖啡券:發出 {len(issued)} 張,已在時間到咖啡館兌換 {red} 張(兌換率 {pct(red, len(issued))});未抽中 {nowin} 人、當日額滿 {full} 人")
     first = sum(1 for r in rows if r.get("freq", "").startswith("今天第一次來"))
     lines.append(f"- 首次到訪遊客占 {pct(first, len(rows))}")
     org = [r["v1"] for r in rows if r.get("v1")]
