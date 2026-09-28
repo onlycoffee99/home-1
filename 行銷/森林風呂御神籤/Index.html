@@ -326,7 +326,7 @@
   var AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"];
   var FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"];
 
-  // 13 支籤(w=抽中權重,目前機率相同);nowin=今日無抽中(不發券)。飲品需為時間到咖啡館實際供應品項
+  // 12 支吉籤機率相同(w=權重);第十三番「今日無抽中」w=0,由後端決定(每天最多 5 人)。飲品需為時間到咖啡館實際供應品項
   var FORTUNES = [
     { n: "第一番", l: "時間到大吉", le: "Great Fortune · Time Has Come", w: 1, p: "時到花開香滿徑<br>湯暖心安福自臨",
       k: "大有進益,放手去做便吉利", ke: "Great progress ahead — go for it and luck will follow.",
@@ -376,7 +376,7 @@
       k: "準備快樂吧,每刻都是快樂的起點", ke: "Get ready to be happy — every moment is a new start of joy.",
       wish: "好事就在眼前", health: "笑口常開", travel: "開心出門,平安回家",
       drink: "冰拿鐵", de: "Iced Latte", act: "對著鏡子笑一個" },
-    { n: "第十三番", l: "今日無抽中", le: "No coupon today", w: 1, nowin: true, p: "緣分未到莫心急<br>明日再來福自臨",
+    { n: "第十三番", l: "今日無抽中", le: "No coupon today", w: 0, nowin: true, p: "緣分未到莫心急<br>明日再來福自臨",
       k: "好運在路上,明天再來試試手氣", ke: "Good luck is on its way — try again tomorrow.",
       wish: "耐心等待,好事將近", health: "泡完湯,好好休息", travel: "慢慢走,好風景不會跑",
       drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "到咖啡館坐坐,把好心情帶回家" }
@@ -566,11 +566,13 @@
       asked: questions.map(function (q) { return q.id; }).join(","),
       message: $("msg").value.trim(),
       email: email && agree ? email : "",
-      luck: f.l,
-      nowin: !!f.nowin
+      luck: f.l
     };
-    function done(coupon) {
-      var r = { fi: fi, coupon: coupon };
+    function done(res) {
+      // 後端回傳 {coupon, nowin};沒抽中就改成第十三番
+      if (typeof res !== "object" || res === null) res = { coupon: res || "", nowin: false };
+      if (res.nowin) { for (var i = 0; i < FORTUNES.length; i++) if (FORTUNES[i].nowin) fi = i; f = FORTUNES[fi]; }
+      var r = { fi: fi, coupon: res.coupon || "" };
       save(r);
       // 先出現籤支,點開才看到籤詩
       $("stickno").textContent = f.n;
@@ -585,7 +587,7 @@
       google.script.run.withSuccessHandler(done).withFailureHandler(fail).submit(payload);
     } else {
       // 預覽模式(不是從 Apps Script 開啟):不存資料,券號顯示 DEMO
-      setTimeout(function () { done(f.nowin ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4)); }, 600);
+      setTimeout(function () { var nw = Math.random() < 0.09; done({ nowin: nw, coupon: nw ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4) }); }, 600);
     }
   }
 

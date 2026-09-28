@@ -9,6 +9,9 @@
 var SHEET_NAME = '回覆';
 // 每日咖啡券上限(台灣時間 0 點重算);0 = 不限量。額滿後仍可填答、抽籤,只是不發券號
 var DAILY_LIMIT = 50;
+// 「今日無抽中」:每人約 NOWIN_RATE 機率沒抽中,每天最多 NOWIN_PER_DAY 人(由後端決定,客人無法自選)
+var NOWIN_PER_DAY = 5;
+var NOWIN_RATE = 0.09;
 // 「森林風呂御神籤_回覆」試算表 ID(雲端硬碟「森林風呂御神籤」資料夾內)
 var SPREADSHEET_ID = '1K22clZvbwZXTtxSCUmUTx1svKZBpdLILlm6Q7w6yC88';
 
@@ -104,15 +107,21 @@ function submit(payload) {
     var sh = getSheet_();
     var n = sh.getLastRow(); // 標題列佔 1 列,故第 n 份 = 第 n+1 列
     var coupon = ('0000' + n).slice(-4);
-    // 抽到「今日無抽中」:不發券
-    var nowin = !!(payload && payload.nowin);
-    if (nowin) coupon = '';
-    // 每日限量:數今天已發出的券
-    if (coupon && DAILY_LIMIT > 0 && n > 1) {
+    // 數今天已發出的券、已「未抽中」的人數
+    var issued = 0, nowinToday = 0, nowin = false;
+    if (n > 1) {
       var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
       var tc = sh.getRange(2, 1, n - 1, 2).getDisplayValues(); // A 填答時間、B 券號
-      var issued = tc.filter(function (r) { return r[0].indexOf(today) === 0 && r[1].indexOf('No.') === 0; }).length;
-      if (issued >= DAILY_LIMIT) coupon = '';
+      tc.forEach(function (r) {
+        if (r[0].indexOf(today) !== 0) return;
+        if (r[1].indexOf('No.') === 0) issued++;
+        else if (r[1] === '未抽中') nowinToday++;
+      });
+    }
+    if (DAILY_LIMIT > 0 && issued >= DAILY_LIMIT) {
+      coupon = '';                                   // 今日券已送完
+    } else if (nowinToday < NOWIN_PER_DAY && Math.random() < NOWIN_RATE) {
+      coupon = ''; nowin = true;                     // 今日無抽中
     }
     var a = (payload && payload.answers) || {};
     // 截長度;開頭是 = + - @ 的文字前面加 ' ,避免被試算表當成公式
@@ -125,7 +134,7 @@ function submit(payload) {
       var k = c[0];
       if (k === 'time') return Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
       if (k === 'coupon') return coupon ? 'No.' + coupon : (nowin ? '未抽中' : '今日額滿');
-      if (k === 'luck') return clip(payload.luck, 10);
+      if (k === 'luck') return nowin ? '今日無抽中' : clip(payload.luck, 10);
       if (k === 'message') return clip(payload.message, 300);
       if (k === 'asked') return clip(payload.asked, 200);
       if (k === 'email') {
@@ -135,7 +144,7 @@ function submit(payload) {
       return clip(a[k], 40);
     });
     sh.appendRow(row);
-    return coupon;
+    return { coupon: coupon, nowin: nowin };
   } finally {
     lock.releaseLock();
   }
