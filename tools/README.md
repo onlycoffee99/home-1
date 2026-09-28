@@ -58,5 +58,5 @@ python3 tools/make_qr.py <網址> qr.svg               # 產 QR SVG,貼進立牌
 node tools/html2pdf.js 立牌.html 立牌.pdf 預覽.png   # 依 CSS @page 紙張大小輸出 PDF + 預覽圖
 node tools/html2print300.js 券.html 券_300dpi        # 印刷店指定 300 dpi 點陣圖時:產出 券_300dpi.png + 券_300dpi.pdf
 ```
-- 範本:`行銷/森林風呂御神籤/立牌_A5.html`、`咖啡券_A4十張.html`
+- 範本:`輕車鑫和合作案/森林風呂御神籤/立牌_A5.html`、`咖啡券_A4十張.html`
 - 印之前用預覽圖解碼確認網址:`pip install opencv-python-headless` 後 `python3 -c "import cv2;print(cv2.QRCodeDetector().detectAndDecode(cv2.imread('預覽.png'))[0])"`

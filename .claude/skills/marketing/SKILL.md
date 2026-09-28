@@ -54,8 +54,8 @@ description: 進入「時間到咖啡館兩店社群行銷」工作模式:產出
 ## 成效週報(第 4 階段啟用後)
 每週一抓 IG 洞察、LINE 後台、Google 商家成效,寫 `行銷/成效/YYYY-Wnn.md`,寄週報,並在下週產稿時引用。
 
-## 森林風呂御神籤問卷
-- 問卷報告、改題目、接新問卷案 → 改用 `survey` skill(`.claude/skills/survey/SKILL.md`)。
+## 森林風呂御神籤問卷(不屬本行銷線)
+- 那是輕車悠遊 × 鑫和洋行的合作案,檔案在 `輕車鑫和合作案/`,一律改用 `survey` skill;不放 `行銷/`、不寫進排程表。
 
 ## 工具
 - Word/PDF 版需求:`tools/md2docx.js`
