@@ -144,6 +144,8 @@
   .claim .c3 { font-size: 11px; opacity: .95; margin-top: 2px; }
   .claim .live { display: inline-flex; margin: 0; font-size: 11px; color: #fff; gap: 4px; }
   .claim .live .dot { width: 7px; height: 7px; background: #9ff0b4; }
+  .gift .limit { display: inline-block; margin-top: 4px; background: var(--torii); color: #fff; font-size: 13px; font-weight: 700; border-radius: 999px; padding: 1px 10px; }
+  .soldout { margin-top: 10px; background: var(--paper-2); border: 1.5px dashed var(--ink-2); border-radius: 12px; padding: 10px; text-align: center; font-size: 15px; font-weight: 700; color: var(--ink); }
   .show { margin-top: 16px; background: var(--forest); color: #fff; border-radius: 12px; padding: 12px; text-align: center; font-weight: 700; }
   .rules { font-size: 12px; color: var(--ink-2); margin-top: 10px; text-align: center; }
   .again { text-align: center; color: var(--forest); font-weight: 700; margin-bottom: 10px; }
@@ -179,7 +181,7 @@
         <text x="90" y="174" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">籤</text>
       </svg>
     </div>
-    <div class="gift">答完 <b>10</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕<span class="en">Answer 10 quick questions, get NT$30 off at Time Café</span></div>
+    <div class="gift">答完 <b>10</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕<br><span class="limit">每日限量・送完為止</span><span class="en">Answer 10 quick questions, get NT$30 off at Time Café (limited daily)</span></div>
     <button class="btn" id="btn-draw">搖一搖・抽籤 <span style="font-size:15px;font-weight:500">Draw</span></button>
     <p class="note">大約 2 分鐘・不用填名字電話<span class="en">About 2 minutes · No name or phone needed</span></p>
   </section>
@@ -248,7 +250,8 @@
       <div class="c2">👉 出示此畫面到<b>【森林風呂櫃台】</b>索取咖啡券</div>
       <div class="c3"><span class="live"><span class="dot"></span><span id="clock"></span></span> ・ Show this at the Forest Onsen counter</div>
     </div>
-    <div class="rules">限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
+    <div class="soldout" id="soldout" hidden>🙏 今日咖啡券已送完,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕<span class="en">Today's coupons are all gone — thank you! Try again tomorrow.</span></div>
+    <div class="rules">每日限量・限公園一館使用・每次限用 1 張・每人每天 1 次・不兌現不找零</div>
   </section>
 
   <div class="foot">礁溪溫泉公園・森林風呂 × 時間到咖啡館
@@ -526,7 +529,10 @@
     $("cafe").innerHTML = '<div class="h">☕ 時間到咖啡館 開運指南</div>今日幸運飲品:<b>' + f.drink + "</b> <span class=\"note2\">" + f.de +
       "</span><br>開運行動:" + f.act + '<br><span class="note2">Lucky drink at Time Café, inside the park ・ IG @5wudou</span>';
     $("slip").classList.remove("open"); void $("slip").offsetWidth; $("slip").classList.add("open");
-    $("cno").textContent = "No." + r.coupon;
+    var has = !!r.coupon;
+    document.querySelector(".claim").hidden = !has;
+    $("soldout").hidden = has;
+    $("cno").textContent = has ? "No." + r.coupon : "";
     $("again").hidden = !repeat;
     show("s-result");
     function tick() {

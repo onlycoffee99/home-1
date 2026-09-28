@@ -7,6 +7,8 @@
  */
 
 var SHEET_NAME = '回覆';
+// 每日咖啡券上限(台灣時間 0 點重算);0 = 不限量。額滿後仍可填答、抽籤,只是不發券號
+var DAILY_LIMIT = 50;
 // 「森林風呂御神籤_回覆」試算表 ID(雲端硬碟「森林風呂御神籤」資料夾內)
 var SPREADSHEET_ID = '1K22clZvbwZXTtxSCUmUTx1svKZBpdLILlm6Q7w6yC88';
 
@@ -102,6 +104,13 @@ function submit(payload) {
     var sh = getSheet_();
     var n = sh.getLastRow(); // 標題列佔 1 列,故第 n 份 = 第 n+1 列
     var coupon = ('0000' + n).slice(-4);
+    // 每日限量:數今天已發出的券
+    if (DAILY_LIMIT > 0 && n > 1) {
+      var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
+      var tc = sh.getRange(2, 1, n - 1, 2).getDisplayValues(); // A 填答時間、B 券號
+      var issued = tc.filter(function (r) { return r[0].indexOf(today) === 0 && r[1].indexOf('No.') === 0; }).length;
+      if (issued >= DAILY_LIMIT) coupon = '';
+    }
     var a = (payload && payload.answers) || {};
     // 截長度;開頭是 = + - @ 的文字前面加 ' ,避免被試算表當成公式
     var clip = function (s, len) {
@@ -112,7 +121,7 @@ function submit(payload) {
     var row = COLUMNS.map(function (c) {
       var k = c[0];
       if (k === 'time') return Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
-      if (k === 'coupon') return 'No.' + coupon;
+      if (k === 'coupon') return coupon ? 'No.' + coupon : '今日額滿';
       if (k === 'luck') return clip(payload.luck, 10);
       if (k === 'message') return clip(payload.message, 300);
       if (k === 'asked') return clip(payload.asked, 200);
