@@ -181,7 +181,7 @@
         <text x="90" y="174" text-anchor="middle" font-family="Noto Serif TC, serif" font-weight="900" font-size="22" fill="#b8402f">籤</text>
       </svg>
     </div>
-    <div class="gift">答完 <b>10</b> 支籤,送你<br><b>時間到咖啡館 折 30 元</b> ☕<br><span class="limit">每日限量・送完為止</span><span class="en">Answer 10 quick questions, get NT$30 off at Time Café (limited daily)</span></div>
+    <div class="gift">回答 <b>10</b> 個小問題,抽一支好運籤 🎋<br>再送 <b>時間到咖啡館 折 30 元</b> ☕<br><span class="limit">每日限量・送完為止</span><span class="en">Answer 10 quick questions, draw your fortune, and get NT$30 off at Time Café (limited daily)</span></div>
     <button class="btn" id="btn-draw">搖一搖・抽籤 <span style="font-size:15px;font-weight:500">Draw</span></button>
     <p class="note">大約 2 分鐘・不用填名字電話<span class="en">About 2 minutes · No name or phone needed</span></p>
   </section>
@@ -194,7 +194,7 @@
       <div class="qtag" id="qtag"></div>
       <div id="qbody"></div>
     </div>
-    <button class="btn ghost back" id="btn-back">← 上一籤</button>
+    <button class="btn ghost back" id="btn-back">← 上一題</button>
   </section>
 
   <!-- 留言 -->
@@ -221,7 +221,7 @@
     </div>
     <div style="height:16px"></div>
     <button class="btn" id="btn-submit">看我的籤詩 🎋 <span style="font-size:15px;font-weight:500">See my fortune</span></button>
-    <button class="btn ghost" id="btn-back2">← 上一籤</button>
+    <button class="btn ghost" id="btn-back2">← 上一題</button>
   </section>
 
   <!-- 抽到的籤支 -->
@@ -469,13 +469,13 @@
   function renderQ() {
     var q = questions[idx];
     renderSticks($("sticks"), idx);
-    $("qno").textContent = "第" + NUM[idx] + "籤";
+    $("qno").textContent = "第 " + (idx + 1) + " 題 / " + TOTAL;
     $("qtag").textContent = q.tag;
     $("btn-back").style.visibility = idx === 0 ? "hidden" : "visible";
     var body = $("qbody");
 
     if (q.basic) {
-      var h = '<div class="qtext">最後一籤!你是…<span class="en">Last one! About you</span></div>';
+      var h = '<div class="qtext">最後一題!你是…<span class="en">Last one! About you</span></div>';
       h += '<div class="grp-label">年齡 <span class="en" style="display:inline">Age</span></div><div class="chips" data-k="age">';
       AGES.forEach(function (a) { h += '<button class="chip' + (answers.age === a ? " sel" : "") + '" data-v="' + a + '">' + a + "</button>"; });
       h += '</div><div class="grp-label">多久來泡一次? <span class="en" style="display:inline">How often do you visit?</span></div><div class="chips" data-k="freq">';
