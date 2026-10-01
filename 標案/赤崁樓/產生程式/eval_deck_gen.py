@@ -40,15 +40,6 @@ slides.append(('cover',f'''<section id="cover" data-transition="fade" style="bac
 <div style="display:flex;flex-direction:column;gap:8px;width:860px"><p style="font-size:32px;color:{L}">投標廠商：鑫和洋行</p><p style="font-size:32px;color:{L}">計畫主持人：鄭玉屏</p><p style="font-size:24px;color:{MD}">中華民國115年10月</p></div>
 <aside>（約10秒）各位委員好，我是鑫和洋行計畫主持人鄭玉屏，向各位報告「時間到茶館」的經營規劃。</aside></section>'''))
 
-content('errata','簡報前說明','服務建議書勘誤',
- table(['頁次','原文','更正為','說明'],[
-  ['第3頁表1','蛙聚有限公司','<b>蚨聚有限公司</b>','依附件2-2租賃契約公證書'],
-  ['第3頁','計畫主持人鄭玉萍小姐','<b>計畫主持人鄭玉屏小姐</b>','姓名誤植'],
-  ['第3頁','咖啡烘培師、烘培','<b>咖啡烘焙師、烘焙</b>','錯字'],
-  ['第26頁','固定權利金每月新臺幣550,000元','<b>固定權利金每年新臺幣550,000元</b>','與第24頁推估、表16一致'],
- ],[16,28,32,24],fs=28)+f'<p style="font-size:28px;color:{M}">以上均屬文字誤植，不影響服務內容及財務結論。</p>',
- '（約20秒）先說明服務建議書四處誤植：第26頁固定權利金應為「每年」55萬元，與第24頁推估及表16一致；第3頁台中館出租人為蚨聚有限公司、計畫主持人為鄭玉屏，烘焙二字一併更正。')
-
 ag=[('一','專業能力與績效','10'),('二','經營管理內容、創意能力及經營策略','25'),('三','權利金報價合理性','20'),('四','財務規劃','15'),('五','空間使用規劃','15'),('六','環境、建物及設備之管理維護計畫','15')]
 agh='<div style="display:flex;flex-direction:column;gap:16px">'+''.join(f'<div style="display:flex;align-items:center;gap:36px;padding:18px 40px;background:#FBF8F1;border:1px solid #D9CFBC;border-radius:16px"><p style="font-family:{H};font-size:40px;font-weight:700;color:{A};width:60px">{a}</p><p style="flex:1;font-size:34px;color:{D}">{b}</p><p style="font-size:30px;font-weight:700;color:{M}">{c}分</p></div>' for a,b,c in ag)+'</div>'
 content('agenda','簡報大綱','依評選項目順序報告',agh,'（約5秒）以下依評選須知六個評選項目的順序報告。')
