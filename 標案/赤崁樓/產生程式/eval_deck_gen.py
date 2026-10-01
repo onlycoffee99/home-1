@@ -2,7 +2,7 @@ import json,os,datetime
 R='/tmp/claude-0/-home-user-home-1/c0e478eb-8463-5374-8afd-baba07237450/scratchpad/eval/deck/project'
 D='#1E3A2F';L='#F7F3EA';L2='#ECE4D3';A='#A8432A';M='#4D4A42';MD='#C9D6CC'
 H="'Noto Serif TC', Georgia, serif";B="'Noto Sans TC', Arial, sans-serif"
-IMG=dict(tea='/_blob/c566d56169e054e78ed5921264eebaab',jx='/_blob/e0dd7440253af3226f5b3b6a5c663a1d',tc='/_blob/a933bb57c14fc10bb68ea30cd17ca8b3',op='/_blob/6d9d8f2ce0556a9090e66940cd15a3f9',op2='/_blob/e9a01c2af5f8fc2538071ec35e6d9ff9',cal='/_blob/9d873bfa768c387b39279aaf37305151',kq='/_blob/017a16c6d40922851828e25cd23152c8',drip='/_blob/6730f75861a7d898b329bb9a94069799',cls='/_blob/e6ba1ea277a29171b21ba6bb09dd8e1a',map='/_blob/43f19846c81d1e93d662ce667162ee5b')
+IMG=dict(plan='/_blob/62f67fdbab19ff0a86164a988f1b2119',tea='/_blob/c566d56169e054e78ed5921264eebaab',jx='/_blob/e0dd7440253af3226f5b3b6a5c663a1d',tc='/_blob/a933bb57c14fc10bb68ea30cd17ca8b3',op='/_blob/6d9d8f2ce0556a9090e66940cd15a3f9',op2='/_blob/e9a01c2af5f8fc2538071ec35e6d9ff9',cal='/_blob/9d873bfa768c387b39279aaf37305151',kq='/_blob/017a16c6d40922851828e25cd23152c8',drip='/_blob/6730f75861a7d898b329bb9a94069799',cls='/_blob/e6ba1ea277a29171b21ba6bb09dd8e1a',map='/_blob/43f19846c81d1e93d662ce667162ee5b')
 slides=[]
 def foot(n,bg='light'):
     c=M if bg=='light' else MD
@@ -44,9 +44,8 @@ content('errata','簡報前說明','服務建議書勘誤',
   ['第3頁','計畫主持人鄭玉萍小姐','<b>計畫主持人鄭玉屏小姐</b>','姓名誤植'],
   ['第3頁','咖啡烘培師、烘培','<b>咖啡烘焙師、烘焙</b>','錯字'],
   ['第26頁','固定權利金每月新臺幣550,000元','<b>固定權利金每年新臺幣550,000元</b>','與第24頁推估、表16一致'],
-  ['第26頁、表16','超過新臺幣540萬元之部分','<b>超過新臺幣550萬元之部分</b>','依招標文件條件'],
- ],[16,28,32,24],fs=26)+f'<p style="font-size:28px;color:{M}">以上均屬文字誤植，不影響服務內容與財務結論；權利金以「每年」計收。</p>',
- '正式報告前，先向委員說明服務建議書中的幾處誤植。最重要的是第26頁：固定權利金應為「每年」55萬元，第24頁的推估與表16的試算都以每年計；變動權利金的門檻依招標文件為年營業額550萬元。另外第3頁台中館的出租人是「蚨聚有限公司」，計畫主持人是鄭玉屏，烘焙兩字也一併更正。')
+ ],[16,28,32,24],fs=26)+f'<p style="font-size:28px;color:{M}">以上均屬文字誤植，不影響服務內容與財務結論。權利金以「每年」計收；變動權利金門檻540萬元與契約一致。</p>',
+ '正式報告前，先向委員說明服務建議書中的幾處誤植。最重要的是第26頁：固定權利金應為「每年」55萬元，第24頁的推估與表16的試算都以每年計；變動權利金門檻540萬元與契約第4條一致，沒有錯。另外第3頁台中館的出租人是「蚨聚有限公司」，計畫主持人是鄭玉屏，烘焙兩字也一併更正。')
 
 # 3 agenda
 items=[('壹','團隊介紹與經營願景'),('貳','整體營運與服務規劃'),('參','營運管理與組織人力'),('肆','權利金與財務營運規劃'),('伍','履約執行與管理維護')]
@@ -119,7 +118,7 @@ content('culture','貳、整體營運','文化內容與營運互相支持',
 
 # 11 space
 content('space','貳、空間規劃','約62坪：不破壞古蹟、可復原、動線清楚',
- f'''<div style="display:flex;gap:48px;align-items:start"><div style="width:760px;display:flex;flex-direction:column;gap:16px"><img src="{IMG['tea']}" alt="時間到茶館空間意象示意圖" style="width:760px;height:430px;object-fit:cover;border-radius:12px"><p style="font-size:24px;color:{M}">空間意象示意圖，實際以機關核定設計圖說為準</p></div>
+ f'''<div style="display:flex;gap:48px;align-items:start"><div style="width:760px;display:flex;flex-direction:column;gap:16px"><img src="{IMG['plan']}" alt="赤崁樓遊客中心2樓平面圖，紅框為委外範圍" style="width:760px;height:380px;object-fit:contain;background:#FFFFFF;border:1px solid #D9CFBC;border-radius:12px"><p style="font-size:24px;color:{M}">紅框為委外範圍（招標文件平面圖）；實際配置以點交丈量及機關核定設計圖說為準</p></div>
 <div style="flex:1">{table(['分區','面積'],[['入口接待及展售區','8坪'],['手搖飲吧台及備料區','12坪'],['休憩座位區（約36席）','20坪'],['文化沙龍多功能區','14坪'],['倉儲及員工區','4坪'],['公共動線（淨寬1.2m以上）','4坪']],[72,28],fs=26)}</div></div>''',
  '委外範圍203.35平方公尺，約62坪。全部採活動式家具與模組化櫃體，不鑽孔、不變更結構；吧台一律電熱設備，不使用明火與桶裝瓦斯。設計圖說於簽約次日起30日內併同營運管理維護計畫送審。')
 
@@ -137,27 +136,27 @@ content('season','參、行銷推廣','四季行銷，結合在地節慶',
  '行銷以四季為節奏。線上由傳宇智聯協助AI行銷與社群，線下串聯周邊商圈與社區組織，推出「古蹟參訪＋一杯故事茶」的套裝。')
 
 # 14 royalty
-roy=table(['年度','預估年營業額','超過550萬部分','變動權利金（2%）','權利金合計'],[
-  ['第一年','8,327,040','2,827,040','56,541','<b>606,541</b>'],
-  ['第二年','9,576,096','4,076,096','81,522','<b>631,522</b>'],
-  ['第三年','10,096,536','4,596,536','91,931','<b>641,931</b>']],[14,22,22,22,20],fs=28)
-content('royalty','肆、權利金','固定保底，營收超過門檻再分享',
+roy=table(['年度','預估年營業額','超過540萬部分','變動權利金（2%）','權利金合計'],[
+  ['第一年','8,327,040','2,927,040','58,541','<b>608,541</b>'],
+  ['第二年','9,576,096','4,176,096','83,522','<b>633,522</b>'],
+  ['第三年','10,096,536','4,696,536','93,931','<b>643,931</b>']],[14,22,22,22,20],fs=28)
+content('royalty','肆、權利金','固定保底，營收超過目標值再分享',
  f'''<div style="display:flex;gap:28px">
-<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:{D};padding:36px 40px;border-radius:16px"><p style="font-size:26px;color:{MD}">固定權利金（未稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{L}">每年55萬元</p><p style="font-size:26px;line-height:1.5;color:{MD}">高於招標底線每年54萬元；依周邊租金推估 (683+62)元×12月×61.51坪 ≈ 549,899元</p></div>
-<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF8F1;padding:36px 40px;border:1px solid #D9CFBC;border-radius:16px"><p style="font-size:26px;color:{M}">變動權利金</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{A}">超過550萬部分×2%</p><p style="font-size:26px;line-height:1.5;color:{M}">年營業額550萬元以內只繳固定權利金；超過部分才計2%</p></div></div>
-{roy}<p style="font-size:24px;color:{M}">單位：新臺幣元；營業額依服務建議書表15。</p>''',
- '權利金分兩層。固定權利金每年55萬元，高於招標底線54萬元，是依周邊租金行情推估的合理水準，不論營運好壞都照繳。變動權利金只就年營業額超過550萬元的部分收2%，不是全部營業額乘2%。55萬剛好是550萬的一成，營業額到550萬以前，固定權利金已相當於營收的10%；超過之後，市府再分享成長。依預估，三年每年繳給市府約61萬到64萬元。')
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:{D};padding:36px 40px;border-radius:16px"><p style="font-size:26px;color:{MD}">固定權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{L}">每年55萬元</p><p style="font-size:26px;line-height:1.5;color:{MD}">高於契約底價每年54萬元；依周邊租金推估 (683+62)元×12月×61.51坪 ≈ 549,899元</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF8F1;padding:36px 40px;border:1px solid #D9CFBC;border-radius:16px"><p style="font-size:26px;color:{M}">變動權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{A}">超過540萬部分×2%</p><p style="font-size:26px;line-height:1.5;color:{M}">依契約第4條：年營業收入未達目標值540萬元免繳；以401申報書為據，第一年依履約日數折算</p></div></div>
+{roy}<p style="font-size:24px;color:{M}">單位：新臺幣元（未稅）；營業額依服務建議書表15。契約期5年，固定權利金五年合計275萬元。</p>''',
+ '權利金分兩層。固定權利金每年55萬元，高於契約底價54萬元，是依周邊租金行情推估的合理水準，不論營運好壞都照繳。變動權利金依契約第4條：當年度稅前營業收入超過目標值540萬元的部分收2%，不是全部營業額乘2%；未達540萬免繳，第一年依實際履約日數折算目標值，以401申報書為依據。依預估營收，前三年每年繳給市府約61萬到64萬元，外加營業稅。')
 
 # 15 finance
 content('finance','肆、財務可行性','保守估算：以來客數達基本面為前提',
  f'''<div style="display:flex;gap:40px;align-items:start"><div style="flex:1">{table(['項目','第一年','第二年','第三年'],[['營收爬坡（穩定水準）','80%','92%','97%'],['年營業收入','832.7萬','957.6萬','1,009.7萬'],['稅前損益','約損益兩平','約64萬','約82萬'],['稅前淨利率','—','6.6%','8.1%']],[37,21,21,21],fs=28)}</div>
 <div style="width:520px;display:flex;flex-direction:column;gap:12px;background:{A};padding:40px;border-radius:16px"><p style="font-size:26px;color:#F3D9CF">損益兩平</p><p style="font-family:{H};font-size:88px;font-weight:700;color:{L};line-height:1.1">207人次</p><p style="font-size:26px;line-height:1.5;color:#FBEDE6">每日平均來客；穩定水準估每日260人次、客單價115元</p></div></div>
-<p style="font-size:28px;line-height:1.6;color:{M}">開辦170萬元＋週轉金30萬元，自有資金70%、金融機構貸款30%；每年自盈餘提撥營業額1%作為設備汰換準備金。</p>''',
+<p style="font-size:28px;line-height:1.6;color:{M}">開辦170萬元＋週轉金30萬元，自有資金70%、金融機構貸款30%；每年自盈餘提撥營業額1%作為設備汰換準備金。契約期5年，自點交次日起算。</p>''',
  '財務採保守估算。第一年是導入期，只估穩定水準的八成，約損益兩平；第二、三年稅前淨利率約6.6%與8.1%。這些數字以來客數達到基本面為前提：每日平均要約207人次才能損益兩平。開辦資金200萬元，七成自有資金。')
 
 # 16 maintenance
 content('manage','伍、履約管理','安全與維護，寫進每天的流程',
- '<div style="display:flex;gap:24px">'+card('設備維護','點交時建立財產及設備清冊並拍照；空調、給排水、冷藏冷凍、監視設備依表定頻率保養並登記建檔')+card('消防防災','設置防火管理人；吧台電熱、不用明火；每年至少2次防災實地演練並邀請機關參與')+card('風險管理','遊客量、食安、古蹟損害、人力、財務、輿情六類風險，各有預防及因應措施；投保公共意外、火災及產品責任險')+'</div>',
+ '<div style="display:flex;gap:24px">'+card('設備維護','點交時建立財產及設備清冊並拍照；依表定頻率保養並登記建檔；POS、監視等聯網設備不使用中國品牌')+card('消防防災','設置防火管理人；吧台電熱、不用明火；每半年至少1次防災實地演練並邀請機關參與')+card('風險管理','遊客量、食安、古蹟損害、人力、財務、輿情六類風險，各有預防及因應措施；投保公共意外、火災及產品責任險')+'</div>',
  '我們把安全放在營運之前：不使用明火、不變更結構、每日巡檢，發生任何損害立即通報機關並負責修復。')
 
 # 17 KPI
@@ -168,10 +167,21 @@ content('kpi','伍、履約承諾','以量化指標自我追蹤',
   ['文化推廣','文化沙龍及體驗活動','每年24場以上'],
   ['在地合作','合作之臺南在地品牌及創作者','每年10家以上'],
   ['行銷推廣','社群貼文','每週3則以上'],
-  ['安全管理','防災實地演練','每年2次以上'],
+  ['安全管理','防災實地演練','每半年1次以上'],
   ['機關考核','年度經營管理考核成績','85分以上（及格75分）'],
  ],[20,48,32],fs=28),
  '最後是我們的承諾，全部可量化、可查核。年度考核我們以85分為目標，高於75分的通過標準。')
+
+# 17b review
+content('review','伍、年度考核','對應文化局年度考核五大項目',
+ table(['考核項目（權重）','本團隊做法'],[
+  ['營運計畫執行（含財務）25%','依核定計畫營運；會計獨立、每月損益檢討、營運月報'],
+  ['設備維修及環境清潔 25%','設備保養表定執行並建檔；每2小時巡檢公共區域'],
+  ['歷史、文化及藝術教育推廣 25%','每年24場以上文化沙龍及體驗；茶款附故事卡'],
+  ['與文化局配合度 15%','機關借用場地優先無償提供；宣傳事先報准；主持人親自出席考核'],
+  ['顧客滿意度或投訴率 10%','每半年滿意度調查，目標85%以上；意見3日內回覆'],
+ ],[36,64],fs=28)+f'<p style="font-size:28px;color:{M}">考核75分通過，本團隊以85分為目標；考核成績亦為後續擴充3年之參考依據。</p>',
+ '文化局每年考核五個項目，我們把每一項都對應到具體做法。其中文化教育推廣占25%，所以我們把文化沙龍和故事卡當成日常營運的一部分，不是偶爾辦活動。考核成績也是後續擴充3年的依據，我們以85分為目標。')
 
 # 18 closing
 n=len(slides)+1
