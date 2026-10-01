@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node tools/einvoice/issue.js *)",
+      "Bash(node /home/user/home-1/tools/einvoice/issue.js *)"
+    ]
+  }
+}
