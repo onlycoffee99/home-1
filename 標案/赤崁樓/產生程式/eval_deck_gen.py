@@ -139,11 +139,11 @@ content('season','參、行銷推廣','四季行銷，結合在地節慶',
 roy=table(['年度','預估年營業額','超過540萬部分','變動權利金（2%）','權利金合計'],[
   ['第一年','8,327,040','2,927,040','58,541','<b>608,541</b>'],
   ['第二年','9,576,096','4,176,096','83,522','<b>633,522</b>'],
-  ['第三年','10,096,536','4,696,536','93,931','<b>643,931</b>']],[14,22,22,22,20],fs=28)
+  ['第三年','10,096,536','4,696,536','93,931','<b>643,931</b>']],[14,22,22,22,20],fs=26)
 content('royalty','肆、權利金','固定保底，營收超過目標值再分享',
  f'''<div style="display:flex;gap:28px">
 <div style="flex:1;display:flex;flex-direction:column;gap:12px;background:{D};padding:36px 40px;border-radius:16px"><p style="font-size:26px;color:{MD}">固定權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{L}">每年55萬元</p><p style="font-size:26px;line-height:1.5;color:{MD}">高於契約底價每年54萬元；依周邊租金推估 (683+62)元×12月×61.51坪 ≈ 549,899元</p></div>
-<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF8F1;padding:36px 40px;border:1px solid #D9CFBC;border-radius:16px"><p style="font-size:26px;color:{M}">變動權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{A}">超過540萬部分×2%</p><p style="font-size:26px;line-height:1.5;color:{M}">依契約第4條：年營業收入未達目標值540萬元免繳；以401申報書為據，第一年依履約日數折算</p></div></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF8F1;padding:36px 40px;border:1px solid #D9CFBC;border-radius:16px"><p style="font-size:26px;color:{M}">變動權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{A}">超過540萬部分×2%</p><p style="font-size:26px;line-height:1.5;color:{M}">契約第4條：未達540萬元免繳；依401申報書計算</p></div></div>
 {roy}<p style="font-size:24px;color:{M}">單位：新臺幣元（未稅）；營業額依服務建議書表15。契約期5年，固定權利金五年合計275萬元。</p>''',
  '權利金分兩層。固定權利金每年55萬元，高於契約底價54萬元，是依周邊租金行情推估的合理水準，不論營運好壞都照繳。變動權利金依契約第4條：當年度稅前營業收入超過目標值540萬元的部分收2%，不是全部營業額乘2%；未達540萬免繳，第一年依實際履約日數折算目標值，以401申報書為依據。依預估營收，前三年每年繳給市府約61萬到64萬元，外加營業稅。')
 
@@ -152,7 +152,7 @@ content('finance','肆、財務可行性','保守估算：以來客數達基本�
  f'''<div style="display:flex;gap:40px;align-items:start"><div style="flex:1">{table(['項目','第一年','第二年','第三年'],[['營收爬坡（穩定水準）','80%','92%','97%'],['年營業收入','832.7萬','957.6萬','1,009.7萬'],['稅前損益','約損益兩平','約64萬','約82萬'],['稅前淨利率','—','6.6%','8.1%']],[37,21,21,21],fs=28)}</div>
 <div style="width:520px;display:flex;flex-direction:column;gap:12px;background:{A};padding:40px;border-radius:16px"><p style="font-size:26px;color:#F3D9CF">損益兩平</p><p style="font-family:{H};font-size:88px;font-weight:700;color:{L};line-height:1.1">207人次</p><p style="font-size:26px;line-height:1.5;color:#FBEDE6">每日平均來客；穩定水準估每日260人次、客單價115元</p></div></div>
 <p style="font-size:28px;line-height:1.6;color:{M}">開辦170萬元＋週轉金30萬元，自有資金70%、金融機構貸款30%；每年自盈餘提撥營業額1%作為設備汰換準備金。契約期5年，自點交次日起算。</p>''',
- '財務採保守估算。第一年是導入期，只估穩定水準的八成，約損益兩平；第二、三年稅前淨利率約6.6%與8.1%。這些數字以來客數達到基本面為前提：每日平均要約207人次才能損益兩平。開辦資金200萬元，七成自有資金。')
+ '財務採保守估算。第一年是導入期，只估穩定水準的八成，約損益兩平；第二、三年稅前淨利率約6.6%與8.1%。這些數字以來客數達到基本面為前提：每日平均要約207人次才能損益兩平。開辦資金200萬元，七成自有資金。契約規定的地價稅、房屋稅由廠商負擔，已列在表16「耗材及雜支」項目內，每年編列營業額2%，約17萬到20萬元。')
 
 # 16 maintenance
 content('manage','伍、履約管理','安全與維護，寫進每天的流程',
