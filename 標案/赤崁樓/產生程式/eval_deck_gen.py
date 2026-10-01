@@ -138,7 +138,7 @@ content('royalty',E3,'固定保底，營收超過目標值再分享',
 <div style="flex:1;display:flex;flex-direction:column;gap:12px;background:{D};padding:36px 40px;border-radius:16px"><p style="font-size:26px;color:{MD}">固定權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{L}">每年55萬元</p><p style="font-size:26px;line-height:1.5;color:{MD}">不論營運好壞照繳；五年合計275萬元</p></div>
 <div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FBF8F1;padding:36px 40px;border:1px solid #D9CFBC;border-radius:16px"><p style="font-size:26px;color:{M}">變動權利金（外加5%營業稅）</p><p style="font-family:{H};font-size:64px;font-weight:700;color:{A}">超過540萬部分×2%</p><p style="font-size:26px;line-height:1.5;color:{M}">契約第4條：未達540萬元免繳；依401申報書計算</p></div></div>
 {roy}<p style="font-size:24px;color:{M}">單位：新臺幣元（未稅）；營業額依服務建議書表15。</p>''',
- '（約30秒）變動權利金依契約第4條：當年度營業收入超過目標值540萬元的部分收2%，以401申報書計算。依我們的營收預估，前三年每年繳給市府約61萬到64萬元。固定保底、成長共享，市府的收入有保障，我們也能長期穩定經營。')
+ '（約35秒）固定權利金是每年55萬元，以標單為準；服務建議書第26頁寫成「每月」是誤植。變動權利金依契約第4條：當年度營業收入超過目標值540萬元的部分收2%，以401申報書計算。依我們的營收預估，前三年每年繳給市府約61萬到64萬元。固定保底、成長共享，市府的收入有保障，我們也能長期穩定經營。')
 
 # 四 財務
 content('invest',E4,'投資金額與經費來源',
