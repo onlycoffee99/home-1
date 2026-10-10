@@ -1,5 +1,7 @@
 # 總指令檔(每次開工必讀)
 
+> **115/10/10 起公務線由 Gemini 接手,先讀 `交接_Claude給Gemini_公務_1151010.md`。**
+
 本 repo 是鄭玉屏(onlycoffee99@gmail.com)的雲端工作區。桌機不穩定,所有工作以雲端為準:**正式檔案庫在 Google 雲端硬碟,文字工作版與進度在本 repo**。開工時先讀本檔與 `README.md`,再讀 `縣府案件/00_總說明_必讀.md`。
 
 ## 一、案件全貌
@@ -56,6 +58,7 @@
 ### 本 repo(文字工作版,git 版本控制)
 - `README.md`:進度總覽、待辦、雲端硬碟連結索引
 - `縣府案件/`:00 總說明、01 對照表、09 提案書、09A 王董發言重點、10 爭點對照表、11 函稿、12A/12B 函稿、12 決策單、13 交件指引、收發文登記簿.csv
+- `政達搭排案/`:A_納管線搭排申請文件(1150902 定版+舊版歸檔,先讀其 README.md;06 計畫書以「官方定版」docx 為準)
 - `tools/md2docx.js`:md 轉 Word 工具(用法見 tools/README.md)
 - `tools/line_broadcast.js`:LINE 官方帳號群發工具(金鑰放環境變數,見 tools/README.md)
 - `tools/social_post.js`:IG/Google 商家代發工具(Postproxy,金鑰放環境變數,見 tools/README.md)
@@ -64,6 +67,8 @@
 - `.claude/skills/ot-case/`:縣府案件工作模式 skill
 - `.claude/skills/survey/`:舞荳問卷設計工作模式 skill(森林風呂御神籤報告與維護、新客戶問卷案)
 - `行銷/`:兩店社群行銷規則書、排程表、每週產稿;`.claude/skills/marketing/`:行銷工作模式 skill
+- `資歷庫/`:鑫和洋行、鄭玉屏、張哲源、徐鈺清之實績與學經歷總庫(實績總表.csv+各主檔);`.claude/skills/credentials/`:標案資歷庫工作模式 skill(老闆拍照+一句話→我補足歸檔)
+- `標案/`:各標案服務建議書產生程式與說明(赤崁樓案)
 
 ### Google 雲端硬碟(正式檔案庫,Word/PDF/影音)
 - 函稿 Word/PDF(01~13、12A/12B):資料夾「Word檔」(ID `1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3`)
@@ -71,12 +76,15 @@
 - 評估會資料(簡報 02/03、影片 04~06、對照表、說明書):資料夾 ID `1FFKkNATwBlR8U7ysAnDl7YuUBI9Syqdi`
 - 票券 A/B 說明影片 07A/07B:資料夾 ID `1boTb8krJQl8y7fkiS5macJPJZM7Ntpju`
 - 收發文登記簿:資料夾 ID `1KzmzfrsSoiDmsG4avK_q-CcNLHA0LDbj`
+- 資歷庫佐證(實績照片、證書、同意書掃描):資料夾 ID `1K0in_MmY2b16QGoYdkQGXGWaoliIsrpa`
 
 ### 僅存桌機(待桌機修復後上雲)
 - E 槽歷代存檔、契約掃描全本(50MB 無文字層)、前案仲裁判斷書掃描
 
 ## 五、工作慣例
 
+- **檔案分層、命名與餵 ChatGPT 的原則見 `檔案使用規則.md`**(三層分工:雲端正本/repo 文字版/對話上傳;狀態只有官方定版/修正/舊版勿用)
+- **輕車函文一律依公司範本格式製作**:範本與格式規範在 `縣府案件/範本/`(輕車函文範本.pdf/.doc、輕車函文格式規範.md)。要點:正本框、公司名置中、右側地址/承辦人/電話/信箱區塊、受文者地址(260 宜蘭市凱旋里三鄰縣政北路一號)、發文字號格式「115北輕字第<年月日>-<序號>號」、附件無則寫「略。」、正本宜蘭縣政府/副本輕車悠遊股份有限公司、末尾署名「董事長 王迪立」、頁尾頁碼。
 - 新增/修改公文文字 → 改 repo 內 md → 用 `tools/md2docx.js` 出 Word → SendUserFile 給使用者 → commit+push
 - 任何收發文動作 → 回填 `收發文登記簿.csv`(格式照現有欄位)
 - 契約條文引用:掃描本僅第 22~24 頁經完整判讀,其餘轉引自函文;**正式引用前以契約正本覆核**
