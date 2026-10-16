@@ -71,7 +71,7 @@
 - `標案/`:各標案服務建議書產生程式與說明(赤崁樓案)
 
 ### Google 雲端硬碟(正式檔案庫,Word/PDF/影音)
-- 函稿 Word/PDF(01~13、12A/12B):資料夾「Word檔」(ID `1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3`)
+- 函稿 Word/PDF(01~13、12A/12B):資料夾「Word檔」(ID `1Vf-sUa-PNvoPHuYfJXpjLYxjjI8Z2Rg3`);其下 `00_輕車函文範本(格式必遵)`(ID `1860T7icpcV-FfHqXDJtrPGD6J1a-Xieu`)放函文格式規範與空白套版
 - 共用附件庫 A~O(縣府來文、判決、處分書掃描):資料夾「附件」(ID `1W5HxcYGNYFOIQ4ka7bcrXdo-T4rug8iA` 下之共用附件庫)
 - 評估會資料(簡報 02/03、影片 04~06、對照表、說明書):資料夾 ID `1FFKkNATwBlR8U7ysAnDl7YuUBI9Syqdi`
 - 票券 A/B 說明影片 07A/07B:資料夾 ID `1boTb8krJQl8y7fkiS5macJPJZM7Ntpju`
