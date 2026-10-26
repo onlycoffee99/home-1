@@ -142,6 +142,8 @@
   .claim .c2 { font-size: 15px; font-weight: 700; margin-top: 2px; }
   .claim .c2 b { color: #ffe9a8; }
   .claim .c5 { font-size: 12px; margin-top: 1px; }
+  .claim .cqr { margin: 8px auto 2px; font-size: 12px; }
+  .claim .cqr img { display: block; width: 132px; height: 132px; margin: 0 auto 3px; background: #fff; padding: 6px; border-radius: 8px; image-rendering: pixelated; }
   .claim .c3 { font-size: 11px; opacity: .95; margin-top: 2px; }
   .claim .live { display: inline-flex; margin: 0; font-size: 11px; color: #fff; gap: 4px; }
   .claim .live .dot { width: 7px; height: 7px; background: #9ff0b4; }
@@ -154,6 +156,7 @@
   .credit { font-size: 11px; opacity: .75; margin-top: 4px; }
   .credit a { color: inherit; text-decoration: none; }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -250,6 +253,7 @@
       <div class="c1">🎁 時間到咖啡館 折 30 元 <span class="no" id="cno"></span></div>
       <div class="c2">👉 今天直接到<b>【時間到咖啡館】</b>出示此畫面</div>
       <div class="c5">店員輸入券號核銷,飲料一杯現折 30 元・<b style="color:#ffe9a8">限當日使用</b>・同公園內步行即達<br><span class="en" style="color:#fff;opacity:.85;font-size:11px">Show this screen at Time Café (in the park) today for NT$30 off one drink</span></div>
+      <div class="cqr" id="cqr" hidden><img id="cqr-img" alt="核銷 QR"><div>店員掃這個 QR 核銷</div></div>
       <div class="c3"><span class="live"><span class="dot"></span><span id="clock"></span></span></div>
     </div>
     <div class="soldout" id="soldout" hidden></div>
@@ -545,6 +549,17 @@
       ? '🍀 這次沒抽中咖啡券,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕'
       : '🙏 今日咖啡券已送完,謝謝你的填答!<br>明天再來試試手氣,歡迎到時間到咖啡館坐坐 ☕';
     $("cno").textContent = has ? "No." + r.coupon : "";
+    // 核銷 QR:咖啡館員工在夥伴專區掃(或手機相機掃開 /me),內容只有券號,後端仍會檢查當日、沒用過
+    $("cqr").hidden = true;
+    if (has && /^\d{4}$/.test(r.coupon) && window.qrcode) {
+      try {
+        var qr = qrcode(0, "M");
+        qr.addData("https://timecoffee.gbfttc.com/me?forest=" + r.coupon);
+        qr.make();
+        $("cqr-img").src = qr.createDataURL(5, 0);
+        $("cqr").hidden = false;
+      } catch (e) {}
+    }
     $("again").hidden = !repeat;
     show("s-result");
     function tick() {
