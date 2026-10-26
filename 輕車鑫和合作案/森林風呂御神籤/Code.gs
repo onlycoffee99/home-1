@@ -118,13 +118,13 @@ function redeem_(p) {
       if (tc[i][1] !== coupon) continue;
       var cell = sh.getRange(i + 2, colR, 1, 2);
       var cur = cell.getDisplayValues()[0];
+      var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
+      if (tc[i][0].indexOf(today) !== 0) return { ok: false, error: coupon + ' 是 ' + tc[i][0].slice(0, 10) + ' 的券,限當日使用' + (undo ? '(過去的核銷不能退回)' : '') };
       if (undo) {
         cell.setValues([['', '']]);
         SpreadsheetApp.flush();
         return { ok: true, coupon: coupon, undone: true };
       }
-      var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
-      if (tc[i][0].indexOf(today) !== 0) return { ok: false, error: coupon + ' 是 ' + tc[i][0].slice(0, 10) + ' 的券,限當日使用' };
       if (cur[0]) return { ok: false, error: coupon + ' 已經用過了(' + cur[0] + ' ' + cur[1] + ')' };
       var now = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
       cell.setValues([[now, String(p.by || '').slice(0, 20)]]);
