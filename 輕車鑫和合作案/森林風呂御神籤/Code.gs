@@ -102,8 +102,10 @@ function redeem_(p) {
   if (!key || p.key !== key) return { ok: false, error: '核銷金鑰不對' };
   var undo = !p.redeem;
   var digits = String(p.redeem || p.unredeem).replace(/\D/g, '');
-  if (!digits || digits.length > 6) return { ok: false, error: '券號格式不對' };
-  var coupon = 'No.' + ('0000' + parseInt(digits, 10)).slice(-4);
+  // 券號是 4 位數(No.0001~No.9999);超過 4 位不截斷,避免對到別人的券
+  var num = parseInt(digits, 10);
+  if (!digits || !(num >= 1 && num <= 9999)) return { ok: false, error: '券號格式不對(請輸入 No. 後面的 4 位數字)' };
+  var coupon = 'No.' + ('0000' + num).slice(-4);
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
@@ -118,6 +120,7 @@ function redeem_(p) {
       var cur = cell.getDisplayValues()[0];
       if (undo) {
         cell.setValues([['', '']]);
+        SpreadsheetApp.flush();
         return { ok: true, coupon: coupon, undone: true };
       }
       var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
@@ -125,6 +128,7 @@ function redeem_(p) {
       if (cur[0]) return { ok: false, error: coupon + ' 已經用過了(' + cur[0] + ' ' + cur[1] + ')' };
       var now = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
       cell.setValues([[now, String(p.by || '').slice(0, 20)]]);
+      SpreadsheetApp.flush(); // 放鎖前寫入,避免同一張券兩人同時核銷都成功
       return { ok: true, coupon: coupon, redeemed: now };
     }
     return { ok: false, error: '查無此券號(' + coupon + ')' };
