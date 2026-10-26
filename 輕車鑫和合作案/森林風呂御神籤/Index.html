@@ -330,7 +330,7 @@
   var AGES = ["20 以下", "21-30 歲", "31-40 歲", "41-50 歲", "51-60 歲", "61-70 歲", "71 以上"];
   var FREQS = ["今天第一次來 🎉", "一年 3 次以下", "一年 3~10 次", "一年 10 次以上", "天天都來 😎"];
 
-  // 12 支吉籤機率相同(w=權重);第十三番「今日無抽中」w=0,由後端決定(每天最多 5 人)。飲品需為時間到咖啡館實際供應品項
+  // 23 支吉籤機率相同(w=權重,115/10/26 由 12 支擴成 23 支);第二十四番「今日無抽中」w=0,由後端決定(每天最多 5 人)。飲品需為時間到咖啡館實際供應品項
   var FORTUNES = [
     { n: "第一番", l: "時間到大吉", le: "Great Fortune · Time Has Come", w: 1, p: "時到花開香滿徑<br>湯暖心安福自臨",
       k: "大有進益,放手去做便吉利", ke: "Great progress ahead — go for it and luck will follow.",
@@ -380,7 +380,51 @@
       k: "準備快樂吧,每刻都是快樂的起點", ke: "Get ready to be happy — every moment is a new start of joy.",
       wish: "好事就在眼前", health: "笑口常開", travel: "開心出門,平安回家",
       drink: "冰拿鐵", de: "Iced Latte", act: "對著鏡子笑一個" },
-    { n: "第十三番", l: "今日無抽中", le: "No coupon today", w: 0, nowin: true, p: "緣分未到莫心急<br>明日再來福自臨",
+    { n: "第十三番", l: "家和吉", le: "Family Blessing", w: 1, p: "一家圍坐湯煙暖<br>笑語聲聲到天邊",
+      k: "家人在旁,就是最大的福氣", ke: "Family by your side is the greatest blessing.",
+      wish: "家人同心,願望更快實現", health: "全家一起放鬆,身心都好", travel: "帶家人走走,處處是回憶",
+      drink: "熱拿鐵", de: "Hot Latte", act: "幫家人拍一張合照" },
+    { n: "第十四番", l: "良緣吉", le: "Blessing of Love", w: 1, p: "花前月下心相印<br>一杯共飲意更濃",
+      k: "真心相待,緣分自然來", ke: "Be sincere, and the right bond will find you.",
+      wish: "心意說出口,對方會懂", health: "心情愉快,氣色紅潤", travel: "兩人同行,一路甜蜜",
+      drink: "冰拿鐵", de: "Iced Latte", act: "和重要的人分享同一杯咖啡的時光" },
+    { n: "第十五番", l: "學業吉", le: "Blessing of Learning", w: 1, p: "燈下書香伴咖啡<br>一分耕耘一分開",
+      k: "專心一志,必有收穫", ke: "Focus wholeheartedly and you will reap the rewards.",
+      wish: "持續努力,目標近了", health: "讀累了記得起身伸展", travel: "邊走邊學,增廣見聞",
+      drink: "熱黑咖啡", de: "Hot Black Coffee", act: "今天學一件新的小事" },
+    { n: "第十六番", l: "事業吉", le: "Blessing of Career", w: 1, p: "千里之行始足下<br>步步踏實步步高",
+      k: "穩紮穩打,前途大好", ke: "Steady steps lead to a bright future.",
+      wish: "把握機會,勇敢爭取", health: "工作之餘別忘了休息", travel: "出差也能順便看風景",
+      drink: "手沖咖啡", de: "Pour-over Coffee", act: "寫下明天最重要的一件事" },
+    { n: "第十七番", l: "旅人吉", le: "Traveler's Blessing", w: 1, p: "千山萬水來相會<br>礁溪一夜勝十年",
+      k: "遠道而來,好運相隨", ke: "You came from afar, and good fortune came with you.",
+      wish: "旅途中的願望最靈驗", health: "入境隨俗,吃好睡好", travel: "大吉,每一站都有收穫",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "寄一張礁溪的照片給想念的人" },
+    { n: "第十八番", l: "好眠吉", le: "Blessing of Rest", w: 1, p: "湯暖身鬆心亦靜<br>一枕安眠到天明",
+      k: "放下手機,好好休息", ke: "Put the phone down and rest well.",
+      wish: "睡飽了,願望更清楚", health: "大吉,今晚一覺到天亮", travel: "不趕行程,慢遊最好",
+      drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "今晚早點睡,把好夢留給自己" },
+    { n: "第十九番", l: "財運吉", le: "Blessing of Prosperity", w: 1, p: "細水長流聚成河<br>點滴積累福滿多",
+      k: "小錢慢慢存,大福自然來", ke: "Save little by little, and great fortune follows.",
+      wish: "穩穩累積,心願可成", health: "知足常樂,身心安穩", travel: "花在值得的地方,玩得開心",
+      drink: "熱黑咖啡", de: "Hot Black Coffee", act: "把今天省下的 30 元,喝成一杯好咖啡" },
+    { n: "第二十番", l: "友情吉", le: "Blessing of Friendship", w: 1, p: "知己相逢千杯少<br>山高水長情更長",
+      k: "好朋友是一生的寶藏", ke: "Good friends are a lifelong treasure.",
+      wish: "和朋友一起,願望加倍", health: "多笑多聊,心情最好", travel: "揪朋友同遊,快樂加倍",
+      drink: "冰黑咖啡", de: "Iced Black Coffee", act: "傳訊息給好久不見的朋友" },
+    { n: "第二十一番", l: "平安吉", le: "Blessing of Peace", w: 1, p: "風平浪靜心安處<br>日日都是好時光",
+      k: "平平安安就是福", ke: "Peace and safety are blessings in themselves.",
+      wish: "所求平順,心想事成", health: "身體健康,無病無憂", travel: "出入平安,一路順遂",
+      drink: "熱拿鐵", de: "Hot Latte", act: "出門前跟家人說聲「我出門了」" },
+    { n: "第二十二番", l: "足湯吉", le: "Footbath Blessing", w: 1, p: "雙足浸暖百脈通<br>一身疲憊化清風",
+      k: "從腳底開始,把自己照顧好", ke: "Take care of yourself, starting from your feet.",
+      wish: "先照顧好自己,好事自來", health: "大吉,泡泡腳氣血順", travel: "走累了,就坐下來歇歇",
+      drink: "冰拿鐵", de: "Iced Latte", act: "到公園泡腳池泡一下腳" },
+    { n: "第二十三番", l: "小確幸吉", le: "Little Joys Blessing", w: 1, p: "午後陽光正好時<br>一杯在手樂無邊",
+      k: "幸福就藏在小事裡", ke: "Happiness hides in little things.",
+      wish: "小小心願,今天就會實現", health: "心情好,身體就好", travel: "慢慢逛,處處有小驚喜",
+      drink: "手沖咖啡", de: "Pour-over Coffee", act: "找出今天最讓你微笑的一件小事" },
+    { n: "第二十四番", l: "今日無抽中", le: "No coupon today", w: 0, nowin: true, p: "緣分未到莫心急<br>明日再來福自臨",
       k: "好運在路上,明天再來試試手氣", ke: "Good luck is on its way — try again tomorrow.",
       wish: "耐心等待,好事將近", health: "泡完湯,好好休息", travel: "慢慢走,好風景不會跑",
       drink: "宜蘭金棗茶", de: "Yilan Kumquat Tea", act: "到咖啡館坐坐,把好心情帶回家" }
@@ -587,7 +631,7 @@
       luck: f.l
     };
     function done(res) {
-      // 後端回傳 {coupon, nowin};沒抽中就改成第十三番
+      // 後端回傳 {coupon, nowin};沒抽中就改成第二十四番(今日無抽中)
       if (typeof res !== "object" || res === null) res = { coupon: res || "", nowin: false };
       if (res.nowin) { for (var i = 0; i < FORTUNES.length; i++) if (FORTUNES[i].nowin) fi = i; f = FORTUNES[fi]; }
       var r = { fi: fi, coupon: res.coupon || "", closed: !!res.closed };
