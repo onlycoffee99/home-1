@@ -4,6 +4,9 @@
  * 網頁(Index.html)答完後呼叫 submit(),寫一列到「回覆」工作表並回傳券號。
  * 匯出(給 Claude 做評估報告):網址後加 ?export=<金鑰>,回傳全部回覆 JSON。
  *   金鑰放在「專案設定 → 指令碼屬性」EXPORT_KEY,不寫進程式碼;未設定則不開放匯出。
+ * 核銷(115/10/26 起不發紙本券):咖啡館 POS 夥伴專區輸入券號 → 呼叫 ?redeem=No.XXXX&key=<金鑰>&by=<員工>
+ *   只收「今天發的、還沒核銷」的券;寫進「核銷時間」「核銷人」欄。?unredeem= 退回(打錯時)。
+ *   金鑰放指令碼屬性 REDEEM_KEY(跟 POS 的 Cloudflare 加密變數 FOREST_KEY 同一串)。
  */
 
 var SHEET_NAME = '回覆';
@@ -61,12 +64,16 @@ var COLUMNS = [
   ['v4', '資訊來源'],
   ['v5', '宜蘭其他行程'],
   // 115/9/27 新增:選填 email(個資,匯出時排除)
-  ['email', 'Email(選填,同意收優惠)']
+  ['email', 'Email(選填,同意收優惠)'],
+  // 115/10/26 新增:POS 核銷(取代紙本券)
+  ['redeemed', '核銷時間'],
+  ['redeemer', '核銷人']
 ];
 // 含個資的欄位:只留在試算表,?export 匯出時不提供
 var PRIVATE_COLUMNS = ['email'];
 
 function doGet(e) {
+  if (e && e.parameter && (e.parameter.redeem || e.parameter.unredeem)) return json_(redeem_(e.parameter));
   var key = PropertiesService.getScriptProperties().getProperty('EXPORT_KEY');
   if (e && e.parameter && e.parameter.export) {
     if (!key || e.parameter.export !== key) {
@@ -83,6 +90,56 @@ function doGet(e) {
   return HtmlService.createHtmlOutputFromFile('Index')
     .setTitle('森林風呂御神籤')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+}
+
+function json_(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// POS 核銷:回 {ok, coupon, redeemed} 或 {ok:false, error}
+function redeem_(p) {
+  var key = PropertiesService.getScriptProperties().getProperty('REDEEM_KEY');
+  if (!key || p.key !== key) return { ok: false, error: '核銷金鑰不對' };
+  var undo = !p.redeem;
+  var digits = String(p.redeem || p.unredeem).replace(/\D/g, '');
+  // 券號是 4 位數(No.0001~No.9999);超過 4 位不截斷,避免對到別人的券
+  var num = parseInt(digits, 10);
+  if (!digits || !(num >= 1 && num <= 9999)) return { ok: false, error: '券號格式不對(請輸入 No. 後面的 4 位數字)' };
+  var coupon = 'No.' + ('0000' + num).slice(-4);
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    var sh = getSheet_();
+    var n = sh.getLastRow();
+    if (n < 2) return { ok: false, error: '查無此券號' };
+    var colR = colOf_('redeemed');
+    var tc = sh.getRange(2, 1, n - 1, 2).getDisplayValues(); // A 填答時間、B 券號
+    for (var i = tc.length - 1; i >= 0; i--) {
+      if (tc[i][1] !== coupon) continue;
+      var cell = sh.getRange(i + 2, colR, 1, 2);
+      var cur = cell.getDisplayValues()[0];
+      var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
+      if (tc[i][0].indexOf(today) !== 0) return { ok: false, error: coupon + ' 是 ' + tc[i][0].slice(0, 10) + ' 的券,限當日使用' + (undo ? '(過去的核銷不能退回)' : '') };
+      if (undo) {
+        cell.setValues([['', '']]);
+        SpreadsheetApp.flush();
+        return { ok: true, coupon: coupon, undone: true };
+      }
+      if (cur[0]) return { ok: false, error: coupon + ' 已經用過了(' + cur[0] + ' ' + cur[1] + ')' };
+      var now = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
+      cell.setValues([[now, String(p.by || '').slice(0, 20)]]);
+      SpreadsheetApp.flush(); // 放鎖前寫入,避免同一張券兩人同時核銷都成功
+      return { ok: true, coupon: coupon, redeemed: now };
+    }
+    return { ok: false, error: '查無此券號(' + coupon + ')' };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function colOf_(k) {
+  for (var i = 0; i < COLUMNS.length; i++) if (COLUMNS[i][0] === k) return i + 1;
+  throw new Error('no column ' + k);
 }
 
 function getSheet_() {
@@ -143,6 +200,7 @@ function submit(payload) {
       if (k === 'luck') return nowin ? '今日無抽中' : clip(payload.luck, 10);
       if (k === 'message') return clip(payload.message, 300);
       if (k === 'asked') return clip(payload.asked, 200);
+      if (k === 'redeemed' || k === 'redeemer') return '';
       if (k === 'email') {
         var m = String(payload.email || '').trim().slice(0, 100);
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m) ? clip(m, 100) : '';
