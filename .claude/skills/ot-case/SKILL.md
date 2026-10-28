@@ -14,14 +14,8 @@ description: 進入「礁溪溫泉公園 OT 案(輕車悠遊 vs 宜蘭縣政府)
 ## 產出規則
 
 - **輕車函文一律依公司範本格式**:先讀 `縣府案件/範本/輕車函文格式規範.md`(範本原件同資料夾),函頭、字號格式、正副本、署名、頁尾照規範,不得沿用其他表頭。
-- 公文/函稿一律先寫 md(放 `縣府案件/`,檔名沿用現有編號體例),再轉 Word 給使用者:
-
-```bash
-cd /tmp/claude-0/*/*/scratchpad 2>/dev/null || SCRATCH=$(mktemp -d) && cd $SCRATCH
-npm init -y >/dev/null 2>&1 && npm install docx marked --no-audit --no-fund >/dev/null 2>&1
-node <repo>/tools/md2docx.js <輸入.md> <輸出.docx>
-```
-
+- 公文/函稿一律先寫 md 或 spec.json(放 `縣府案件/`,檔名沿用現有編號體例)。**函文**用 `python3 tools/qc_letter.py <spec.json> <輸出.docx>` 套範本(正本框、簽名、頁碼),再 `soffice --headless --convert-to pdf` 出預覽目視核對;md2docx.js 只用於對照表等內部文件,不得出函文。
+- 交件前逐條過 `縣府案件/範本/函文交件前檢核表.md`。
 - 產出 Word 後用 SendUserFile 傳給使用者(display: attach)。
 - 每次有收發文動作,回填 `縣府案件/收發文登記簿.csv`。
 - 完成即 commit + push 到 `claude/desktop-crash-issue-axgd3x` 分支。
