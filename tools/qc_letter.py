@@ -3,6 +3,8 @@
 # 用法: python3 tools/qc_letter.py <spec.json> <輸出.docx>
 # spec 欄位: date_roc(省略則自動帶今日)、seq(當日序號,預設1)、subject、
 #   sections([{title,paras[]}] 或字串)、attachments_line、copies_main、copies_cc、sign(預設true)
+# 他公司用(例:政達木業)可另給:title、info_lines[]、recv_zip、recv_addr、recipient、
+#   doc_no(整串發文字號,含【待填】亦可)、date_text(整串日期)、sign_text(文字署名,取代簽名圖)
 import json, sys, datetime
 from docx import Document
 from docx.shared import Pt, Cm, Mm
@@ -103,27 +105,27 @@ def build(spec, out):
     tcPr.append(borders)
 
     # 標題
-    para(doc, '輕車悠遊股份有限公司　函', 20, align=WD_ALIGN_PARAGRAPH.CENTER, before=6, after=6)
+    para(doc, spec.get('title', '輕車悠遊股份有限公司　函'), 20, align=WD_ALIGN_PARAGRAPH.CENTER, before=6, after=6)
 
     # 右側基本資料區塊
-    for t in ('地　　址:262宜蘭縣礁溪鄉公園路16號(營運地點)',
+    for t in spec.get('info_lines') or ('地　　址:262宜蘭縣礁溪鄉公園路16號(營運地點)',
               '承 辦 人:鄭玉屏(手機:0975-328-779)',
               '電　　話:03 987 6416',
               '電子信箱:onlycoffee99@gmail.com'):
         para(doc, t, 11, left=7.8, line=14)
 
     para(doc, '', 8)
-    para(doc, '260', 11)
-    para(doc, '宜蘭市凱旋里三鄰縣政北路一號', 12)
+    para(doc, spec.get('recv_zip', '260'), 11)
+    para(doc, spec.get('recv_addr', '宜蘭市凱旋里三鄰縣政北路一號'), 12)
     para(doc, '', 6)
-    para(doc, '受文者:宜蘭縣政府', 15, bold=True, after=6)
+    para(doc, f"受文者:{spec.get('recipient', '宜蘭縣政府')}", 15, bold=True, after=6)
 
     y, m, d = roc_today()
     if spec.get('date_roc'):
         y, m, d = spec['date_roc']
     seq = spec.get('seq', 1)
-    para(doc, f'發文日期:中華民國{y}年{m}月{d}日', 12)
-    para(doc, f'發文字號:{y}北輕字第{y}{m:02d}{d:02d}-{seq}號', 12)
+    para(doc, spec.get('date_text') or f'發文日期:中華民國{y}年{m}月{d}日', 12)
+    para(doc, spec.get('doc_no') or f'發文字號:{y}北輕字第{y}{m:02d}{d:02d}-{seq}號', 12)
     para(doc, '速　　別:普通件', 12)
     para(doc, '密等及解密條件或保密期限:普通', 12)
     para(doc, f"附　　件:{spec.get('attachments_line', '略。')}", 12, after=8)
@@ -146,7 +148,10 @@ def build(spec, out):
     para(doc, f"正本:{spec.get('copies_main', '宜蘭縣政府')}", 12)
     para(doc, f"副本:{spec.get('copies_cc', '輕車悠遊股份有限公司')}", 12, after=12)
 
-    if spec.get('sign', True) and os.path.exists(SIG_IMG):
+    if spec.get('sign_text'):
+        for i, t in enumerate(spec['sign_text']):
+            para(doc, t, 18 if i == 0 else 12, before=24 if i == 0 else 4)
+    elif spec.get('sign', True) and os.path.exists(SIG_IMG):
         p = doc.add_paragraph()
         p.paragraph_format.space_before = Pt(18)
         p.add_run().add_picture(SIG_IMG, width=Cm(10))
