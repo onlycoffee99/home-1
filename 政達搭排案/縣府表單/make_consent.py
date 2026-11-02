@@ -16,7 +16,7 @@ def P(t,size=13,bold=False,align=None,before=0,after=4,line=22,indent=None):
     r=p.add_run(t); r.font.name=KAI; r.font.size=Pt(size); r.font.bold=bold
     r._element.rPr.rFonts.set(qn('w:eastAsia'),KAI); return p
 P('土地使用同意書',22,True,WD_ALIGN_PARAGRAPH.CENTER,after=18)
-P('本人陳文政為下列土地之所有權人,茲同意政達木業有限公司二廠(統一編號89497279)於本人所有之下列土地,施設生活污水放流管線並排入宜蘭縣政府管理之區域排水「梅花排水」,作為申請宜蘭縣政府水利事業(跨越水道)建造物(縣管河川、區域排水及野溪搭排水專用)許可之用。',indent=1.0)
+P('本人陳文政為下列土地之所有權人,茲同意政達木業有限公司二廠(統一編號89497279)於本人所有之下列土地,施設跨越梅花排水之出入版橋(既設)及生活污水放流管線,並將生活污水排入宜蘭縣政府管理之區域排水「梅花排水」,作為申請宜蘭縣政府水利事業(跨越水道)建造物(縣管河川、區域排水及野溪搭排水專用)許可之用。',indent=1.0)
 t=d.add_table(rows=1,cols=6); t.style='Table Grid'
 hdr=['鄉鎮市','地段','小段','地號','面積(㎡)','權利範圍']
 row=['冬山鄉','梅山段','－','349','2,602.16','全部']
@@ -30,7 +30,7 @@ for r in t.rows:
             for run in p.runs:
                 run.font.name=KAI; run.font.size=Pt(13); run._element.rPr.rFonts.set(qn('w:eastAsia'),KAI)
 P('',after=4)
-for x in ['一、使用範圍:放流管線自廠內化糞池、放流池經廠區正門口至梅山段329地號介入口之管線埋設範圍(詳申請書件設計圖說)。',
+for x in ['一、使用範圍:(一)廠區正門口既設版橋之橋臺銜接範圍;(二)放流管線自廠內化糞池、放流池經廠區正門口至梅山段329地號介入口之管線埋設範圍(詳申請書件設計圖說)。',
           '二、使用期間:自宜蘭縣政府核准之日起至中華民國119年12月31日止;期滿如經許可展延,同意期間隨同延長。',
           '三、本同意書僅供上開申請使用,不作其他用途。']:
     P(x,indent=None)
