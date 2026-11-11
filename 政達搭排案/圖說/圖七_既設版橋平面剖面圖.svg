@@ -10,26 +10,26 @@
 <rect x="70" y="170" width="620" height="80" fill="#d6ecfa" fill-opacity="1" stroke="#1565c0" stroke-width="1.2" rx="0"/>
 <line x1="90" y1="228" x2="660" y2="228" stroke="#1565c0" stroke-width="3" marker-end="url(#fl)"/>
 <text x="80" y="190" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="13" fill="#0d47a1" text-anchor="start" font-weight="700">梅山段 329(水利用地)</text>
-<text x="80" y="207" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#0d47a1" text-anchor="start">梅花排水(梅花大排)渠道</text>
+<text x="80" y="207" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#0d47a1" text-anchor="start">梅花排水渠道</text>
 <text x="650" y="245" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11" fill="#1565c0" text-anchor="end">流向下游</text>
 <rect x="70" y="250" width="620" height="130" fill="url(#hatch)" fill-opacity="0.35" stroke="#b8860b" stroke-width="1.2" rx="0"/>
 <text x="80" y="360" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="13" fill="#6d4c00" text-anchor="start" font-weight="700">梅山段 349　政達木業有限公司二廠(廠區)</text>
-<rect x="330" y="165" width="110" height="90" fill="url(#conc)" fill-opacity="1" stroke="#333" stroke-width="2" rx="0"/>
-<rect x="330" y="165" width="110" height="90" fill="#bdbdbd" fill-opacity="0.55" stroke="#333" stroke-width="2" rx="0"/>
-<text x="385.0" y="205" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="14" fill="#111" text-anchor="middle" font-weight="700">既設版橋</text>
-<text x="385.0" y="223" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11" fill="#333" text-anchor="middle">(鋼筋混凝土版)</text>
-<rect x="330" y="160" width="110" height="10" fill="#757575" fill-opacity="1" stroke="#333" stroke-width="1" rx="0"/>
-<rect x="330" y="250" width="110" height="10" fill="#757575" fill-opacity="1" stroke="#333" stroke-width="1" rx="0"/>
-<text x="446" y="160" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#424242" text-anchor="start">橋臺(渠岸外側)</text>
-<text x="446" y="262" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#424242" text-anchor="start">橋臺(渠岸外側)</text>
-<rect x="340" y="262" width="90" height="16" fill="#5d4037" fill-opacity="1" stroke="#3e2723" stroke-width="1" rx="0"/>
-<text x="385.0" y="274" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#fff" text-anchor="middle">廠區正門口</text>
-<line x1="308" y1="165" x2="308" y2="255" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
-<text x="230" y="214.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="start">長約 4.0 m</text>
-<line x1="300" y1="165" x2="330" y2="165" stroke="#c62828" stroke-width="0.6" stroke-dasharray="3,2"/>
-<line x1="300" y1="255" x2="330" y2="255" stroke="#c62828" stroke-width="0.6" stroke-dasharray="3,2"/>
-<line x1="330" y1="152" x2="440" y2="152" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
-<text x="385.0" y="146" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">寬【實測】m</text>
+<rect x="300" y="165" width="160" height="90" fill="url(#conc)" fill-opacity="1" stroke="#333" stroke-width="2" rx="0"/>
+<rect x="300" y="165" width="160" height="90" fill="#bdbdbd" fill-opacity="0.55" stroke="#333" stroke-width="2" rx="0"/>
+<text x="380.0" y="205" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="14" fill="#111" text-anchor="middle" font-weight="700">既設版橋</text>
+<text x="380.0" y="223" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11" fill="#333" text-anchor="middle">(鋼筋混凝土版)</text>
+<rect x="300" y="160" width="160" height="10" fill="#757575" fill-opacity="1" stroke="#333" stroke-width="1" rx="0"/>
+<rect x="300" y="250" width="160" height="10" fill="#757575" fill-opacity="1" stroke="#333" stroke-width="1" rx="0"/>
+<text x="466" y="160" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#424242" text-anchor="start">橋臺(渠岸外側)</text>
+<text x="466" y="262" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#424242" text-anchor="start">橋臺(渠岸外側)</text>
+<rect x="310" y="262" width="140" height="16" fill="#5d4037" fill-opacity="1" stroke="#3e2723" stroke-width="1" rx="0"/>
+<text x="380.0" y="274" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#fff" text-anchor="middle">廠區正門口</text>
+<line x1="278" y1="165" x2="278" y2="255" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
+<text x="220" y="214.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="start">長 4.9 m</text>
+<line x1="270" y1="165" x2="300" y2="165" stroke="#c62828" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="270" y1="255" x2="300" y2="255" stroke="#c62828" stroke-width="0.6" stroke-dasharray="3,2"/>
+<line x1="300" y1="152" x2="460" y2="152" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
+<text x="380.0" y="146" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">寬 7.6 m</text>
 <line x1="675" y1="170" x2="675" y2="250" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
 <text x="683" y="214.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="start"></text>
 <text x="670" y="200" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11" fill="#c62828" text-anchor="end">渠寬約 3.83 m</text>
@@ -39,9 +39,9 @@
 <text x="530" y="312" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#e65100" text-anchor="start">放流池</text>
 <text x="530" y="284" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#c62828" text-anchor="start">放流管</text>
 <text x="530" y="266" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11" fill="#c62828" text-anchor="start">介入口(與版橋錯開)</text>
-<line x1="440" y1="296" x2="520" y2="296" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
-<text x="480.0" y="310" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">間距【實測】</text>
-<text x="70" y="384" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#666" text-anchor="start">※ 平面示意(比例約略);版橋寬度、厚度、介入口與版橋間距依現地實測填寫。</text>
+<line x1="460" y1="296" x2="512" y2="296" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
+<text x="486.0" y="310" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">間距(放樣確認)</text>
+<text x="70" y="384" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#666" text-anchor="start">※ 平面示意(比例約略);介入口與版橋間距依會同放樣確認。</text>
 <text x="56" y="420" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="14" fill="#111" text-anchor="start" font-weight="700">(二)縱剖面圖(沿版橋中心線,垂直渠道方向)</text>
 <rect x="60" y="430" width="630" height="290" fill="none" fill-opacity="1" stroke="#888" stroke-width="1" rx="0"/>
 <line x1="80" y1="520" x2="255" y2="520" stroke="#5d4037" stroke-width="2"/>
@@ -63,16 +63,16 @@
 <rect x="205" y="498" width="350" height="18" fill="#bdbdbd" fill-opacity="0.5" stroke="#111" stroke-width="2" rx="0"/>
 <text x="380" y="492" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="middle" font-weight="700">既設鋼筋混凝土版橋</text>
 <line x1="205" y1="460" x2="555" y2="460" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
-<text x="380.0" y="454" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">版橋長約 4.0 m(含兩端橋臺搭接)</text>
+<text x="380.0" y="454" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">版橋長 4.9 m(含兩端擱置於渠岸)</text>
 <line x1="255" y1="680" x2="505" y2="680" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
 <text x="380.0" y="696" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="middle">渠寬(渠頂)約 3.83 m</text>
 <line x1="255" y1="520" x2="255" y2="685" stroke="#c62828" stroke-width="0.6" stroke-dasharray="3,2"/>
 <line x1="505" y1="520" x2="505" y2="685" stroke="#c62828" stroke-width="0.6" stroke-dasharray="3,2"/>
 <line x1="575" y1="498" x2="575" y2="516" stroke="#c62828" stroke-width="1.2" marker-start="url(#a2)" marker-end="url(#a2)"/>
 <text x="583" y="511.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#c62828" text-anchor="start"></text>
-<text x="582" y="512" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#c62828" text-anchor="start">版厚【實測】</text>
+<text x="582" y="512" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#c62828" text-anchor="start">側面高約49cm</text>
 <text x="260" y="542" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#c62828" text-anchor="start">版底不低於渠岸頂</text>
-<text x="80" y="712" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#666" text-anchor="start">※ 示意圖(尺寸待實測);渠道內不設橋墩,橋臺設於渠岸外側。</text>
+<text x="80" y="712" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#666" text-anchor="start">※ 尺寸依 115/11/11 現場實測;渠道內無橋墩,版兩端擱置於渠岸。</text>
 <rect x="715" y="70" width="380" height="300" fill="#fafafa" fill-opacity="1" stroke="#333" stroke-width="1.2" rx="6"/>
 <text x="727" y="94" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="14" fill="#111" text-anchor="start" font-weight="700">既設版橋規格(現況)</text>
 <text x="731" y="118" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">位　　置</text>
@@ -88,16 +88,16 @@
 <text x="825" y="179.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">已施設完成(補辦申請)</text>
 <line x1="727" y1="186.5" x2="1083" y2="186.5" stroke="#e0e0e0" stroke-width="0.8"/>
 <text x="731" y="200.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">型　　式</text>
-<text x="825" y="200.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">鋼筋混凝土版橋【確認】</text>
+<text x="825" y="200.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">鋼筋混凝土版橋</text>
 <line x1="727" y1="207.0" x2="1083" y2="207.0" stroke="#e0e0e0" stroke-width="0.8"/>
 <text x="731" y="220.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">長　　度</text>
-<text x="825" y="220.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">約 4.0 m(渠寬約 3.83 m)</text>
+<text x="825" y="220.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">4.9 m(跨越渠道方向,渠寬約 3.83 m)</text>
 <line x1="727" y1="227.5" x2="1083" y2="227.5" stroke="#e0e0e0" stroke-width="0.8"/>
 <text x="731" y="241.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">寬　　度</text>
-<text x="825" y="241.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">【實測】m</text>
+<text x="825" y="241.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">7.6 m(面積約 37.24 m²)</text>
 <line x1="727" y1="248.0" x2="1083" y2="248.0" stroke="#e0e0e0" stroke-width="0.8"/>
-<text x="731" y="261.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">版　　厚</text>
-<text x="825" y="261.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">【實測】cm</text>
+<text x="731" y="261.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">版側高度</text>
+<text x="825" y="261.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">約 49 cm(照片判讀)</text>
 <line x1="727" y1="268.5" x2="1083" y2="268.5" stroke="#e0e0e0" stroke-width="0.8"/>
 <text x="731" y="282.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#455a64" text-anchor="start">橋臺位置</text>
 <text x="825" y="282.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#111" text-anchor="start">渠岸外側,渠內無橋墩</text>
@@ -113,7 +113,7 @@
 <line x1="727" y1="350.5" x2="1083" y2="350.5" stroke="#e0e0e0" stroke-width="0.8"/>
 <rect x="715" y="380" width="380" height="230" fill="#fff5f5" fill-opacity="1" stroke="#c62828" stroke-width="1.2" rx="6"/>
 <text x="727" y="404" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="14" fill="#c62828" text-anchor="start" font-weight="700">設置原則與承諾事項</text>
-<text x="731" y="428" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11.5" fill="#333" text-anchor="start">1. 版橋長度約 4 m,在 6 m 以內,一處一座。</text>
+<text x="731" y="428" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11.5" fill="#333" text-anchor="start">1. 版橋長 4.9 m,在 6 m 以內,一處一座。</text>
 <text x="731" y="447.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11.5" fill="#333" text-anchor="start">2. 渠道內不設橋墩,橋臺設於渠岸外側,</text>
 <text x="731" y="467.0" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11.5" fill="#333" text-anchor="start">　 不縮減梅花排水通水斷面。</text>
 <text x="731" y="486.5" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11.5" fill="#333" text-anchor="start">3. 版底不低於渠岸頂,不妨礙排水及渠道維護。</text>
@@ -129,5 +129,5 @@
 <text x="797" y="732" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="12" fill="#444" text-anchor="start">跨越梅花排水(梅山段329地號)</text>
 <line x1="793" y1="740" x2="1101" y2="740" stroke="#999" stroke-width="0.8"/>
 <text x="797" y="757" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="11" fill="#333" text-anchor="start">案名:政達木業有限公司二廠既設版橋及生活污水搭排</text>
-<text x="797" y="772" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#333" text-anchor="start">示意圖(尺寸待實測)　｜　第 7 張,共 7 張</text>
+<text x="797" y="772" font-family="'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif" font-size="10.5" fill="#333" text-anchor="start">示意圖(115/11/11 實測)　｜　第 7 張,共 7 張</text>
 </svg>
