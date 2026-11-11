@@ -2,7 +2,7 @@
 # 輕車悠遊公司函產生器:依 縣府案件/範本/輕車函文範本.pdf 版面輸出 Word。
 # 用法: python3 tools/qc_letter.py <spec.json> <輸出.docx>
 # spec 欄位: date_roc(省略則自動帶今日)、seq(當日序號,預設1)、subject、
-#   sections([{title,paras[]}] 或字串)、attachments_line、copies_main、copies_cc、sign(預設true)
+#   sections([{title,paras[]}] 或字串)、attachments_line、copies_main、copies_cc、sign(預設true)、speed(速別,預設普通件)
 # 他公司用(例:政達木業)可另給:title、info_lines[]、recv_zip、recv_addr、recipient、
 #   doc_no(整串發文字號,含【待填】亦可)、date_text(整串日期)、sign_text(文字署名,取代簽名圖)
 import json, sys, datetime
@@ -126,7 +126,7 @@ def build(spec, out):
     seq = spec.get('seq', 1)
     para(doc, spec.get('date_text') or f'發文日期:中華民國{y}年{m}月{d}日', 12)
     para(doc, spec.get('doc_no') or f'發文字號:{y}北輕字第{y}{m:02d}{d:02d}-{seq}號', 12)
-    para(doc, '速　　別:普通件', 12)
+    para(doc, '速　　別:' + spec.get('speed', '普通件'), 12)
     para(doc, '密等及解密條件或保密期限:普通', 12)
     para(doc, f"附　　件:{spec.get('attachments_line', '略。')}", 12, after=8)
 
