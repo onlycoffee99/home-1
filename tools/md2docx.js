@@ -13,7 +13,7 @@ const md = fs.readFileSync(inFile, 'utf8')
   // 去除 YAML front matter
   .replace(/^---\n[\s\S]*?\n---\n/, '');
 
-const FONT = 'Microsoft JhengHei';
+const FONT = process.env.MD2DOCX_FONT || 'Microsoft JhengHei';
 const PAGE_W = 11906, MARGIN = 1080; // A4, 邊界 1.9cm
 const CONTENT_W = PAGE_W - MARGIN * 2; // 9746 DXA
 

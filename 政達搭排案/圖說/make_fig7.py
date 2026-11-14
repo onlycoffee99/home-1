@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # 圖七 既設版橋平面圖・縱剖面圖(政達二廠,跨越梅花排水,梅山段329)
 # 尺寸:渠寬約3.83 m(圖四)、版橋長約4 m(業主告知);寬度、厚度、高程依實測填寫
-F = "'Microsoft JhengHei','微軟正黑體','PMingLiU',sans-serif"
+F = "'標楷體','DFKai-SB','AR PL UKai TW',serif"
 o = []
 def T(x, y, s, size=12, fill='#222', anchor='start', bold=False):
     w = ' font-weight="700"' if bold else ''
