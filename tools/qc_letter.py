@@ -24,6 +24,7 @@ def set_font(run, size, bold=False):
     run.font.size = Pt(size)
     run.font.bold = bold
     run._element.rPr.rFonts.set(qn('w:eastAsia'), KAI)
+    run._element.rPr.rFonts.set(qn('w:cs'), KAI)
 
 
 def para(doc, text, size=12, bold=False, align=None, left=None, hang=None, before=0, after=0, line=None):
@@ -74,6 +75,11 @@ def add_footer(doc):
 
 def build(spec, out):
     doc = Document()
+    # 全文預設標楷體(含空白段落、表格、頁尾),中英數字一律楷書
+    st = doc.styles['Normal']; st.font.name = KAI
+    rpr = st.element.get_or_add_rPr(); rf = rpr.find(qn('w:rFonts'))
+    if rf is None: rf = OxmlElement('w:rFonts'); rpr.append(rf)
+    for k in ('w:ascii', 'w:hAnsi', 'w:eastAsia', 'w:cs'): rf.set(qn(k), KAI)
     sec = doc.sections[0]
     sec.page_height, sec.page_width = Mm(297), Mm(210)
     sec.top_margin, sec.bottom_margin = Cm(1.5), Cm(2.0)
