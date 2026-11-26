@@ -4,6 +4,7 @@
  * 網頁(Index.html)答完後呼叫 submit(),寫一列到「回覆」工作表並回傳券號。
  * 匯出(給 Claude 做評估報告):網址後加 ?export=<金鑰>,回傳全部回覆 JSON。
  *   金鑰放在「專案設定 → 指令碼屬性」EXPORT_KEY,不寫進程式碼;未設定則不開放匯出。
+ * 分級獎項(115/11/26):抽中再分 大獎/二獎/三獎(PRIZES),寫進「獎項」欄;核銷時回傳給 POS。
  * 核銷(115/10/26 起不發紙本券):咖啡館 POS 夥伴專區輸入券號 → 呼叫 ?redeem=No.XXXX&key=<金鑰>&by=<員工>
  *   只收「今天發的、還沒核銷」的券;寫進「核銷時間」「核銷人」欄。?unredeem= 退回(打錯時)。
  *   金鑰放指令碼屬性 REDEEM_KEY(跟 POS 的 Cloudflare 加密變數 FOREST_KEY 同一串)。
@@ -12,11 +13,18 @@
 var SHEET_NAME = '回覆';
 // 每日咖啡券上限(台灣時間 0 點重算);0 = 不限量。額滿後仍可填答、抽籤,只是不發券號
 var DAILY_LIMIT = 100;
-// 時間到咖啡館公休日(0=週日…2=週二);券限當日使用,公休日不發券
+// 時間到咖啡館公休日(0=週日…2=週二);券限當日使用,公休日不發券(115/11/26 起礁溪、台中兩館都能用)
 var CLOSED_WEEKDAYS = [2];
 // 「今日無抽中」:每人約 NOWIN_RATE 機率沒抽中,每天最多 NOWIN_PER_DAY 人(由後端決定,客人無法自選)
 var NOWIN_PER_DAY = 5;
 var NOWIN_RATE = 0.09;
+// 115/11/26 分級獎項(老闆定):抽中的人再分三級;rate 是「抽中者」中的比例(加起來 1),cap = 每日上限(0 = 不限,額滿改發下一級)
+//   整體約:大獎 3%、二獎 30%、三獎 58%、今日無抽中 9%
+var PRIZES = [
+  { k: '大獎', rate: 0.033, cap: 3 },  // 免費飲料一杯(M 杯)
+  { k: '二獎', rate: 0.330, cap: 0 },  // 飲料一杯折 30 元
+  { k: '三獎', rate: 0.637, cap: 0 }   // 當日店內消費整筆 9 折
+];
 // 「森林風呂御神籤_回覆」試算表 ID(雲端硬碟「森林風呂御神籤」資料夾內)
 var SPREADSHEET_ID = '1K22clZvbwZXTtxSCUmUTx1svKZBpdLILlm6Q7w6yC88';
 
@@ -67,7 +75,12 @@ var COLUMNS = [
   ['email', 'Email(選填,同意收優惠)'],
   // 115/10/26 新增:POS 核銷(取代紙本券)
   ['redeemed', '核銷時間'],
-  ['redeemer', '核銷人']
+  ['redeemer', '核銷人'],
+  // 115/11/26 新增:咖啡館題、分級獎項(接在最後,舊資料欄位不動)
+  ['c1', '咖啡館:今天會去嗎'],
+  ['c2', '咖啡館:什麼會讓你想進去'],
+  ['c3', '咖啡館:飲品與服務滿意度'],
+  ['prize', '獎項']
 ];
 // 含個資的欄位:只留在試算表,?export 匯出時不提供
 var PRIVATE_COLUMNS = ['email'];
@@ -126,10 +139,12 @@ function redeem_(p) {
         return { ok: true, coupon: coupon, undone: true };
       }
       if (cur[0]) return { ok: false, error: coupon + ' 已經用過了(' + cur[0] + ' ' + cur[1] + ')' };
+      // 115/11/26 以前的券沒有「獎項」欄 → 當二獎(折 30)
+      var prize = String(sh.getRange(i + 2, colOf_('prize')).getDisplayValue() || '') || '二獎';
       var now = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd HH:mm:ss');
       cell.setValues([[now, String(p.by || '').slice(0, 20)]]);
       SpreadsheetApp.flush(); // 放鎖前寫入,避免同一張券兩人同時核銷都成功
-      return { ok: true, coupon: coupon, redeemed: now };
+      return { ok: true, coupon: coupon, redeemed: now, prize: prize };
     }
     return { ok: false, error: '查無此券號(' + coupon + ')' };
   } finally {
@@ -167,14 +182,19 @@ function submit(payload) {
     var n = sh.getLastRow(); // 標題列佔 1 列,故第 n 份 = 第 n+1 列
     var coupon = ('0000' + n).slice(-4);
     // 數今天已發出的券、已「未抽中」的人數
-    var issued = 0, nowinToday = 0, nowin = false;
+    var issued = 0, nowinToday = 0, nowin = false, prizeToday = {};
     if (n > 1) {
       var today = Utilities.formatDate(new Date(), 'Asia/Taipei', 'yyyy-MM-dd');
       var tc = sh.getRange(2, 1, n - 1, 2).getDisplayValues(); // A 填答時間、B 券號
-      tc.forEach(function (r) {
+      var cp = colOf_('prize');
+      var pz = sh.getLastColumn() >= cp ? sh.getRange(2, cp, n - 1, 1).getDisplayValues() : [];
+      tc.forEach(function (r, i) {
         if (r[0].indexOf(today) !== 0) return;
-        if (r[1].indexOf('No.') === 0) issued++;
-        else if (r[1] === '未抽中') nowinToday++;
+        if (r[1].indexOf('No.') === 0) {
+          issued++;
+          var k = pz[i] && pz[i][0];
+          if (k) prizeToday[k] = (prizeToday[k] || 0) + 1;
+        } else if (r[1] === '未抽中') nowinToday++;
       });
     }
     var wd = parseInt(Utilities.formatDate(new Date(), 'Asia/Taipei', 'u'), 10) % 7; // 1=週一…7=週日 → 0=週日
@@ -186,6 +206,7 @@ function submit(payload) {
     } else if (nowinToday < NOWIN_PER_DAY && Math.random() < NOWIN_RATE) {
       coupon = ''; nowin = true;                     // 今日無抽中
     }
+    var prize = coupon ? drawPrize_(prizeToday) : '';
     var a = (payload && payload.answers) || {};
     // 截長度;開頭是 = + - @ 的文字前面加 ' ,避免被試算表當成公式
     var clip = function (s, len) {
@@ -201,6 +222,7 @@ function submit(payload) {
       if (k === 'message') return clip(payload.message, 300);
       if (k === 'asked') return clip(payload.asked, 200);
       if (k === 'redeemed' || k === 'redeemer') return '';
+      if (k === 'prize') return prize;
       if (k === 'email') {
         var m = String(payload.email || '').trim().slice(0, 100);
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m) ? clip(m, 100) : '';
@@ -208,9 +230,21 @@ function submit(payload) {
       return clip(a[k], 40);
     });
     sh.appendRow(row);
-    return { coupon: coupon, nowin: nowin, closed: closed };
+    return { coupon: coupon, nowin: nowin, closed: closed, prize: prize };
   } finally {
     lock.releaseLock();
   }
 }
 
+// 依 PRIZES 比例抽一級;該級今天已到上限 → 改發下一級(最後一級不設上限)
+function drawPrize_(today) {
+  var x = Math.random(), acc = 0, i;
+  for (i = 0; i < PRIZES.length - 1; i++) {
+    acc += PRIZES[i].rate;
+    if (x < acc) break;
+  }
+  for (; i < PRIZES.length - 1; i++) {
+    if (!PRIZES[i].cap || (today[PRIZES[i].k] || 0) < PRIZES[i].cap) break;
+  }
+  return PRIZES[i].k;
+}

@@ -22,7 +22,7 @@ import urllib.request
 from collections import Counter, OrderedDict
 
 SCALE = OrderedDict([("非常滿意", 5), ("滿意", 4), ("普通", 3), ("不滿意", 2), ("非常不滿意", 1)])
-NA = {"不清楚/沒注意", "今天沒開車", "今天沒需要幫忙"}
+NA = {"不清楚/沒注意", "今天沒開車", "今天沒需要幫忙", "還沒去過"}
 RECOMMEND = ["一定會", "應該會", "還不確定", "應該不會"]
 SMALL_N = 30  # 有效份數低於此值標註「樣本少」
 
@@ -32,8 +32,9 @@ SECTIONS = [
     ("♨️ 風呂服務", ["q10", "q11", "q12"]),
     ("☕ 店家與停車", ["q13", "q14", "q15"]),
     ("🏞️ 宜蘭好在地", ["q17", "q18", "q19", "q20", "q21", "q22", "q23", "q24"]),
+    ("☕ 時間到咖啡館(115/11/26 起)", ["c3"]),
 ]
-FUN = ["f1", "f2", "f3"]
+FUN = ["f1", "f2", "f3", "c1", "c2"]  # c1、c2:115/11/26 起咖啡館選擇題
 TRAVEL = [
     ("v1", ["宜蘭在地", "基隆、台北、新北", "桃園、新竹、苗栗", "台中、彰化、南投", "雲林、嘉義、台南", "高雄、屏東", "花蓮、台東", "離島", "國外"]),
     ("v2", ["當天來回", "住 1 晚", "住 2 晚", "住 3 晚以上", "我住宜蘭"]),
@@ -126,7 +127,7 @@ def build(rows, names, start, end):
         "",
         f"- 調查期間:{period}(共 {days} 日)",
         f"- 有效問卷:**{len(rows)} 份**(平均每日 {len(rows) / days:.1f} 份)",
-        f"- 調查方式:森林風呂現場 QR code 線上填答(森林風呂御神籤),不記名(email 為選填,僅供寄送優惠,不納入統計);填答後贈時間到咖啡館折價券",
+        f"- 調查方式:森林風呂現場 QR code 線上填答(森林風呂御神籤),不記名(email 為選填,僅供寄送優惠,不納入統計);抽中再送時間到咖啡館好禮",
         f"- 產出日期:{roc(dt.date.today())}",
         "",
     ]
@@ -155,7 +156,10 @@ def build(rows, names, start, end):
         nowin = sum(1 for r in rows if r.get("coupon") == "未抽中")
         full = sum(1 for r in rows if r.get("coupon") == "今日額滿")
         closed = sum(1 for r in rows if r.get("coupon") == "公休不發券")
-        lines.append(f"- 咖啡券:發出 {len(issued)} 張;未抽中 {nowin} 人、當日額滿 {full} 人、週二公休未發 {closed} 人(實際兌換數請以咖啡館收回的紙本券為準)")
+        used = sum(1 for r in issued if r.get("redeemed"))
+        pz = Counter(r.get("prize") for r in issued if r.get("prize"))
+        tier = ("(其中 " + "、".join(f"{k} {pz[k]}" for k in ["大獎", "二獎", "三獎"] if pz[k]) + ")") if pz else ""
+        lines.append(f"- 咖啡館好禮:發出 {len(issued)} 張{tier},已到咖啡館核銷 {used} 張;未抽中 {nowin} 人、當日額滿 {full} 人、週二公休未發 {closed} 人")
     first = sum(1 for r in rows if r.get("freq", "").startswith("今天第一次來"))
     lines.append(f"- 首次到訪遊客占 {pct(first, len(rows))}")
     org = [r["v1"] for r in rows if r.get("v1")]
@@ -169,7 +173,7 @@ def build(rows, names, start, end):
     lines.append("")
 
     lines += ["## 二、各題滿意度", "",
-              "> 說明:每位填答者答 10 題(整體滿意度、溫泉水質、湯區清潔、客源地、年齡與來訪頻率為固定題,其餘分類自題庫隨機抽出),故各題有效份數不同。滿意率=(非常滿意+滿意)÷有效份數;平均分數以非常滿意 5 分至非常不滿意 1 分計;「不清楚/沒注意」「今天沒開車」「今天沒需要幫忙」列為不適用,不計入分母。"
+              "> 說明:每位填答者答 10 題(整體滿意度、溫泉水質、客源地、年齡與來訪頻率為固定題;115/11/26 起「這趟還會去宜蘭哪裡」改固定題、湯區清潔改隨機,另加咖啡館題,其餘分類自題庫隨機抽出),故各題有效份數不同。滿意率=(非常滿意+滿意)÷有效份數;平均分數以非常滿意 5 分至非常不滿意 1 分計;「不清楚/沒注意」「今天沒開車」「今天沒需要幫忙」「還沒去過」列為不適用,不計入分母。"
               f"有效份數未達 {SMALL_N} 份者標註「樣本少」,僅供參考。", ""]
     for title, qs in SECTIONS:
         lines += [f"### {title}", "",
@@ -212,7 +216,7 @@ def build(rows, names, start, end):
     else:
         sec = "四"
 
-    lines += [f"## {sec}、趣味題(遊客偏好參考)", ""]
+    lines += [f"## {sec}、趣味題與咖啡館(遊客偏好參考)", ""]
     for q in FUN:
         c = Counter(r.get(q) for r in rows if r.get(q))
         if c:
