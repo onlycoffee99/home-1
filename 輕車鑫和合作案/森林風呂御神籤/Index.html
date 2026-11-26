@@ -649,7 +649,7 @@
       google.script.run.withSuccessHandler(done).withFailureHandler(fail).submit(payload);
     } else {
       // 預覽模式(不是從 Apps Script 開啟):不存資料,券號顯示 DEMO
-      setTimeout(function () { var nw = Math.random() < 0.70, cl = new Date().getDay() === 2; done({ nowin: nw && !cl, closed: cl, coupon: (nw || cl) ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4) }); }, 600);
+      setTimeout(function () { var nw = Math.random() < 0.09, cl = new Date().getDay() === 2; done({ nowin: nw && !cl, closed: cl, coupon: (nw || cl) ? "" : "DEMO-" + ("000" + Math.floor(Math.random() * 1000)).slice(-4) }); }, 600);
     }
   }
 

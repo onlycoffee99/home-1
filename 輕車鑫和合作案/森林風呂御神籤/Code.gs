@@ -14,10 +14,9 @@ var SHEET_NAME = '回覆';
 var DAILY_LIMIT = 100;
 // 時間到咖啡館公休日(0=週日…2=週二);券限當日使用,公休日不發券
 var CLOSED_WEEKDAYS = [2];
-// 「今日無抽中」:每人約 NOWIN_RATE 機率沒抽中,每天最多 NOWIN_PER_DAY 人(0 = 不限;由後端決定,客人無法自選)
-// 115/11/26 老闆:抽中率改 30%(原本約 91%、每天最多 5 人沒中)
-var NOWIN_PER_DAY = 0;
-var NOWIN_RATE = 0.70;
+// 「今日無抽中」:每人約 NOWIN_RATE 機率沒抽中,每天最多 NOWIN_PER_DAY 人(由後端決定,客人無法自選)
+var NOWIN_PER_DAY = 5;
+var NOWIN_RATE = 0.09;
 // 「森林風呂御神籤_回覆」試算表 ID(雲端硬碟「森林風呂御神籤」資料夾內)
 var SPREADSHEET_ID = '1K22clZvbwZXTtxSCUmUTx1svKZBpdLILlm6Q7w6yC88';
 
@@ -184,7 +183,7 @@ function submit(payload) {
       coupon = '';                                   // 咖啡館公休日:不發券
     } else if (DAILY_LIMIT > 0 && issued >= DAILY_LIMIT) {
       coupon = '';                                   // 今日券已送完
-    } else if ((!NOWIN_PER_DAY || nowinToday < NOWIN_PER_DAY) && Math.random() < NOWIN_RATE) {
+    } else if (nowinToday < NOWIN_PER_DAY && Math.random() < NOWIN_RATE) {
       coupon = ''; nowin = true;                     // 今日無抽中
     }
     var a = (payload && payload.answers) || {};
