@@ -23,7 +23,7 @@ var NOWIN_RATE = 0.09;
 var PRIZES = [
   { k: '大獎', rate: 0.033, cap: 3 },  // 免費飲料一杯(M 杯)
   { k: '二獎', rate: 0.330, cap: 0 },  // 飲料一杯折 30 元
-  { k: '三獎', rate: 0.637, cap: 0 }   // 當日店內消費整筆 9 折
+  { k: '三獎', rate: 0.637, cap: 0 }   // 當日店內消費整筆 9 折,至少折 30(森林風呂牌子寫「飲品一杯折 30 元」,不能少於這個)
 ];
 // 「森林風呂御神籤_回覆」試算表 ID(雲端硬碟「森林風呂御神籤」資料夾內)
 var SPREADSHEET_ID = '1K22clZvbwZXTtxSCUmUTx1svKZBpdLILlm6Q7w6yC88';
