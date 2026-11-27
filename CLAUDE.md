@@ -27,7 +27,7 @@
 - 每日 Gmail 有「[鑫和] 申報與繳款提醒」;iCHEF 每日關帳紀錄、綠界通知均進 Gmail
 
 ### 行銷線:時間到咖啡館兩店社群經營 → **在 home-2,不在本 repo**
-- ⚠️ 115/10/17 老闆反映 home-1 也冒出行銷檔會弄混,已把 `行銷/` 與 marketing skill 移出本 repo。兩店發文、圖卡、立牌、排程表、Pinkoi 一律在 **onlycoffee99/home-2** `行銷/` 做(本對話若只有 home-1,先 add_repo home-2 再動手)。
+- ⚠️ 115/10/17 老闆反映 home-1 也冒出行銷檔會弄混,已把 `行銷/` 與 marketing skill 移出本 repo。兩店發文、圖卡、立牌、排程表、Pinkoi 一律在 **onlycoffee99/home-2** `行銷/` 做(本對話若只有 home-1,先 add_repo home-2 再動手)。115/11/27 連 home-1 的行銷轉向 skill 也刪了,行銷一律靠本檔「開工第一步」判斷去 home-2,用 home-2 的 marketing skill(唯一行銷 skill)。
 - 例外:輕車×鑫和合作案(森林風呂御神籤)仍在本 repo,見下節。
 
 ### 合作行銷線:輕車悠遊 × 鑫和洋行(第一案:森林風呂御神籤)
